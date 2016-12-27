@@ -13,7 +13,7 @@ import tg.controleprojeto.modelo.Empregado;
 @ManagedBean
 public class ProjetoMB {
 	
-	private Projeto projeto = new Projeto();
+	private Projeto projeto = new Projeto() ;
 	private ProjetoDAO projetoDAO = new ProjetoDAO();
 	private EmpregadoDAO empregadoDAO = new EmpregadoDAO();
 	private List<Integer> idDosCoordenadores;
