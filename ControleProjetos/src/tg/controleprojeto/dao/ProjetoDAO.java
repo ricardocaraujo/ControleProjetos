@@ -22,7 +22,7 @@ public class ProjetoDAO {
 		EntityManager manager = new JPAUtil().getEntityManager();
 		manager.getTransaction().begin();
 		manager.merge(projeto);
-		manager.getTransaction().commit();
+		manager.getTransaction().commit();	
 		manager.close();
 	}
 	
