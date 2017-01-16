@@ -2,25 +2,59 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:h="http://java.sun.com/jsf/html"
-		xmlns:f="http://java.sun.com/jsf/core">
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui">
 
-	<h:body>
-		<h:form>
-			<h:panelGrid columns="2">
-				<h:outputLabel value="Nome do projeto" for="nome"/>
-				<h:inputText id="nome" value="#{projetoMB.projeto.nome}"/>
-				<h:outputLabel value="Objetivo" for="objetivo"/>
-				<h:inputTextarea id="objetivo" value="#{projetoMB.projeto.objetivo}"/>
-				<h:outputLabel value="Justificativa" for="justificativa"/>
-				<h:inputTextarea id="justificativa" value="#{projetoMB.projeto.justificativa}"/>
-				<h:outputLabel value="Coordenadores"/>
-				<h:selectManyListbox value="#{projetoMB.idDosCoordenadores}">
-					<f:selectItem itemLabel="Nenhum" noSelectionOption="true"/>
-					<f:selectItems value="#{projetoMB.empregados}" var="coordenador" 
-						itemValue="#{coordenador.id}" itemLabel="#{coordenador.nome}"/>
-				</h:selectManyListbox>
-				<h:commandButton value="Gravar" action="#{projetoMB.adiciona}"/>
-			</h:panelGrid>
-		</h:form>
-	</h:body>
-</html>
+	<ui:composition template="_template.xhtml">
+		
+		<ui:define name="titulo">
+			Adiciona Projeto
+		</ui:define>
+		<ui:define name="conteudo">
+			<h:form id="form">
+				<p:panelGrid columns="2">
+					<p:outputLabel value="Nome do projeto" for="nome"/>
+					<p:inputText id="nome" value="#{projetoMB.projeto.nome}"
+						required="true" requiredMessage="Nome obrigatório" >
+					
+					
+					</p:inputText>
+					
+					<p:outputLabel value="Objetivo" for="objetivo"/>
+					<p:inputTextarea id="objetivo" value="#{projetoMB.projeto.objetivo}"/>
+					
+					<p:outputLabel value="Justificativa" for="justificativa"/>
+					<p:inputTextarea id="justificativa" value="#{projetoMB.projeto.justificativa}"/>
+					
+					<p:outputLabel value="Data de início" for="dataInicio"/>
+					<p:calendar id="dataInicio" value="#{projetoMB.projeto.dataInicio.time}" 
+								timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" mask="true"/>
+								
+					<p:outputLabel value="Data de término" for="dataFim"/>
+					<p:calendar id="dataFim" value="#{projetoMB.projeto.dataFim.time}" 
+								timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" mask="true"/>
+					
+					<p:outputLabel value="Coordenadores"/>
+					<h:selectManyListbox value="#{projetoMB.idDosCoordenadores}" converter="javax.faces.Integer">
+						<f:selectItem itemLabel="Nenhum" noSelectionOption="true"/>
+						<f:selectItems value="#{projetoMB.empregados}" var="coordenador" 
+										itemValue="#{coordenador.id}" itemLabel="#{coordenador.nome}"/>
+					</h:selectManyListbox>
+					
+					<p:outputLabel value="Responsáveis Técnicos"/>
+					<p:selectManyMenu value="#{projetoMB.idDosResponsaveisTecnicos}" converter="javax.faces.Integer">
+						<f:selectItem itemLabel="Nenhum" noSelectionOption="true"/>
+						<f:selectItems value="#{projetoMB.empregados}" var="responsaveisTecnicos"
+										itemValue="#{responsaveisTecnicos.id}" itemLabel="#{responsaveisTecnicos.nome}"/>
+					</p:selectManyMenu>
+					
+					<h:commandButton value="Salvar" action="#{projetoMB.adiciona}"/>
+				</p:panelGrid>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</html>		
+					
+					
+					

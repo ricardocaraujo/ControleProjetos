@@ -1,5 +1,6 @@
 package tg.controleprojeto.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -16,8 +17,18 @@ public class ProjetoMB {
 	private Projeto projeto = new Projeto() ;
 	private ProjetoDAO projetoDAO = new ProjetoDAO();
 	private EmpregadoDAO empregadoDAO = new EmpregadoDAO();
+	private List<Projeto> listaProjetos;
 	private List<Integer> idDosCoordenadores;
+	private List<Integer> idDosResponsaveisTecnicos;
 	
+	public List<Integer> getIdDosResponsaveisTecnicos() {
+		return idDosResponsaveisTecnicos;
+	}
+
+	public void setIdDosResponsaveisTecnicos(List<Integer> idDosResponsaveisTecnicos) {
+		this.idDosResponsaveisTecnicos = idDosResponsaveisTecnicos;
+	}
+
 	public List<Empregado> getEmpregados() {
 		return empregadoDAO.getEmpregados();
 	}
@@ -26,18 +37,28 @@ public class ProjetoMB {
 		return idDosCoordenadores;
 	}
 
+	public List<Projeto> getListaProjetos() {
+		return projetoDAO.getProjetos();
+	}
+
+	public void setListaProjetos(List<Projeto> listaProjetos) {
+		this.listaProjetos = listaProjetos;
+	}
+
 	public void setIdDosCoordenadores(List<Integer> idDosCoordenadores) {
 		this.idDosCoordenadores = idDosCoordenadores;
 	}
 	
-	public void adiciona() {
-		List<Integer> lista = this.idDosCoordenadores;
-		for(Integer idEmpregado : lista) {
+	public String adiciona() {
+		List<Empregado> coordenadores = new ArrayList<Empregado>();
+		for(Integer idEmpregado : this.idDosCoordenadores) {
 			Empregado empregado = empregadoDAO.buscaPorId(idEmpregado.intValue());
-			projeto.getCoordenadores().add(empregado);
+			coordenadores.add(empregado);
 		}
+		projeto.setCoordenadores(coordenadores);
 		this.projetoDAO.adiciona(projeto);
 		this.projeto = new Projeto();
+		return "adicionaProjeto";
 	}
 
 	public Projeto getProjeto() {
