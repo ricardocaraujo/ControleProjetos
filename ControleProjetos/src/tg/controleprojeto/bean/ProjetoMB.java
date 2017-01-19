@@ -3,23 +3,36 @@ package tg.controleprojeto.bean;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+
+import com.sun.org.apache.xml.internal.security.Init;
+
+import javax.faces.bean.RequestScoped;
 
 import tg.controleprojeto.dao.EmpregadoDAO;
 import tg.controleprojeto.dao.ProjetoDAO;
 import tg.controleprojeto.modelo.Projeto;
 import tg.controleprojeto.modelo.Empregado;
+import tg.controleprojeto.modelo.Gerencia;
 
 
 @ManagedBean
+@ViewScoped
 public class ProjetoMB {
 	
-	private Projeto projeto = new Projeto() ;
+	private Projeto projeto;
 	private ProjetoDAO projetoDAO = new ProjetoDAO();
 	private EmpregadoDAO empregadoDAO = new EmpregadoDAO();
 	private List<Projeto> listaProjetos;
 	private List<Integer> idDosCoordenadores;
 	private List<Integer> idDosResponsaveisTecnicos;
+	
+	@PostConstruct
+	public void init() {
+		this.projeto = new Projeto();
+	}
 	
 	public List<Integer> getIdDosResponsaveisTecnicos() {
 		return idDosResponsaveisTecnicos;
@@ -58,7 +71,7 @@ public class ProjetoMB {
 		projeto.setCoordenadores(coordenadores);
 		this.projetoDAO.adiciona(projeto);
 		this.projeto = new Projeto();
-		return "adicionaProjeto";
+		return "listaProjeto";
 	}
 
 	public Projeto getProjeto() {

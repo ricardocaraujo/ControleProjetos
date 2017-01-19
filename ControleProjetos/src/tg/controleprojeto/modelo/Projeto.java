@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -26,7 +27,7 @@ import javax.persistence.TemporalType;
 @Entity 
 public class Projeto {
 	
-	@Id @GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id; 
 	private String justificativa;
 	private String nome;
@@ -67,8 +68,11 @@ public class Projeto {
 	@JoinTable(name="projeto_gerenciasexecutoras")
 	private List<Gerencia> gerenciasExecutoras;
 	 
-	 
-	public Projeto(){}
+	
+	public Projeto(){
+		dataInicio = Calendar.getInstance();
+		dataFim = Calendar.getInstance();
+	}
 
 	
 	public Integer getId() {
@@ -117,6 +121,7 @@ public class Projeto {
 
 
 	public void setDataInicio(Calendar dataInicio) {
+		System.out.println("chegou");
 		this.dataInicio = dataInicio;
 	}
 

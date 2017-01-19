@@ -1,6 +1,16 @@
 .container {
-	
-	width: 720px;
+	width: 920px;
 	margin: auto;
-	
+}
+
+.formulario {
+	border: none;	
+}
+
+.ui-panelgrid {
+	border-color: green;
+}
+
+img {
+	width: 520px;
 }

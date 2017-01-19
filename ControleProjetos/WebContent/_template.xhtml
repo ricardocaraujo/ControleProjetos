@@ -3,12 +3,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:h="http://java.sun.com/jsf/html"
 		xmlns:f="http://java.sun.com/jsf/core"
-		xmlns:ui="http://java.sun.com/jsf/facelets">
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui">
 		
 	<h:head>
-	
-		<link type="stylesheet" href="resources/css/estilos.css"/>
-	
+		<h:outputStylesheet name="css/estilos.css"/>
 	</h:head>	
 	
 	
@@ -18,12 +17,47 @@
 			<div id="cabecalho">
 				<h:graphicImage library="img" name="logo.jpg"/>
 				<h1><ui:insert name="titulo"></ui:insert></h1>
+				
+				<h:form>  
+				    <p:growl id="messages"/>
+				 
+				    <p:menubar>
+				        <p:submenu label="Projeto" icon="ui-icon-document">
+				            <p:menuitem value="Novo" action="adicionaProjeto" />
+				            <p:menuitem value="Editar"  icon="ui-icon-pencil" />
+				            <p:menuitem value="Excluir"  icon="ui-icon-close" />
+				            <p:separator />
+				            <p:menuitem value="Relatórios" action="listaProjeto" />
+				        </p:submenu>
+				 
+				        <p:submenu label="Empregado" icon="ui-icon-help">
+				            <p:menuitem value="Novo"  />
+				            <p:menuitem value="Editar"  icon="ui-icon-pencil" />
+				            <p:menuitem value="Excluir"  icon="ui-icon-close" />
+				        </p:submenu>
+				 
+				 		 <p:submenu label="Gerência" icon="ui-icon-help">
+				            <p:menuitem value="Nova" />
+				            <p:menuitem value="Editar" icon="ui-icon-pencil" />
+				            <p:menuitem value="Excluir"  icon="ui-icon-close" />
+				        </p:submenu>
+				 
+				        <p:menuitem value="Quit" icon="ui-icon-close" />
+				 
+				        <f:facet name="options">
+				            <p:inputText style="margin-right:10px" placeholder="Procurar"/>
+				            <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+				        </f:facet>
+				    </p:menubar>
+				</h:form>
 			</div>
 		
 			<div id="conteudo">
 				<ui:insert name="conteudo"></ui:insert>
 			</div>
 		</div>
+		
+		
 		
 	</h:body>
 		

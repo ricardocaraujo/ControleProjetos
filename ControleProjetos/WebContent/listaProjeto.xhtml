@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:h="http://java.sun.com/jsf/html"
 		xmlns:f="http://java.sun.com/jsf/core"
-		xmlns:ui="http://java.sun.com/jsf/facelets">
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui">
 		
 		<ui:composition template="_template.xhtml">
 			<ui:define name="titulo">
@@ -11,14 +12,19 @@
 			</ui:define>
 		
 			<ui:define name="conteudo">
-				<h:dataTable value="#{projetoMB.listaProjetos}" var="projeto">
-					<h:column name="Nome">
+				<p:dataTable value="#{projetoMB.listaProjetos}" var="projeto">
+					<p:column headerText="Nome">
 						<h:outputText value="#{projeto.nome}"/>
-					</h:column>
-					<!-- <h:column name="Coordenador">
-						<h:outputText value="#{projeto.coordenadores.nome}"/>
-					</h:column>	 -->					
-				</h:dataTable>
+					</p:column>	
+					<p:column headerText="Objetivo">
+						<h:outputText value="#{projeto.objetivo}"/>
+					</p:column>
+					<p:column headerText="Data Início">
+						<h:outputText value="#{projeto.dataInicio.time}">
+							<h:outputFormat pattern="dd/MM/yyyy"/>
+						</h:outputText>
+					</p:column>
+				</p:dataTable>
 			</ui:define>
 		</ui:composition>
 </html>

@@ -5,6 +5,10 @@
 		xmlns:f="http://java.sun.com/jsf/core"
 		xmlns:ui="http://java.sun.com/jsf/facelets"
 		xmlns:p="http://primefaces.org/ui">
+		
+	<h:head>
+		<h:outputStylesheet name="css/estilos.css"/>
+	</h:head>
 
 	<ui:composition template="_template.xhtml">
 		
@@ -13,11 +17,10 @@
 		</ui:define>
 		<ui:define name="conteudo">
 			<h:form id="form">
-				<p:panelGrid columns="2">
+				<p:panelGrid style="border-color: green;" columns="2">
 					<p:outputLabel value="Nome do projeto" for="nome"/>
 					<p:inputText id="nome" value="#{projetoMB.projeto.nome}"
 						required="true" requiredMessage="Nome obrigatório" >
-					
 					
 					</p:inputText>
 					
@@ -26,6 +29,7 @@
 					
 					<p:outputLabel value="Justificativa" for="justificativa"/>
 					<p:inputTextarea id="justificativa" value="#{projetoMB.projeto.justificativa}"/>
+					
 					
 					<p:outputLabel value="Data de início" for="dataInicio"/>
 					<p:calendar id="dataInicio" value="#{projetoMB.projeto.dataInicio.time}" 
