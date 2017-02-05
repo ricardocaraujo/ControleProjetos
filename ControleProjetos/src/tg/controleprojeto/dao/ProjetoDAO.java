@@ -1,9 +1,15 @@
 package tg.controleprojeto.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import tg.controleprojeto.modelo.Projeto;
 
@@ -40,7 +46,6 @@ public class ProjetoDAO {
 		manager.getTransaction().begin();
 		TypedQuery<Projeto> query = manager.createNamedQuery("Projetos.findAll", Projeto.class);
 		List<Projeto> projetos = query.getResultList();
-		manager.getTransaction().commit();
 		manager.close();
 		return projetos;
 	}
@@ -51,9 +56,24 @@ public class ProjetoDAO {
 		TypedQuery<Projeto> query = manager.createNamedQuery("Projetos.buscaPorId", Projeto.class);
 		query.setParameter("pId", id);
 		Projeto projeto = query.getSingleResult();
-		manager.getTransaction().commit();
 		manager.close();
 		return projeto;
+	}
+	
+	public List<Projeto> getProjetosPorStatus (List<Enum> situacao) {
+		EntityManager manager = new JPAUtil().getEntityManager();
+		CriteriaBuilder criteria = manager.getCriteriaBuilder();
+		CriteriaQuery<Projeto> query = criteria.createQuery(Projeto.class);
+		Root<Projeto> root = query.from(Projeto.class);
+		
+		Path<Enum> enumPath = root.<Enum>get("situacao");
+		
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		for(Enum e:situacao) {
+			
+		}
+		
 	}
 	
 	

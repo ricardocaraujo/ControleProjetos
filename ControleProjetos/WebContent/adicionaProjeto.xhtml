@@ -20,8 +20,7 @@
 				<p:panelGrid style="border-color: green;" columns="2">
 					<p:outputLabel value="Nome do projeto" for="nome"/>
 					<p:inputText id="nome" value="#{projetoMB.projeto.nome}"
-						required="true" requiredMessage="Nome obrigatório" >
-					
+						required="true" requiredMessage="Nome obrigatório" >					
 					</p:inputText>
 					
 					<p:outputLabel value="Objetivo" for="objetivo"/>
@@ -29,7 +28,6 @@
 					
 					<p:outputLabel value="Justificativa" for="justificativa"/>
 					<p:inputTextarea id="justificativa" value="#{projetoMB.projeto.justificativa}"/>
-					
 					
 					<p:outputLabel value="Data de início" for="dataInicio"/>
 					<p:calendar id="dataInicio" value="#{projetoMB.projeto.dataInicio.time}" 
@@ -40,11 +38,11 @@
 								timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" mask="true"/>
 					
 					<p:outputLabel value="Coordenadores"/>
-					<h:selectManyListbox value="#{projetoMB.idDosCoordenadores}" converter="javax.faces.Integer">
+					<p:selectManyMenu value="#{projetoMB.idDosCoordenadores}" converter="javax.faces.Integer">
 						<f:selectItem itemLabel="Nenhum" noSelectionOption="true"/>
 						<f:selectItems value="#{projetoMB.empregados}" var="coordenador" 
 										itemValue="#{coordenador.id}" itemLabel="#{coordenador.nome}"/>
-					</h:selectManyListbox>
+					</p:selectManyMenu>
 					
 					<p:outputLabel value="Responsáveis Técnicos"/>
 					<p:selectManyMenu value="#{projetoMB.idDosResponsaveisTecnicos}" converter="javax.faces.Integer">

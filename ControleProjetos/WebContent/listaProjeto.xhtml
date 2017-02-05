@@ -6,25 +6,32 @@
 		xmlns:ui="http://java.sun.com/jsf/facelets"
 		xmlns:p="http://primefaces.org/ui">
 		
+		<h:outputStylesheet library="awesome" name="css/font-awesome.css"/>
+		
 		<ui:composition template="_template.xhtml">
 			<ui:define name="titulo">
 				Lista Projetos
 			</ui:define>
 		
 			<ui:define name="conteudo">
-				<p:dataTable value="#{projetoMB.listaProjetos}" var="projeto">
-					<p:column headerText="Nome">
-						<h:outputText value="#{projeto.nome}"/>
-					</p:column>	
-					<p:column headerText="Objetivo">
-						<h:outputText value="#{projeto.objetivo}"/>
-					</p:column>
-					<p:column headerText="Data Início">
-						<h:outputText value="#{projeto.dataInicio.time}">
-							<h:outputFormat pattern="dd/MM/yyyy"/>
-						</h:outputText>
-					</p:column>
-				</p:dataTable>
+				<h:form id="formulario">
+					<p:dataTable value="#{projetoMB.listaProjetos}" var="projeto">
+						<p:column headerText="Nome">
+							<h:outputText value="#{projeto.nome}"/>
+						</p:column>	
+						<p:column headerText="Objetivo">
+							<h:outputText value="#{projeto.objetivo}"/>
+						</p:column>
+						<p:column headerText="Data Início">
+							<h:outputText value="#{projeto.dataInicio.time}">
+								<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+							</h:outputText>
+						</p:column>
+						<p:column headerText="Ação">
+							<p:commandButton value="aroasds" icon="fa fa-exclamation"/>
+						</p:column>
+					</p:dataTable>
+				</h:form>
 			</ui:define>
 		</ui:composition>
 </html>

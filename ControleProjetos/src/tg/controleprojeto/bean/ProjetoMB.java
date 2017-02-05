@@ -23,8 +23,8 @@ import tg.controleprojeto.modelo.Gerencia;
 public class ProjetoMB {
 	
 	private Projeto projeto;
-	private ProjetoDAO projetoDAO = new ProjetoDAO();
-	private EmpregadoDAO empregadoDAO = new EmpregadoDAO();
+	private ProjetoDAO projetoDAO;
+	private EmpregadoDAO empregadoDAO;
 	private List<Projeto> listaProjetos;
 	private List<Integer> idDosCoordenadores;
 	private List<Integer> idDosResponsaveisTecnicos;
@@ -32,6 +32,8 @@ public class ProjetoMB {
 	@PostConstruct
 	public void init() {
 		this.projeto = new Projeto();
+		projetoDAO = new ProjetoDAO();
+		empregadoDAO = new EmpregadoDAO();
 	}
 	
 	public List<Integer> getIdDosResponsaveisTecnicos() {
@@ -64,11 +66,17 @@ public class ProjetoMB {
 	
 	public String adiciona() {
 		List<Empregado> coordenadores = new ArrayList<Empregado>();
-		for(Integer idEmpregado : this.idDosCoordenadores) {
-			Empregado empregado = empregadoDAO.buscaPorId(idEmpregado.intValue());
-			coordenadores.add(empregado);
+		List<Empregado> responsaveisTecnicos = new ArrayList<Empregado>();
+		for(Integer idCoordenador : this.idDosCoordenadores) {
+			Empregado coordenador = empregadoDAO.buscaPorId(idCoordenador.intValue());
+			coordenadores.add(coordenador);
+		}
+		for(Integer idRespTecnico : this.idDosResponsaveisTecnicos) {
+			Empregado respTecnico = empregadoDAO.buscaPorId(idRespTecnico.intValue());
+			responsaveisTecnicos.add(respTecnico);
 		}
 		projeto.setCoordenadores(coordenadores);
+		projeto.setResponsaveisTecnicos(responsaveisTecnicos);
 		this.projetoDAO.adiciona(projeto);
 		this.projeto = new Projeto();
 		return "listaProjeto";

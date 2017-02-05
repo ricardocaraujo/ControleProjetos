@@ -32,5 +32,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jsr250-api-1.0.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mysql-connector-java-5.1.40-bin.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.faces-2.2.9.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/font-awesome-4.0.3.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

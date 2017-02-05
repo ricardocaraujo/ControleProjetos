@@ -3,6 +3,10 @@
 	margin: auto;
 }
 
+#cabecalho {
+	margin-bottom: 20px;
+}
+
 .formulario {
 	border: none;	
 }
