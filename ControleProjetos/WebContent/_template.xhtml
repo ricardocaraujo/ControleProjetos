@@ -16,7 +16,6 @@
 		<div class="container">
 			<div id="cabecalho">
 				<h:graphicImage library="img" name="logo.jpg"/>
-				<h1><ui:insert name="titulo"></ui:insert></h1>
 				
 				<h:form>  
 				    <p:growl id="messages"/>
@@ -50,14 +49,14 @@
 				        </f:facet>
 				    </p:menubar>
 				</h:form>
+				<h1><ui:insert name="titulo"></ui:insert></h1>
+				
 			</div>
 		
 			<div id="conteudo">
 				<ui:insert name="conteudo"></ui:insert>
 			</div>
 		</div>
-		
-		
 		
 	</h:body>
 		

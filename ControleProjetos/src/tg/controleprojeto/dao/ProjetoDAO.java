@@ -68,12 +68,18 @@ public class ProjetoDAO {
 		
 		Path<Enum> enumPath = root.<Enum>get("situacao");
 		
-		List<Predicate> predicates = new ArrayList<Predicate>();
+		Predicate situacaoIgual = null;
 		
-		for(Enum e:situacao) {
+		if(!situacao.isEmpty()) {
+			situacaoIgual = criteria.equal(enumPath, situacao);	
 			
 		}
 		
+		query.where(situacaoIgual);
+		TypedQuery<Projeto> typedQuery = manager.createQuery(query);
+		
+		return typedQuery.getResultList();
+				
 	}
 	
 	

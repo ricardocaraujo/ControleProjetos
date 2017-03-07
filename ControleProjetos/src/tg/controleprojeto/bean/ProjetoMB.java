@@ -14,6 +14,7 @@ import javax.faces.bean.RequestScoped;
 import tg.controleprojeto.dao.EmpregadoDAO;
 import tg.controleprojeto.dao.ProjetoDAO;
 import tg.controleprojeto.modelo.Projeto;
+import tg.controleprojeto.modelo.Situacao;
 import tg.controleprojeto.modelo.Empregado;
 import tg.controleprojeto.modelo.Gerencia;
 
@@ -28,6 +29,8 @@ public class ProjetoMB {
 	private List<Projeto> listaProjetos;
 	private List<Integer> idDosCoordenadores;
 	private List<Integer> idDosResponsaveisTecnicos;
+	private List<Enum> situacoesSelecionadas;
+	
 	
 	@PostConstruct
 	public void init() {
@@ -64,6 +67,19 @@ public class ProjetoMB {
 		this.idDosCoordenadores = idDosCoordenadores;
 	}
 	
+	public Enum[] getSituacoesPossiveis() {
+		return Situacao.values();
+	}
+	
+	public List<Enum> getSituacoesSelecionadas() {
+		return situacoesSelecionadas;
+	}
+
+	public void setSituacoesSelecionadas(List<Enum> situacoesSelecionadas) {
+		this.situacoesSelecionadas = situacoesSelecionadas;
+	}
+
+
 	public String adiciona() {
 		List<Empregado> coordenadores = new ArrayList<Empregado>();
 		List<Empregado> responsaveisTecnicos = new ArrayList<Empregado>();

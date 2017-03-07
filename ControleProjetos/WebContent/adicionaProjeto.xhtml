@@ -17,14 +17,14 @@
 		</ui:define>
 		<ui:define name="conteudo">
 			<h:form id="form">
-				<p:panelGrid style="border-color: green;" columns="2">
+				<p:panelGrid style="width: 500px;" columns="2">
 					<p:outputLabel value="Nome do projeto" for="nome"/>
 					<p:inputText id="nome" value="#{projetoMB.projeto.nome}"
 						required="true" requiredMessage="Nome obrigatório" >					
 					</p:inputText>
 					
 					<p:outputLabel value="Objetivo" for="objetivo"/>
-					<p:inputTextarea id="objetivo" value="#{projetoMB.projeto.objetivo}"/>
+					<p:inputTextarea style="width: 400px" id="objetivo" value="#{projetoMB.projeto.objetivo}"/>
 					
 					<p:outputLabel value="Justificativa" for="justificativa"/>
 					<p:inputTextarea id="justificativa" value="#{projetoMB.projeto.justificativa}"/>

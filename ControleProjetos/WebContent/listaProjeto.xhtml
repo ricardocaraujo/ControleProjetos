@@ -8,30 +8,47 @@
 		
 		<h:outputStylesheet library="awesome" name="css/font-awesome.css"/>
 		
+		<h:head>
+			<h:outputStylesheet name="css/estilos.css"/>
+		</h:head>
+		
 		<ui:composition template="_template.xhtml">
 			<ui:define name="titulo">
 				Lista Projetos
 			</ui:define>
 		
 			<ui:define name="conteudo">
-				<h:form id="formulario">
-					<p:dataTable value="#{projetoMB.listaProjetos}" var="projeto">
-						<p:column headerText="Nome">
-							<h:outputText value="#{projeto.nome}"/>
-						</p:column>	
-						<p:column headerText="Objetivo">
-							<h:outputText value="#{projeto.objetivo}"/>
-						</p:column>
-						<p:column headerText="Data Início">
-							<h:outputText value="#{projeto.dataInicio.time}">
-								<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
-							</h:outputText>
-						</p:column>
-						<p:column headerText="Ação">
-							<p:commandButton value="aroasds" icon="fa fa-exclamation"/>
-						</p:column>
-					</p:dataTable>
-				</h:form>
+				<div id="formPesquisa">
+					<h:form>
+						<p:panelGrid columns="2">
+							<p:outputLabel value="Situação"/>
+							<p:selectManyCheckbox value="#{projetoMB.situacoesSelecionadas}">
+								<f:selectItems value="#{projetoMB.situacoesPossiveis}" var="situacao"
+												itemValue="#{situacao}" itemLabel="#{situacao.descricao}"/>
+							</p:selectManyCheckbox>					
+						</p:panelGrid>						
+					</h:form>
+				</div>			
+				<div>
+					<h:form id="formulario">
+						<p:dataTable value="#{projetoMB.listaProjetos}" var="projeto">
+							<p:column headerText="Nome">
+								<h:outputText value="#{projeto.nome}"/>
+							</p:column>	
+							<p:column headerText="Objetivo">
+								<h:outputText value="#{projeto.objetivo}"/>
+							</p:column>
+							<p:column headerText="Data Início">
+								<h:outputText value="#{projeto.dataInicio.time}">
+									<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+								</h:outputText>
+							</p:column>
+							<p:column headerText="Ação">
+								<p:commandButton value="aroasds" icon="fa fa-exclamation"/>
+							</p:column>
+						</p:dataTable>
+					</h:form>
+				</div>
 			</ui:define>
 		</ui:composition>
 </html>
