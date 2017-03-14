@@ -12,6 +12,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import tg.controleprojeto.modelo.Projeto;
+import tg.controleprojeto.modelo.Situacao;
 
 public class ProjetoDAO {
 	
@@ -60,24 +61,18 @@ public class ProjetoDAO {
 		return projeto;
 	}
 	
-	public List<Projeto> getProjetosPorStatus (List<Enum> situacao) {
+	public List<Projeto> getProjetosPorStatus (List<Situacao> situacao) {
 		EntityManager manager = new JPAUtil().getEntityManager();
 		CriteriaBuilder criteria = manager.getCriteriaBuilder();
 		CriteriaQuery<Projeto> query = criteria.createQuery(Projeto.class);
 		Root<Projeto> root = query.from(Projeto.class);
-		
-		Path<Enum> enumPath = root.<Enum>get("situacao");
-		
+		Path<Situacao> enumPath = root.<Situacao>get("situacao");
 		Predicate situacaoIgual = null;
-		
 		if(!situacao.isEmpty()) {
-			situacaoIgual = criteria.equal(enumPath, situacao);	
-			
+			situacaoIgual = criteria.equal(enumPath, situacao);		
 		}
-		
 		query.where(situacaoIgual);
-		TypedQuery<Projeto> typedQuery = manager.createQuery(query);
-		
+		TypedQuery<Projeto> typedQuery = manager.createQuery(query);	
 		return typedQuery.getResultList();
 				
 	}

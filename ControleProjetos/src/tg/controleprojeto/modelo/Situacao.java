@@ -18,4 +18,5 @@ public enum Situacao {
 		return this.descricao;
 	}
 	
+		
 }

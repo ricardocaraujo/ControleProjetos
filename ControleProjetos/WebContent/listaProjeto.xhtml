@@ -22,10 +22,11 @@
 					<h:form>
 						<p:panelGrid columns="2">
 							<p:outputLabel value="Situação"/>
-							<p:selectManyCheckbox value="#{projetoMB.situacoesSelecionadas}">
+							<p:selectManyCheckbox value="#{projetoMB.situacoesSelecionadas}" converter="javax.faces.EnumConverter">
 								<f:selectItems value="#{projetoMB.situacoesPossiveis}" var="situacao"
 												itemValue="#{situacao}" itemLabel="#{situacao.descricao}"/>
-							</p:selectManyCheckbox>					
+							</p:selectManyCheckbox>
+							<p:commandButton value="Listar" action="#{projetoMB.listaProjetosComFiltro}"/>				
 						</p:panelGrid>						
 					</h:form>
 				</div>			

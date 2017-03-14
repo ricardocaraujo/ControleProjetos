@@ -29,7 +29,7 @@ public class ProjetoMB {
 	private List<Projeto> listaProjetos;
 	private List<Integer> idDosCoordenadores;
 	private List<Integer> idDosResponsaveisTecnicos;
-	private List<Enum> situacoesSelecionadas;
+	private List<Situacao> situacoesSelecionadas;
 	
 	
 	@PostConstruct
@@ -56,30 +56,34 @@ public class ProjetoMB {
 	}
 
 	public List<Projeto> getListaProjetos() {
-		return projetoDAO.getProjetos();
-	}
-
-	public void setListaProjetos(List<Projeto> listaProjetos) {
-		this.listaProjetos = listaProjetos;
+		
+		if(situacoesSelecionadas == null) {
+			this.listaProjetos = projetoDAO.getProjetos();
+		}
+		return this.listaProjetos;
 	}
 
 	public void setIdDosCoordenadores(List<Integer> idDosCoordenadores) {
 		this.idDosCoordenadores = idDosCoordenadores;
 	}
 	
-	public Enum[] getSituacoesPossiveis() {
+	public Situacao[] getSituacoesPossiveis() {
 		return Situacao.values();
 	}
 	
-	public List<Enum> getSituacoesSelecionadas() {
+	public List<Situacao> getSituacoesSelecionadas() {
 		return situacoesSelecionadas;
 	}
 
-	public void setSituacoesSelecionadas(List<Enum> situacoesSelecionadas) {
+	public void setSituacoesSelecionadas(List<Situacao> situacoesSelecionadas) {
 		this.situacoesSelecionadas = situacoesSelecionadas;
 	}
 
-
+	public String listaProjetosComFiltro() {
+		this.listaProjetos = this.projetoDAO.getProjetosPorStatus(situacoesSelecionadas);
+		return "listaProjeto";
+	}
+	
 	public String adiciona() {
 		List<Empregado> coordenadores = new ArrayList<Empregado>();
 		List<Empregado> responsaveisTecnicos = new ArrayList<Empregado>();
