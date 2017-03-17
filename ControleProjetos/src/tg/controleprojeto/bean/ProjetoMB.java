@@ -59,6 +59,8 @@ public class ProjetoMB {
 		
 		if(situacoesSelecionadas == null) {
 			this.listaProjetos = projetoDAO.getProjetos();
+		} else {
+			this.listaProjetos = projetoDAO.getProjetosPorStatus(situacoesSelecionadas);
 		}
 		return this.listaProjetos;
 	}
@@ -79,10 +81,11 @@ public class ProjetoMB {
 		this.situacoesSelecionadas = situacoesSelecionadas;
 	}
 
-	public String listaProjetosComFiltro() {
+	/*public String listaProjetosComFiltro() {
 		this.listaProjetos = this.projetoDAO.getProjetosPorStatus(situacoesSelecionadas);
+		
 		return "listaProjeto";
-	}
+	}*/
 	
 	public String adiciona() {
 		List<Empregado> coordenadores = new ArrayList<Empregado>();

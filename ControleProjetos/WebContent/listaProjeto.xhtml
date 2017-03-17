@@ -22,17 +22,19 @@
 					<h:form>
 						<p:panelGrid columns="2">
 							<p:outputLabel value="Situação"/>
-							<p:selectManyCheckbox value="#{projetoMB.situacoesSelecionadas}" converter="javax.faces.EnumConverter">
+							<p:selectManyCheckbox value="#{projetoMB.situacoesSelecionadas}" id="situacoes" converter="situacaoEnumConverter">
 								<f:selectItems value="#{projetoMB.situacoesPossiveis}" var="situacao"
 												itemValue="#{situacao}" itemLabel="#{situacao.descricao}"/>
 							</p:selectManyCheckbox>
-							<p:commandButton value="Listar" action="#{projetoMB.listaProjetosComFiltro}"/>				
+							<p:commandButton value="Listar" action="#{projetoMB.listaProjetos}">
+								<f:ajax execute="situacoes" render=":tabelaProjetos"/>
+							</p:commandButton>				
 						</p:panelGrid>						
 					</h:form>
 				</div>			
 				<div>
 					<h:form id="formulario">
-						<p:dataTable value="#{projetoMB.listaProjetos}" var="projeto">
+						<p:dataTable value="#{projetoMB.listaProjetos}" var="projeto" id="tabelaProjetos">
 							<p:column headerText="Nome">
 								<h:outputText value="#{projeto.nome}"/>
 							</p:column>	
