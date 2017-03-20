@@ -26,9 +26,7 @@
 								<f:selectItems value="#{projetoMB.situacoesPossiveis}" var="situacao"
 												itemValue="#{situacao}" itemLabel="#{situacao.descricao}"/>
 							</p:selectManyCheckbox>
-							<p:commandButton value="Listar" action="#{projetoMB.listaProjetos}">
-								<f:ajax execute="situacoes" render=":tabelaProjetos"/>
-							</p:commandButton>				
+							<p:commandButton value="Listar" action="#{projetoMB.listaProjetosComFiltro}" />					
 						</p:panelGrid>						
 					</h:form>
 				</div>			

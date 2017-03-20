@@ -20,7 +20,6 @@ import tg.controleprojeto.modelo.Gerencia;
 
 
 @ManagedBean
-@ViewScoped
 public class ProjetoMB {
 	
 	private Projeto projeto;
@@ -56,12 +55,12 @@ public class ProjetoMB {
 	}
 
 	public List<Projeto> getListaProjetos() {
-		
 		if(situacoesSelecionadas == null) {
-			this.listaProjetos = projetoDAO.getProjetos();
-		} else {
-			this.listaProjetos = projetoDAO.getProjetosPorStatus(situacoesSelecionadas);
+			System.out.println("entrou");
+			return projetoDAO.getProjetos();
+			
 		}
+		System.out.println("passou aqui");
 		return this.listaProjetos;
 	}
 
@@ -81,11 +80,9 @@ public class ProjetoMB {
 		this.situacoesSelecionadas = situacoesSelecionadas;
 	}
 
-	/*public String listaProjetosComFiltro() {
+	public void listaProjetosComFiltro() {
 		this.listaProjetos = this.projetoDAO.getProjetosPorStatus(situacoesSelecionadas);
-		
-		return "listaProjeto";
-	}*/
+	}
 	
 	public String adiciona() {
 		List<Empregado> coordenadores = new ArrayList<Empregado>();
