@@ -15,7 +15,7 @@ import javax.persistence.NamedQuery;
 @Entity
 public class Empregado {
 	
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id @GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private Integer id;
 	private String nome;
 	

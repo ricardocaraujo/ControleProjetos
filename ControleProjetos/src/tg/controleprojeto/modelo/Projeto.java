@@ -27,7 +27,7 @@ import javax.persistence.TemporalType;
 @Entity 
 public class Projeto {
 	
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id @GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private Integer id; 
 	private String justificativa;
 	private String nome;

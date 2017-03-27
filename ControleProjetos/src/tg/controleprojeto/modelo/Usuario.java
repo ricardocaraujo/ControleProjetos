@@ -8,7 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class Usuario {
 	
-	@Id	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private Integer id;
 	
 	private String nome;
