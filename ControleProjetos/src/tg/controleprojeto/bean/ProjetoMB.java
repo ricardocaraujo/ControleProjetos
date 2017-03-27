@@ -75,6 +75,7 @@ public class ProjetoMB {
 	
 	public List<Situacao> getSituacoesSelecionadas() {
 		return situacoesSelecionadas;
+		
 	}
 
 	public void setSituacoesSelecionadas(List<Situacao> situacoesSelecionadas) {
@@ -85,9 +86,6 @@ public class ProjetoMB {
 		this.listaProjetos = this.projetoDAO.getProjetosPorStatus(situacoesSelecionadas);
 		for(Situacao s : situacoesSelecionadas) {
 			System.out.println(s.getDescricao());
-		}
-		for(Projeto p : listaProjetos) {
-			System.out.println(p.getNome());
 		}
 	}
 	
