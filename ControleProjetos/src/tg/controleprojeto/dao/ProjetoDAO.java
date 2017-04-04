@@ -68,15 +68,15 @@ public class ProjetoDAO {
 		Root<Projeto> root = query.from(Projeto.class);
 		Path<Situacao> enumPath = root.<Situacao>get("situacao");
 		Predicate situacaoIgual = null;
-		if(!situacao.isEmpty()) {
-			situacaoIgual = criteria.equal(enumPath, situacao);		
-		}
-		query.where(situacaoIgual);
+		if(situacao != null) {
+			List<Predicate> predicates = new ArrayList<Predicate>();
+			for(Situacao s:situacao) {
+				situacaoIgual = criteria.equal(enumPath, s);
+				predicates.add(situacaoIgual);
+			}
+			query.where((Predicate[]) predicates.toArray());
+		}		
 		TypedQuery<Projeto> typedQuery = manager.createQuery(query);	
-		return typedQuery.getResultList();
-				
-	}
-	
-	
-
+		return (List<Projeto>) typedQuery.getResultList();
+	}	
 }

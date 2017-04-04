@@ -55,13 +55,9 @@ public class ProjetoMB {
 	}
 
 	public List<Projeto> getListaProjetos() {
-		System.out.println("entrou aqui");
 		if(situacoesSelecionadas == null) {
-			System.out.println("entrou");
-			return projetoDAO.getProjetos();
-			
+			return projetoDAO.getProjetos();	
 		}
-		System.out.println("passou aqui");
 		return this.listaProjetos;
 	}
 
@@ -83,10 +79,11 @@ public class ProjetoMB {
 	}
 
 	public void listaProjetosComFiltro() {
-		this.listaProjetos = this.projetoDAO.getProjetosPorStatus(situacoesSelecionadas);
 		for(Situacao s : situacoesSelecionadas) {
 			System.out.println(s.getDescricao());
 		}
+		this.listaProjetos = this.projetoDAO.getProjetosPorStatus(situacoesSelecionadas);
+		
 	}
 	
 	public String adiciona() {
