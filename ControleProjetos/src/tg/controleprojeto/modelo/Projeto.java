@@ -1,5 +1,6 @@
 package tg.controleprojeto.modelo;
 
+import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -36,13 +38,14 @@ public class Projeto {
 	@Enumerated(EnumType.STRING)
 	private Situacao situacao;
 	
-	
 	@Temporal(TemporalType.DATE)
 	private Calendar dataInicio;
 	
 	@Temporal(TemporalType.DATE)
 	private Calendar dataFim;
 	
+	@Lob
+	private byte[] eap;
 
 	@ManyToMany
 	@JoinTable(name="projeto_resptecnico")
@@ -94,6 +97,16 @@ public class Projeto {
 		this.justificativa = justificativa;
 	}
 
+	
+	public Situacao getSituacao() {
+		return situacao;
+	}
+
+
+	public void setSituacao(Situacao situacao) {
+		this.situacao = situacao;
+	}
+
 
 	public String getNome() {
 		return nome;
@@ -114,6 +127,13 @@ public class Projeto {
 		this.objetivo = objetivo;
 	}
 
+	public byte[] getEap() {
+		return eap;
+	}
+
+	public void setEap(byte[] eap) {
+		this.eap = eap;
+	}
 
 	public Calendar getDataInicio() {
 		return dataInicio;

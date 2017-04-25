@@ -1,15 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
-		http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" 
-		version="2.0">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
 
-	<!-- unidade de persistencia com o nome financas -->
-	<persistence-unit name="projetos" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="projeto" transaction-type="RESOURCE_LOCAL">
 		<!-- Implementação do JPA, no nosso caso Hibernate -->
-		<!-- <provider>org.hibernate.ejb.HibernatePersistence</provider> -->
-		<!-- Aqui são listadas todas as entidades -->
-		<!--<class>tg.controleprojeto.modelo.Empregado</class> -->
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		
+		<class>tg.controleprojeto.modelo.Empregado</class>
+		<class>tg.controleprojeto.modelo.Projeto</class>
+		<class>tg.controleprojeto.modelo.Gerencia</class>
 		
 		<properties><!-- Propriedades JDBC -->
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
@@ -21,7 +22,8 @@
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
 			<property name="hibernate.hbm2ddl.auto" value="update"/>
 			<property name="hibernate.show_sql" value="false"/>
-			<property name="hibernate.format_sql" value="true"/>	
+			<property name="hibernate.format_sql" value="true"/>
+			
 		</properties>
 	</persistence-unit>
 </persistence>

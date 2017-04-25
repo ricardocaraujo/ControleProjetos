@@ -16,8 +16,8 @@
 			Adiciona Projeto
 		</ui:define>
 		<ui:define name="conteudo">
-			<h:form id="form">
-				<p:panelGrid style="width: 500px;" columns="2">
+			<h:form id="form" enctype="multipart/form-data">
+				<p:panelGrid style="width: 920px;" columns="2">
 					<p:outputLabel value="Nome do projeto" for="nome"/>
 					<p:inputText id="nome" value="#{projetoMB.projeto.nome}"
 						required="true" requiredMessage="Nome obrigatório" >					
@@ -37,6 +37,12 @@
 					<p:calendar id="dataFim" value="#{projetoMB.projeto.dataFim.time}" 
 								timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" mask="true"/>
 					
+					<p:outputLabel value="Situação"/>
+					<p:selectOneRadio value="#{projetoMB.projeto.situacao}" converter="situacaoEnumConverter">
+						<f:selectItems value="#{projetoMB.situacoesPossiveis}" var="situacao"
+										itemValue="#{situacao}" itemLabel="#{situacao.descricao}"/>
+					</p:selectOneRadio>
+					
 					<p:outputLabel value="Coordenadores"/>
 					<p:selectManyMenu value="#{projetoMB.idDosCoordenadores}" converter="javax.faces.Integer">
 						<f:selectItem itemLabel="Nenhum" noSelectionOption="true"/>
@@ -51,6 +57,9 @@
 										itemValue="#{responsaveisTecnicos.id}" itemLabel="#{responsaveisTecnicos.nome}"/>
 					</p:selectManyMenu>
 					
+					<p:outputLabel value="EAP"/>
+					<p:fileUpload value="#{projetoMB.eap}" mode="simple" skinSimple="true"/> 
+									
 					<h:commandButton value="Salvar" action="#{projetoMB.adiciona}"/>
 				</p:panelGrid>
 			</h:form>

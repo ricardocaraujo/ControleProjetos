@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import tg.controleprojeto.modelo.Empregado;
+import tg.controleprojeto.dao.*;
 
 public class EmpregadoDAO {
 	

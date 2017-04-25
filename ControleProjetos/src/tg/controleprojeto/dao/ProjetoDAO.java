@@ -74,9 +74,9 @@ public class ProjetoDAO {
 				situacaoIgual = criteria.equal(enumPath, s);
 				predicates.add(situacaoIgual);
 			}
-			query.where((Predicate[]) predicates.toArray());
+			query.where(criteria.or((Predicate[]) predicates.toArray(new Predicate[0])));
 		}		
 		TypedQuery<Projeto> typedQuery = manager.createQuery(query);	
-		return (List<Projeto>) typedQuery.getResultList();
+		return typedQuery.getResultList();
 	}	
 }

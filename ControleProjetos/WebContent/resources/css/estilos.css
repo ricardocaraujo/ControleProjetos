@@ -3,22 +3,19 @@
 	margin: auto;
 }
 
+.lados {
+	width:15%;
+	background-color: #c0c0c0;
+}
+
 #cabecalho {
 	margin-bottom: 20px;
-}
-
-.formulario {
-	border: none;	
-}
-
-.ui-panelgrid {
-	border-color: green;
 }
 
 #formPesquisa {
 	margin-bottom: 20px;
 }
 
-img {
-	width: 520px;
-}
+/* img { */
+/* 	width: 520px; */
+/* } */

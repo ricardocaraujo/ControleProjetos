@@ -18,6 +18,8 @@ import tg.controleprojeto.modelo.Situacao;
 import tg.controleprojeto.modelo.Empregado;
 import tg.controleprojeto.modelo.Gerencia;
 
+import org.primefaces.model.UploadedFile;
+
 
 @ManagedBean
 public class ProjetoMB {
@@ -29,6 +31,7 @@ public class ProjetoMB {
 	private List<Integer> idDosCoordenadores;
 	private List<Integer> idDosResponsaveisTecnicos;
 	private List<Situacao> situacoesSelecionadas;
+	private UploadedFile eap;
 	
 	
 	@PostConstruct
@@ -77,6 +80,15 @@ public class ProjetoMB {
 	public void setSituacoesSelecionadas(List<Situacao> situacoesSelecionadas) {
 		this.situacoesSelecionadas = situacoesSelecionadas;
 	}
+	
+	public UploadedFile getEap() {
+		return eap;
+	}
+
+	public void setEap(UploadedFile eap) {
+		this.eap = eap;
+	}
+
 
 	public void listaProjetosComFiltro() {
 		for(Situacao s : situacoesSelecionadas) {
@@ -99,6 +111,7 @@ public class ProjetoMB {
 		}
 		projeto.setCoordenadores(coordenadores);
 		projeto.setResponsaveisTecnicos(responsaveisTecnicos);
+		projeto.setEap(this.eap.getContents());
 		this.projetoDAO.adiciona(projeto);
 		this.projeto = new Projeto();
 		return "listaProjeto";
