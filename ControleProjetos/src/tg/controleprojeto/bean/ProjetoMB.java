@@ -1,7 +1,9 @@
 package tg.controleprojeto.bean;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -18,6 +20,7 @@ import tg.controleprojeto.modelo.Situacao;
 import tg.controleprojeto.modelo.Empregado;
 import tg.controleprojeto.modelo.Gerencia;
 
+import org.primefaces.context.RequestContext;
 import org.primefaces.model.UploadedFile;
 
 
@@ -33,7 +36,7 @@ public class ProjetoMB {
 	private List<Situacao> situacoesSelecionadas;
 	private UploadedFile eap;
 	
-	
+ 	
 	@PostConstruct
 	public void init() {
 		this.projeto = new Projeto();
@@ -116,6 +119,21 @@ public class ProjetoMB {
 		this.projeto = new Projeto();
 		return "listaProjeto";
 	}
+	
+	public String editaProjeto(Projeto projeto) {
+		this.projeto = projeto;
+		return "adicionaProjeto";
+	}
+	
+	
+	
+	public void apagaProjeto(Projeto projeto) {
+        Map<String,Object> options = new HashMap<String, Object>();
+        options.put("resizable", false);
+        options.put("draggable", false);
+        options.put("modal", true);
+        RequestContext.getCurrentInstance().openDialog("janela", options, null);
+    }
 
 	public Projeto getProjeto() {
 		return projeto;

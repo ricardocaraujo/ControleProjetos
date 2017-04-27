@@ -13,13 +13,19 @@
 		<class>tg.controleprojeto.modelo.Gerencia</class>
 		
 		<properties><!-- Propriedades JDBC -->
-			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/projeto_tg_jee"/>
-			<property name="javax.persistence.jdbc.user" value="postgres"/>
-			<property name="javax.persistence.jdbc.password" value="r1card0a"/>
+<!-- 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/> -->
+<!-- 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/projeto_tg_jee"/> -->
+<!-- 			<property name="javax.persistence.jdbc.user" value="postgres"/> -->
+<!-- 			<property name="javax.persistence.jdbc.password" value="r1card0a"/> -->
+
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/controle_projetos"/>
+			<property name="javax.persistence.jdbc.user" value="behx"/>
+			<property name="javax.persistence.jdbc.password" value="behxbehx"/>
 			
 			<!-- Configurações específicas do Hibernate -->
-			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+<!-- 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/> -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
 			<property name="hibernate.hbm2ddl.auto" value="update"/>
 			<property name="hibernate.show_sql" value="false"/>
 			<property name="hibernate.format_sql" value="true"/>
