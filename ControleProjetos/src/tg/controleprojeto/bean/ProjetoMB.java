@@ -132,7 +132,7 @@ public class ProjetoMB {
         options.put("resizable", false);
         options.put("draggable", false);
         options.put("modal", true);
-        RequestContext.getCurrentInstance().openDialog("janela", options, null);
+        RequestContext.getCurrentInstance().openDialog("dialogoExcluiProjeto", options, null);
     }
 
 	public Projeto getProjeto() {
