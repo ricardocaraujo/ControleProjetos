@@ -78,5 +78,10 @@ public class ProjetoDAO {
 		}		
 		TypedQuery<Projeto> typedQuery = manager.createQuery(query);	
 		return typedQuery.getResultList();
+	}
+
+	public void apaga(Projeto projeto) {
+		EntityManager manager = new JPAUtil().getEntityManager();
+		
 	}	
 }

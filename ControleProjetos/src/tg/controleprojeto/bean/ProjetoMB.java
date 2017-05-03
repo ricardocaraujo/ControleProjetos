@@ -125,14 +125,8 @@ public class ProjetoMB {
 		return "adicionaProjeto";
 	}
 	
-	
-	
 	public void apagaProjeto(Projeto projeto) {
-        Map<String,Object> options = new HashMap<String, Object>();
-        options.put("resizable", false);
-        options.put("draggable", false);
-        options.put("modal", true);
-        RequestContext.getCurrentInstance().openDialog("dialogoExcluiProjeto", options, null);
+        
     }
 
 	public Projeto getProjeto() {
