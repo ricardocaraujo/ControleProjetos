@@ -48,17 +48,18 @@
 <!-- 									<p:commandLink styleClass="ui-icon ui-icon-pencil" action="#{projetoMB.editaProjeto(projeto)}" /> -->
 <!-- 									<p:commandButton icon="ui-icon-search"></p:commandButton> -->
 								<p:commandButton icon="fa fa-fw fa-edit" action="#{projetoMB.editaProjeto(projeto)}" />
-								<p:commandButton icon="fa fa-fw fa-trash-o" action="#{projetoMB.apagaProjeto(projeto)}" onclick="PF('dlg').show()"/>
+								<p:commandButton icon="fa fa-fw fa-trash-o" onclick="PF('dlg').show()"/>
 								
 															
 							</p:column>
 						</p:dataTable>
 					</h:form>
 					<p:dialog widgetVar="dlg">
-						<p:outputLabel value="Apagar projeto?"/>
-						<p:commandButton value="Não" action="#{projetoMB.apagaProjeto(projeto)}" onclick="PF('dlg').show()"/>
-						<p:commandButton value="Sim" action="#{projetoMB.apagaProjeto(projeto)}" onclick="PF('dlg').show()"/>	
-					</p:dialog>	
+						<p:panelGrid columns="2">
+							<p:commandButton value="Não" onclick="PF('dlg').hide()"/> 
+							<p:commandButton value="Sim" action="#{projetoMB.removeProjeto}" onclick="PF('dlg').hide()"/>	
+						</p:panelGrid>
+					</p:dialog>			
 				</div>
 			</ui:define>
 		</ui:composition>
