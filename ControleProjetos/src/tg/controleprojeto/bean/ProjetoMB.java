@@ -27,6 +27,7 @@ import org.primefaces.model.UploadedFile;
 
 
 @ManagedBean
+@ViewScoped
 public class ProjetoMB {
 	
 	private Projeto projeto;
@@ -127,8 +128,12 @@ public class ProjetoMB {
 		return "adicionaProjeto";
 	}
 	
+	public void setProjetoAtual(Projeto projeto) {
+		this.projeto = projeto;
+	}
+	
 	public void removeProjeto() {
-        this.projetoDAO.remove(this.projeto.getId());
+		this.projetoDAO.apaga(this.projeto);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Projeto apagado!"));
     }
 	
