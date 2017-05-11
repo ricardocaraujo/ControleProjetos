@@ -1,43 +1,33 @@
 package tg.controleprojeto.bean;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-
-import com.sun.org.apache.xml.internal.security.Init;
-
-import javax.faces.bean.RequestScoped;
 
 import tg.controleprojeto.dao.EmpregadoDAO;
 import tg.controleprojeto.dao.ProjetoDAO;
 import tg.controleprojeto.modelo.Projeto;
 import tg.controleprojeto.modelo.Situacao;
 import tg.controleprojeto.modelo.Empregado;
-import tg.controleprojeto.modelo.Gerencia;
 
-import org.primefaces.context.RequestContext;
 import org.primefaces.model.UploadedFile;
 
 
 @ManagedBean
-@ViewScoped
 public class ProjetoMB {
 	
-	private Projeto projeto;
+	private Projeto projeto; 
 	private ProjetoDAO projetoDAO;
 	private EmpregadoDAO empregadoDAO;
 	private List<Projeto> listaProjetos;
 	private List<Integer> idDosCoordenadores;
 	private List<Integer> idDosResponsaveisTecnicos;
 	private List<Situacao> situacoesSelecionadas;
-	private UploadedFile eap;
+	private UploadedFile eap; 
 	
  	
 	@PostConstruct
@@ -100,11 +90,10 @@ public class ProjetoMB {
 		for(Situacao s : situacoesSelecionadas) {
 			System.out.println(s.getDescricao());
 		}
-		this.listaProjetos = this.projetoDAO.getProjetosPorStatus(situacoesSelecionadas);
-		
+		this.listaProjetos = this.projetoDAO.getProjetosPorStatus(situacoesSelecionadas);		
 	}
 	
-	public String adiciona() {
+	public String adiciona() { 
 		List<Empregado> coordenadores = new ArrayList<Empregado>();
 		List<Empregado> responsaveisTecnicos = new ArrayList<Empregado>();
 		for(Integer idCoordenador : this.idDosCoordenadores) {
@@ -120,7 +109,7 @@ public class ProjetoMB {
 		projeto.setEap(this.eap.getContents());
 		this.projetoDAO.adiciona(projeto);
 		this.projeto = new Projeto();
-		return "listaProjeto";
+		return "listaProjeto?faces-redirect=true";
 	}
 	
 	public String editaProjeto(Projeto projeto) {
@@ -133,7 +122,7 @@ public class ProjetoMB {
 	}
 	
 	public void removeProjeto() {
-		this.projetoDAO.apaga(this.projeto);
+		this.projetoDAO.remove(this.projeto.getId());
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Projeto apagado!"));
     }
 	

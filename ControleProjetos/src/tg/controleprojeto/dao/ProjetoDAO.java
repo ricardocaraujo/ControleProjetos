@@ -40,6 +40,7 @@ public class ProjetoDAO {
 		manager.remove(projeto);
 		manager.getTransaction().commit();
 		manager.close();
+		System.out.println("projeto removido");
 	}
 	
 	public List<Projeto> getProjetos() {
@@ -80,8 +81,4 @@ public class ProjetoDAO {
 		return typedQuery.getResultList();
 	}
 
-	public void apaga(Projeto projeto) {
-		EntityManager manager = new JPAUtil().getEntityManager();
-		
-	}	
 }
