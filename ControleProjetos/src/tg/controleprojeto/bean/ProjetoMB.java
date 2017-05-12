@@ -1,11 +1,15 @@
 package tg.controleprojeto.bean;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import tg.controleprojeto.dao.EmpregadoDAO;
@@ -14,10 +18,13 @@ import tg.controleprojeto.modelo.Projeto;
 import tg.controleprojeto.modelo.Situacao;
 import tg.controleprojeto.modelo.Empregado;
 
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
 
 @ManagedBean
+@ViewScoped
 public class ProjetoMB {
 	
 	private Projeto projeto; 
@@ -27,7 +34,8 @@ public class ProjetoMB {
 	private List<Integer> idDosCoordenadores;
 	private List<Integer> idDosResponsaveisTecnicos;
 	private List<Situacao> situacoesSelecionadas;
-	private UploadedFile eap; 
+	private UploadedFile eap;
+	private StreamedContent chart;
 	
  	
 	@PostConstruct
@@ -77,8 +85,19 @@ public class ProjetoMB {
 		this.situacoesSelecionadas = situacoesSelecionadas;
 	}
 	
-	public UploadedFile getEap() {
+	public UploadedFile getEap() {		
 		return eap;
+	}
+	
+	public StreamedContent eap() {
+        FileInputStream chartFile;
+		try {
+			chartFile = (FileInputStream) eap.getInputstream();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return new DefaultStreamedContent(chartFile, "image/jpg");
 	}
 
 	public void setEap(UploadedFile eap) {
