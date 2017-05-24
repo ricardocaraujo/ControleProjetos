@@ -18,6 +18,7 @@ import tg.controleprojeto.modelo.Projeto;
 import tg.controleprojeto.modelo.Situacao;
 import tg.controleprojeto.modelo.Empregado;
 
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
@@ -35,7 +36,7 @@ public class ProjetoMB {
 	private List<Integer> idDosResponsaveisTecnicos;
 	private List<Situacao> situacoesSelecionadas;
 	private UploadedFile eap;
-	private StreamedContent chart;
+	private StreamedContent imagem;
 	
  	
 	@PostConstruct
@@ -85,25 +86,36 @@ public class ProjetoMB {
 		this.situacoesSelecionadas = situacoesSelecionadas;
 	}
 	
-	public UploadedFile getEap() {		
+	public UploadedFile getEap() {
+		System.out.println("entrou no geteap");
 		return eap;
 	}
 	
-	public StreamedContent eap() {
-        FileInputStream chartFile;
-		try {
-			chartFile = (FileInputStream) eap.getInputstream();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        return new DefaultStreamedContent(chartFile, "image/jpg");
-	}
-
 	public void setEap(UploadedFile eap) {
+		System.out.println("entrou no seteap");
 		this.eap = eap;
 	}
+	
+	public void exibeImagemEap(FileUploadEvent event) {
+		try {
+			this.imagem = new DefaultStreamedContent(event.getFile().getInputstream());
+			this.setEap(event.getFile());
+			System.out.println("chegou no metodo exibeEAP");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        //this.imagem = new DefaultStreamedContent(arquivo, "image/png");
+	}
 
+	public StreamedContent getImagem() {
+		System.out.println("entrou no getimagem");
+		return imagem;
+	}
+
+	public void setImagem(StreamedContent imagem) {
+		System.out.println("entrou no setimagem");
+		this.imagem = imagem;
+	}
 
 	public void listaProjetosComFiltro() {
 		for(Situacao s : situacoesSelecionadas) {
