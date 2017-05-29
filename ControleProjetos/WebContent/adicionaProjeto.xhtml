@@ -58,8 +58,7 @@
 					</p:selectManyMenu>
 					
 					<p:outputLabel value="EAP"/>
-					<p:fileUpload value="#{projetoMB.eap}" fileUploadListener="#{projetoMB.exibeImagemEap}" showButtons="false"/>	
-					<!-- <p:graphicImage id="imagemEap" value="#{projetoMB.imagem}" rendered="#{projetoMB.imagem != null}"/>   -->
+					<p:fileUpload fileUploadListener="#{projetoMB.exibeImagemEap}" showButtons="false"/>
 									
 					<h:commandButton value="Salvar" action="#{projetoMB.adiciona}"/>
 				</p:panelGrid>

@@ -35,7 +35,7 @@ public class ProjetoMB {
 	private List<Integer> idDosCoordenadores;
 	private List<Integer> idDosResponsaveisTecnicos;
 	private List<Situacao> situacoesSelecionadas;
-	private UploadedFile eap;
+	private byte[] eap;
 	private StreamedContent imagem;
 	
  	
@@ -86,12 +86,12 @@ public class ProjetoMB {
 		this.situacoesSelecionadas = situacoesSelecionadas;
 	}
 	
-	public UploadedFile getEap() {
+	public byte[] getEap() {
 		System.out.println("entrou no geteap");
 		return eap;
 	}
 	
-	public void setEap(UploadedFile eap) {
+	public void setEap(byte[] eap) {
 		System.out.println("entrou no seteap");
 		this.eap = eap;
 	}
@@ -99,7 +99,7 @@ public class ProjetoMB {
 	public void exibeImagemEap(FileUploadEvent event) {
 		try {
 			this.imagem = new DefaultStreamedContent(event.getFile().getInputstream());
-			this.setEap(event.getFile());
+			this.setEap(event.getFile().getContents());
 			System.out.println("chegou no metodo exibeEAP");
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -107,15 +107,15 @@ public class ProjetoMB {
         //this.imagem = new DefaultStreamedContent(arquivo, "image/png");
 	}
 
-	public StreamedContent getImagem() {
-		System.out.println("entrou no getimagem");
-		return imagem;
-	}
-
-	public void setImagem(StreamedContent imagem) {
-		System.out.println("entrou no setimagem");
-		this.imagem = imagem;
-	}
+//	public StreamedContent getImagem() {
+//		System.out.println("entrou no getimagem");
+//		return imagem;
+//	}
+//
+//	public void setImagem(StreamedContent imagem) {
+//		System.out.println("entrou no setimagem");
+//		this.imagem = imagem;
+//	}
 
 	public void listaProjetosComFiltro() {
 		for(Situacao s : situacoesSelecionadas) {
@@ -137,7 +137,7 @@ public class ProjetoMB {
 		}
 		projeto.setCoordenadores(coordenadores);
 		projeto.setResponsaveisTecnicos(responsaveisTecnicos);
-		projeto.setEap(this.eap.getContents());
+		projeto.setEap(this.eap);
 		this.projetoDAO.adiciona(projeto);
 		this.projeto = new Projeto();
 		return "listaProjeto?faces-redirect=true";
