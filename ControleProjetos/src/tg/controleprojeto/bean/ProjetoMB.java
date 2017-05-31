@@ -36,7 +36,7 @@ public class ProjetoMB {
 	private List<Integer> idDosResponsaveisTecnicos;
 	private List<Situacao> situacoesSelecionadas;
 	private byte[] eap;
-	private StreamedContent imagem;
+	//private StreamedContent imagem;
 	
  	
 	@PostConstruct
@@ -78,8 +78,7 @@ public class ProjetoMB {
 	}
 	
 	public List<Situacao> getSituacoesSelecionadas() {
-		return situacoesSelecionadas;
-		
+		return situacoesSelecionadas;		
 	}
 
 	public void setSituacoesSelecionadas(List<Situacao> situacoesSelecionadas) {
@@ -97,14 +96,14 @@ public class ProjetoMB {
 	}
 	
 	public void exibeImagemEap(FileUploadEvent event) {
-		try {
-			this.imagem = new DefaultStreamedContent(event.getFile().getInputstream());
-			this.setEap(event.getFile().getContents());
-			System.out.println("chegou no metodo exibeEAP");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-        //this.imagem = new DefaultStreamedContent(arquivo, "image/png");
+		this.setEap(event.getFile().getContents());
+		System.out.println("chegou no metodo exibeEAP");
+//		try {
+//			this.imagem = new DefaultStreamedContent(event.getFile().getInputstream());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//        //this.imagem = new DefaultStreamedContent(arquivo, "image/png");
 	}
 
 //	public StreamedContent getImagem() {
