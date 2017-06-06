@@ -22,6 +22,8 @@ import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.ChartSeries;
 
 
 @ManagedBean
@@ -36,6 +38,7 @@ public class ProjetoMB {
 	private List<Integer> idDosResponsaveisTecnicos;
 	private List<Situacao> situacoesSelecionadas;
 	private byte[] eap;
+	private BarChartModel grafico;
 	//private StreamedContent imagem;
 	
  	
@@ -142,6 +145,21 @@ public class ProjetoMB {
 		return "listaProjeto?faces-redirect=true";
 	}
 	
+	public BarChartModel getGrafico() {
+		return grafico;
+	}
+	
+	private void graficoSituacaoProjetos() {
+		grafico = new BarChartModel();		
+		ChartSeries serie = new ChartSeries();
+		serie.setLabel("Situação");
+		int numeroProjetos = 0;
+		for(Situacao s:Situacao.values()) {
+			numeroProjetos = this.projetoDAO.getNumeroProjetosPorStatus(s);
+			serie.set(s.getDescricao(), numeroProjetos);
+		}
+	}
+
 	public String editaProjeto(Projeto projeto) {
 		this.projeto = projeto;
 		return "adicionaProjeto";
