@@ -14,7 +14,7 @@ import javax.persistence.criteria.Root;
 import tg.controleprojeto.modelo.Projeto;
 import tg.controleprojeto.modelo.Situacao;
 
-public class ProjetoDAO {
+public class ProjetoDAO { 
 	
 		
 	public void adiciona(Projeto projeto) {
@@ -22,7 +22,7 @@ public class ProjetoDAO {
 		manager.getTransaction().begin();
 		manager.persist(projeto);
 		manager.getTransaction().commit();
-		manager.close();
+		manager.close(); 
 	}
 	
 	public void altera(Projeto projeto) {
@@ -81,8 +81,16 @@ public class ProjetoDAO {
 		return typedQuery.getResultList();
 	}
 	
-	public int getNumeroProjetosPorStatus(Situacao situacao) {
+	public int getNumeroProjetosPorStatus (Situacao situacao) { 
+		EntityManager manager = new JPAUtil().getEntityManager();
+		manager.getTransaction().begin();
+		TypedQuery<Projeto> query = manager.createNamedQuery("Projetos.quantidadePorSituacao", Projeto.class);
+		query.setParameter("pSituacao", situacao);
+		List<Projeto> projetos = query.getResultList();
+		System.out.println(situacao.getDescricao());
+		manager.close();
+		return projetos.size();
 		
 	}
-
+	
 }

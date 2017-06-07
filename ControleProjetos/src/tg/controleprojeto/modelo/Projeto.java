@@ -23,7 +23,7 @@ import javax.persistence.TemporalType;
 @NamedQueries({
 	@NamedQuery(name="Projetos.findAll", query="select p from Projeto p"),
 	@NamedQuery(name="Projetos.buscaPorId", query="select p from Projeto p where p.id=:pId"),
-	@NamedQuery(name="Projetos.numeroPorSituacao", query="select p from Projeto p where p.situacao=:pSituacao")
+	@NamedQuery(name="Projetos.quantidadePorSituacao", query="select p from Projeto p where p.situacao=:pSituacao")
 })
 
 

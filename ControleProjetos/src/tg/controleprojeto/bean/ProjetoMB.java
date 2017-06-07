@@ -67,8 +67,10 @@ public class ProjetoMB {
 
 	public List<Projeto> getListaProjetos() {
 		if(situacoesSelecionadas == null) {
+			System.out.println("entrou no lista projetos");
 			return projetoDAO.getProjetos();	
 		}
+		
 		return this.listaProjetos;
 	}
 
@@ -89,18 +91,15 @@ public class ProjetoMB {
 	}
 	
 	public byte[] getEap() {
-		System.out.println("entrou no geteap");
 		return eap;
 	}
 	
 	public void setEap(byte[] eap) {
-		System.out.println("entrou no seteap");
 		this.eap = eap;
 	}
 	
 	public void exibeImagemEap(FileUploadEvent event) {
 		this.setEap(event.getFile().getContents());
-		System.out.println("chegou no metodo exibeEAP");
 //		try {
 //			this.imagem = new DefaultStreamedContent(event.getFile().getInputstream());
 //		} catch (IOException e) {
@@ -146,18 +145,21 @@ public class ProjetoMB {
 	}
 	
 	public BarChartModel getGrafico() {
+		this.graficoSituacaoProjetos();
+		System.out.println("entrou no getGrafico");
 		return grafico;
 	}
 	
 	private void graficoSituacaoProjetos() {
 		grafico = new BarChartModel();		
-		ChartSeries serie = new ChartSeries();
-		serie.setLabel("Situação");
+		ChartSeries series = new ChartSeries();
+		series.setLabel("Situação");
 		int numeroProjetos = 0;
 		for(Situacao s:Situacao.values()) {
 			numeroProjetos = this.projetoDAO.getNumeroProjetosPorStatus(s);
-			serie.set(s.getDescricao(), numeroProjetos);
+			series.set(s.getDescricao(), numeroProjetos);
 		}
+		grafico.addSeries(series);
 	}
 
 	public String editaProjeto(Projeto projeto) {

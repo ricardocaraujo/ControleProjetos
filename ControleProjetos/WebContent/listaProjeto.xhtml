@@ -45,12 +45,10 @@
 								</h:outputText>
 							</p:column>
 							<p:column headerText="Ação">
-<!-- 							<p:commandLink styleClass="ui-icon ui-icon-pencil" action="#{projetoMB.editaProjeto(projeto)}" /> -->
-<!-- 							<p:commandButton icon="ui-icon-search"></p:commandButton> -->
 								<p:commandButton icon="fa fa-fw fa-edit" action="#{projetoMB.editaProjeto(projeto)}" />
 								<p:commandButton icon="fa fa-fw fa-trash-o" action="#{projetoMB.setProjetoAtual(projeto)}" onclick="PF('dlg').show()"/>													
 							</p:column>
-						</p:dataTable>
+						</p:dataTable>					
 					</h:form>
 					<p:dialog widgetVar="dlg" header="Excluir projeto?">
 						 <h:form>
@@ -62,7 +60,9 @@
 					</p:dialog>
 				</div>
 				<div>
-					<p:chart type="bar" model="#{projetoMB.graficoSituacaoProjetos}"/>
+					<h:form name="graficoProjetos">
+						<p:chart type="bar" model="#{projetoMB.grafico}" style="height:300px"/>
+					</h:form>
 				</div>
 			</ui:define>
 		</ui:composition>
