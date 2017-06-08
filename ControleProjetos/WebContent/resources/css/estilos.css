@@ -16,6 +16,6 @@
 	margin-bottom: 20px;
 }
 
-/* img { */
-/* 	width: 520px; */
-/* } */
+.ui-panelgrid-cell {
+	border-style: none;
+}
