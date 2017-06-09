@@ -24,29 +24,30 @@
 					
 						<f:facet name="header">
 							Projetos de Pesquisa
-						</f:facet>
-						
+						</f:facet>					
 						<p:panel header="#{projeto.nome}" style="text-align:center">
-							<div class="ui-g">
-							    <div class="ui-g-6">
-							    	<h:outputLabel value="Objetivo: "/>
-							    	<h:outputLabel value="Data de início: "/>
-							    	<p:commandLink title="Ver detalhes">
-		                    			<h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
-		                			</p:commandLink>
-							    </div>
-							    <div class="ui-g-6">
-							    	<h:outputText value="#{projeto.objetivo}"/>
-							    	<h:outputText value="#{projeto.dataInicio.time}">
-										<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
-									</h:outputText>
-									<p:commandLink title="Editar">
-			                    		<h:outputText styleClass="ui-icon ui-icon-pencil" style="margin:0 auto;" />
-			                		</p:commandLink>	
-							    </div>
-							</div>				
-						</p:panel>					
-					</p:dataGrid>					
+					        <h:panelGrid columns="2" style="font-size:14px">
+					        	<h:outputLabel value="Objetivo: " style="margin:left"/>
+					        	<h:outputText value="#{projeto.objetivo}"/>
+						    	<h:outputLabel value="Data de início: "/>
+						    	<h:outputText value="#{projeto.dataInicio.time}">
+									<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+								</h:outputText>
+								
+					        </h:panelGrid>
+					        <h:panelGrid columns="3" style="margin:auto">
+					        	<p:commandLink title="Ver detalhes">
+	                    			<h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
+	                			</p:commandLink>
+					            <p:commandLink title="Editar">
+		                    		<h:outputText styleClass="ui-icon ui-icon-pencil" style="margin:0 auto;" />
+		                		</p:commandLink>
+		                		<p:commandLink title="Apagar">
+		                    		<h:outputText styleClass="ui-icon ui-icon-trash" style="margin:0 auto;" />
+				                </p:commandLink>
+					        </h:panelGrid>	                
+						</p:panel>
+					</p:dataGrid>
 				</h:form>			
 			</ui:define>
 		</ui:composition>
