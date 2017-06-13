@@ -13,10 +13,12 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import tg.controleprojeto.dao.EmpregadoDAO;
+import tg.controleprojeto.dao.LinhaDePesquisaDAO;
 import tg.controleprojeto.dao.ProjetoDAO;
 import tg.controleprojeto.modelo.Projeto;
 import tg.controleprojeto.modelo.Situacao;
 import tg.controleprojeto.modelo.Empregado;
+import tg.controleprojeto.modelo.LinhaDePesquisa;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
@@ -30,9 +32,11 @@ import org.primefaces.model.chart.ChartSeries;
 @ViewScoped
 public class ProjetoMB {
 	
-	private Projeto projeto; 
+	private Projeto projeto;
+	private LinhaDePesquisa linhasDePesquisa;
 	private ProjetoDAO projetoDAO;
 	private EmpregadoDAO empregadoDAO;
+	private LinhaDePesquisaDAO linhaDePesquisaDAO;
 	private List<Projeto> listaProjetos;
 	private List<Integer> idDosCoordenadores;
 	private List<Integer> idDosResponsaveisTecnicos;
@@ -47,6 +51,7 @@ public class ProjetoMB {
 		this.projeto = new Projeto();
 		projetoDAO = new ProjetoDAO();
 		empregadoDAO = new EmpregadoDAO();
+		linhaDePesquisaDAO = new LinhaDePesquisaDAO();
 	}
 	
 	public List<Integer> getIdDosResponsaveisTecnicos() {
@@ -67,10 +72,8 @@ public class ProjetoMB {
 
 	public List<Projeto> getListaProjetos() {
 		if(situacoesSelecionadas == null) {
-			System.out.println("entrou no lista projetos");
 			return projetoDAO.getProjetos();	
-		}
-		
+		}	
 		return this.listaProjetos;
 	}
 

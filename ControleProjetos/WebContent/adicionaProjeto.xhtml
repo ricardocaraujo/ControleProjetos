@@ -17,10 +17,10 @@
 		</ui:define>
 		<ui:define name="conteudo">
 			<h:form id="form" enctype="multipart/form-data">
-				<p:panelGrid style="width: 920px;" columns="2">
+				<h:panelGrid style="width: 920px; font-size:12px;" columns="2">
 					<p:outputLabel value="Nome do projeto" for="nome"/>
 					<p:inputText id="nome" value="#{projetoMB.projeto.nome}"
-						required="true" requiredMessage="Nome obrigatório" >					
+						required="true" requiredMessage="Nome obrigatório">					
 					</p:inputText>
 					
 					<p:outputLabel value="Objetivo" for="objetivo"/>
@@ -43,6 +43,14 @@
 										itemValue="#{situacao}" itemLabel="#{situacao.descricao}"/>
 					</p:selectOneRadio>
 					
+					<p:outputLabel value="Situação"/>
+					<p:selectOneRadio value="#{projetoMB.projeto.linhaDePesquisa}" converter="javax.faces.Integer">
+						<h:panelGrid columns="3">
+							<f:selectItems value="#{projetoMB.linhasDePesquisa}" var="linhaDePesquisa"
+										itemValue="#{linhaDePesquisa.id}" itemLabel="#{situacao.descricao}"/>
+						</h:panelGrid>						
+					</p:selectOneRadio>
+					
 					<p:outputLabel value="Coordenadores"/>
 					<p:selectManyMenu value="#{projetoMB.idDosCoordenadores}" converter="javax.faces.Integer">
 						<f:selectItem itemLabel="Nenhum" noSelectionOption="true"/>
@@ -61,7 +69,7 @@
 					<p:fileUpload fileUploadListener="#{projetoMB.exibeImagemEap}" showButtons="false"/>
 									
 					<h:commandButton value="Salvar" action="#{projetoMB.adiciona}"/>
-				</p:panelGrid>
+				</h:panelGrid>
 			</h:form>
 		</ui:define>
 	</ui:composition>

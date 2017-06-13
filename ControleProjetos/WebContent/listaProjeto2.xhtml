@@ -26,10 +26,10 @@
 							Projetos de Pesquisa
 						</f:facet>					
 						<p:panel header="#{projeto.nome}" style="text-align:center">
-					        <h:panelGrid columns="2" style="font-size:14px">
-					        	<h:outputLabel value="Objetivo: " style="margin:left"/>
+					        <h:panelGrid columns="2" style="font-size:14px;text-align:left;">
+					        	<h:outputLabel value="Objetivo: " style="font-weight:bold"/>
 					        	<h:outputText value="#{projeto.objetivo}"/>
-						    	<h:outputLabel value="Data de início: "/>
+						    	<h:outputLabel value="Data de início: " style="font-weight:bold"/>
 						    	<h:outputText value="#{projeto.dataInicio.time}">
 									<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
 								</h:outputText>
