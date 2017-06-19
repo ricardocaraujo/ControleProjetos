@@ -43,12 +43,10 @@
 										itemValue="#{situacao}" itemLabel="#{situacao.descricao}"/>
 					</p:selectOneRadio>
 					
-					<p:outputLabel value="Situação"/>
-					<p:selectOneRadio value="#{projetoMB.projeto.linhaDePesquisa}" converter="javax.faces.Integer">
-						<h:panelGrid columns="3">
-							<f:selectItems value="#{projetoMB.linhasDePesquisa}" var="linhaDePesquisa"
-										itemValue="#{linhaDePesquisa.id}" itemLabel="#{situacao.descricao}"/>
-						</h:panelGrid>						
+					<p:outputLabel value="Linha de Pesquisa"/>
+					<p:selectOneRadio value="#{projetoMB.projeto.linhaDePesquisa}">
+						<f:selectItems value="#{projetoMB.linhasDePesquisa}" var="linhaDePesquisa" 
+									itemValue="#{linhaDePesquisa}" itemLabel="#{linhaDePesquisa.nome}"/>					
 					</p:selectOneRadio>
 					
 					<p:outputLabel value="Coordenadores"/>

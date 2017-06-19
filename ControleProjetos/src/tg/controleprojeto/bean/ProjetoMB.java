@@ -33,7 +33,6 @@ import org.primefaces.model.chart.ChartSeries;
 public class ProjetoMB {
 	
 	private Projeto projeto;
-	private LinhaDePesquisa linhasDePesquisa;
 	private ProjetoDAO projetoDAO;
 	private EmpregadoDAO empregadoDAO;
 	private LinhaDePesquisaDAO linhaDePesquisaDAO;
@@ -99,6 +98,12 @@ public class ProjetoMB {
 	
 	public void setEap(byte[] eap) {
 		this.eap = eap;
+	}
+	
+	public List<LinhaDePesquisa> getLinhasDePesquisa() {
+		List<LinhaDePesquisa> lista = this.linhaDePesquisaDAO.getLinhasDePesquisa();
+		System.out.println(lista.size());
+		return lista;
 	}
 	
 	public void exibeImagemEap(FileUploadEvent event) {

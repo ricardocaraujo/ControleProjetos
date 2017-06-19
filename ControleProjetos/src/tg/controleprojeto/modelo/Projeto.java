@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
@@ -35,6 +36,9 @@ public class Projeto {
 	private String justificativa;
 	private String nome;
 	private String objetivo;
+	
+	@ManyToOne
+	private LinhaDePesquisa linhaDePesquisa;
 	
 	@Enumerated(EnumType.STRING)
 	private Situacao situacao;
@@ -214,5 +218,14 @@ public class Projeto {
 	public void setGerenciasExecutoras(List<Gerencia> gerenciasExecutoras) {
 		this.gerenciasExecutoras = gerenciasExecutoras;
 	}
+	
+	public LinhaDePesquisa getLinhaDePesquisa() {
+		return linhaDePesquisa;
+	}
+
+	public void setLinhaDePesquisa(LinhaDePesquisa linhaDePesquisa) {
+		this.linhaDePesquisa = linhaDePesquisa;
+	}
+
 }
 

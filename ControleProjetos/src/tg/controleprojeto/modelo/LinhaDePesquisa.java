@@ -8,10 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 
 @NamedQueries({
-	@NamedQuery(name="LinhasDePesquisa.findAll", query="select l from LinhasDePesquisa l"),
+	@NamedQuery(name="LinhasDePesquisa.findAll", query="select l from LinhaDePesquisa l"),
 })
 
 @Entity
@@ -21,9 +20,6 @@ public class LinhaDePesquisa {
 	private int id;
 
 	private String nome;
-	
-	@OneToMany
-	private List<Projeto> projetos;
 	
 	private LinhaDePesquisa() {}	
 	

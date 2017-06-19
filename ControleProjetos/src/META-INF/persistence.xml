@@ -20,8 +20,11 @@
 
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/controle_projetos"/>
-			<property name="javax.persistence.jdbc.user" value="behx"/>
-			<property name="javax.persistence.jdbc.password" value="behxbehx"/>
+			<!-- <property name="javax.persistence.jdbc.user" value="behx"/>
+			<property name="javax.persistence.jdbc.password" value="behxbehx"/> -->
+			
+			<property name="javax.persistence.jdbc.user" value="root"/>
+			<property name="javax.persistence.jdbc.password" value="r1card0a"/>
 			
 			<!-- Configurações específicas do Hibernate -->
 <!-- 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/> -->
