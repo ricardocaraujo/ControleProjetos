@@ -45,4 +45,12 @@ public class LinhaDePesquisaDAO {
 		return linhasDePesquisa;
 	}
 	
+	public LinhaDePesquisa buscaPorId(int id) {
+		EntityManager manager = new JPAUtil().getEntityManager();
+		manager.getTransaction().begin();
+		LinhaDePesquisa linhaDePesquisa = manager.find(LinhaDePesquisa.class, id);
+		manager.close();
+		return linhaDePesquisa;
+	}
+	
 }

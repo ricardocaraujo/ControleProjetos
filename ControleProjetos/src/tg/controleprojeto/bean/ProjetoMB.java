@@ -39,6 +39,7 @@ public class ProjetoMB {
 	private List<Projeto> listaProjetos;
 	private List<Integer> idDosCoordenadores;
 	private List<Integer> idDosResponsaveisTecnicos;
+	private Integer idLinhaDePesquisa;
 	private List<Situacao> situacoesSelecionadas;
 	private byte[] eap;
 	private BarChartModel grafico;
@@ -106,6 +107,14 @@ public class ProjetoMB {
 		return lista;
 	}
 	
+	public Integer getIdLinhaDePesquisa() {
+		return idLinhaDePesquisa;
+	}
+	
+	public void setIdLinhaDePesquisa(Integer idLinhaDePesquisa) {
+		this.idLinhaDePesquisa = idLinhaDePesquisa;
+	}
+
 	public void exibeImagemEap(FileUploadEvent event) {
 		this.setEap(event.getFile().getContents());
 //		try {
@@ -136,6 +145,7 @@ public class ProjetoMB {
 	public String adiciona() { 
 		List<Empregado> coordenadores = new ArrayList<Empregado>();
 		List<Empregado> responsaveisTecnicos = new ArrayList<Empregado>();
+		LinhaDePesquisa linhaDePesquisa = linhaDePesquisaDAO.buscaPorId(idLinhaDePesquisa.intValue());
 		for(Integer idCoordenador : this.idDosCoordenadores) {
 			Empregado coordenador = empregadoDAO.buscaPorId(idCoordenador.intValue());
 			coordenadores.add(coordenador);
@@ -147,11 +157,12 @@ public class ProjetoMB {
 		projeto.setCoordenadores(coordenadores);
 		projeto.setResponsaveisTecnicos(responsaveisTecnicos);
 		projeto.setEap(this.eap);
+		projeto.setLinhaDePesquisa(linhaDePesquisa);
 		this.projetoDAO.adiciona(projeto);
 		this.projeto = new Projeto();
 		return "listaProjeto?faces-redirect=true";
 	}
-	
+
 	public BarChartModel getGrafico() {
 		this.graficoSituacaoProjetos();
 		System.out.println("entrou no getGrafico");

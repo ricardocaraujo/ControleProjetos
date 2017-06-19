@@ -44,9 +44,9 @@
 					</p:selectOneRadio>
 					
 					<p:outputLabel value="Linha de Pesquisa"/>
-					<p:selectOneRadio value="#{projetoMB.projeto.linhaDePesquisa}">
+					<p:selectOneRadio value="#{projetoMB.idLinhaDePesquisa}" converter="javax.faces.Integer">
 						<f:selectItems value="#{projetoMB.linhasDePesquisa}" var="linhaDePesquisa" 
-									itemValue="#{linhaDePesquisa}" itemLabel="#{linhaDePesquisa.nome}"/>					
+									itemValue="#{linhaDePesquisa.id}" itemLabel="#{linhaDePesquisa.nome}"/>					
 					</p:selectOneRadio>
 					
 					<p:outputLabel value="Coordenadores"/>
