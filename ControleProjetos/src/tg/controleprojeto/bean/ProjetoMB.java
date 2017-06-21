@@ -103,7 +103,6 @@ public class ProjetoMB {
 	
 	public List<LinhaDePesquisa> getLinhasDePesquisa() {
 		List<LinhaDePesquisa> lista = this.linhaDePesquisaDAO.getLinhasDePesquisa();
-		System.out.println(lista.size());
 		return lista;
 	}
 	
@@ -136,9 +135,6 @@ public class ProjetoMB {
 //	}
 
 	public void listaProjetosComFiltro() {
-		for(Situacao s : situacoesSelecionadas) {
-			System.out.println(s.getDescricao());
-		}
 		this.listaProjetos = this.projetoDAO.getProjetosPorStatus(situacoesSelecionadas);		
 	}
 	
