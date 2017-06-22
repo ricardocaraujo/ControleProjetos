@@ -90,7 +90,16 @@ public class ProjetoDAO {
 		System.out.println(situacao.getDescricao());
 		manager.close();
 		return projetos.size();
-		
+	}
+	
+	public List<Projeto> getProjetosPorLinhaDePesquisa(int id) {
+		EntityManager manager = new JPAUtil().getEntityManager();
+		manager.getTransaction().begin();
+		TypedQuery<Projeto> query = manager.createNamedQuery("Projetos.buscaPorLinhaDePesquisa", Projeto.class);
+		query.setParameter("plinhaDePesquisa", id);
+		List<Projeto> projetos = query.getResultList();
+		manager.close();
+		return projetos;		
 	}
 	
 }

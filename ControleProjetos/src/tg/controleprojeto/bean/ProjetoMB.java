@@ -102,8 +102,7 @@ public class ProjetoMB {
 	}
 	
 	public List<LinhaDePesquisa> getLinhasDePesquisa() {
-		List<LinhaDePesquisa> lista = this.linhaDePesquisaDAO.getLinhasDePesquisa();
-		return lista;
+		return this.linhaDePesquisaDAO.getLinhasDePesquisa();
 	}
 	
 	public Integer getIdLinhaDePesquisa() {
@@ -112,6 +111,11 @@ public class ProjetoMB {
 	
 	public void setIdLinhaDePesquisa(Integer idLinhaDePesquisa) {
 		this.idLinhaDePesquisa = idLinhaDePesquisa;
+	}
+	
+	public void selecionaLinhaDePesquisa(int id) {
+		System.out.println(id);
+		this.listaProjetos = this.projetoDAO.getProjetosPorLinhaDePesquisa(id);
 	}
 
 	public void exibeImagemEap(FileUploadEvent event) {

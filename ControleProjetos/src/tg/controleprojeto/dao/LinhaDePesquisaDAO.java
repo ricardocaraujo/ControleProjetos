@@ -51,6 +51,5 @@ public class LinhaDePesquisaDAO {
 		LinhaDePesquisa linhaDePesquisa = manager.find(LinhaDePesquisa.class, id);
 		manager.close();
 		return linhaDePesquisa;
-	}
-	
+	}	
 }

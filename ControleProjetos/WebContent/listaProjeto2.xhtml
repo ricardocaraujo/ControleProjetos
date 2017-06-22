@@ -18,38 +18,63 @@
 			</ui:define>
 		
 			<ui:define name="conteudo">	
-				<h:form id="form">
-					<p:tabView value="#{projetoMB.linhasDePesquisa}" var="{linhaDePesquisa}">
-						<p:tab title="#{linhaDePesquisa.nome}" actionListener="" update="dataGridProjetos">
-							<p:dataGrid id="dataGridProjetos" var="projeto" value="#{projetoMB.listaProjetos}" columns="3" layout="grid"
-										rows="12" paginator="true" id="projetos" rowsPerPageTemplate="6,12,16">
-											
-								<p:panel header="#{projeto.nome}" style="text-align:center">
-							        <h:panelGrid columns="2" style="font-size:14px;text-align:left;">
-							        	<h:outputLabel value="Objetivo: " style="font-weight:bold"/>
-							        	<h:outputText value="#{projeto.objetivo}"/>
-								    	<h:outputLabel value="Data de início: " style="font-weight:bold"/>
-								    	<h:outputText value="#{projeto.dataInicio.time}">
-											<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
-										</h:outputText>
+				<div style="margin-bottom: 30px">
+					<h:form>
+						<h:panelGrid columns="2">
+							<p:outputLabel value="Situação"/>
+							<p:selectManyCheckbox value="#{projetoMB.situacoesSelecionadas}" id="situacoes" converter="situacaoEnumConverter">
+								<f:selectItems value="#{projetoMB.situacoesPossiveis}" var="situacao"
+												itemValue="#{situacao}" itemLabel="#{situacao.descricao}"/>
+							</p:selectManyCheckbox>
+							<h:commandButton value="Listar" action="#{projetoMB.listaProjetosComFiltro}" />					
+						</h:panelGrid>						
+					</h:form>
+				</div>		
+				<div style="margin-bottom: 30px">
+					<h:form id="formProjetos">
+						<p:dataGrid var="projeto" value="#{projetoMB.listaProjetos}" columns="3" layout="grid"
+									rows="12" paginator="true" id="projetos" rowsPerPageTemplate="6,12,16">
 										
-							        </h:panelGrid>
-							        <h:panelGrid columns="3" style="margin:auto">
-							        	<p:commandLink title="Ver detalhes">
-			                    			<h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
-			                			</p:commandLink>
-							            <p:commandLink title="Editar">
-				                    		<h:outputText styleClass="ui-icon ui-icon-pencil" style="margin:0 auto;" />
-				                		</p:commandLink>
-				                		<p:commandLink title="Apagar">
-				                    		<h:outputText styleClass="ui-icon ui-icon-trash" style="margin:0 auto;" />
-						                </p:commandLink>
-							        </h:panelGrid>	                
-								</p:panel>
-							</p:dataGrid>
-						</p:tab>			
-					</p:tabView>
-				</h:form>			
+							<p:panel header="#{projeto.nome}" style="text-align:center">
+						        <h:panelGrid columns="2" style="font-size:14px;text-align:left;">
+						        	<h:outputLabel value="Objetivo: " style="font-weight:bold"/>
+						        	<h:outputText value="#{projeto.objetivo}"/>
+							    	<h:outputLabel value="Data de início: " style="font-weight:bold"/>
+							    	<h:outputText value="#{projeto.dataInicio.time}">
+										<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+									</h:outputText>
+									
+						        </h:panelGrid>
+						        <h:panelGrid columns="3" style="margin:auto">
+						        	<p:commandLink title="Ver detalhes">
+		                    			<h:outputText styleClass="ui-icon ui-icon-search" style="margin: auto;" />
+		                			</p:commandLink>
+						            <p:commandLink title="Editar" action="#{projetoMB.editaProjeto(projeto)}">
+			                    		<h:outputText styleClass="ui-icon ui-icon-pencil" style="margin: auto;" />
+			                		</p:commandLink>
+			                		<p:commandLink title="Apagar" action="#{projetoMB.setProjetoAtual(projeto)}" onclick="PF('dlg').show()">
+			                    		<h:outputText styleClass="ui-icon ui-icon-trash" style="margin: auto;" />
+					                </p:commandLink>
+						        </h:panelGrid>	                
+							</p:panel>
+						</p:dataGrid>
+					</h:form>
+				</div>	
+				<div>
+					<p:dialog widgetVar="dlg" header="Excluir projeto?">
+						<h:form>
+							<p:panelGrid columns="2">
+								<p:commandButton value="Não" onclick="PF('dlg').hide()"/> 
+								<p:commandButton value="Sim" action="#{projetoMB.removeProjeto}" onclick="PF('dlg').hide()" update=":formProjetos"/>	
+							</p:panelGrid>
+						</h:form>
+					</p:dialog>
+				</div>
+				<div>
+					<h:form name="graficoProjetos">
+						<p:chart type="bar" model="#{projetoMB.grafico}" style="height:300px"/>
+					</h:form>
+				</div>							
 			</ui:define>
 		</ui:composition>
 </html>
