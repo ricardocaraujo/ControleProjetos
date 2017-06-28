@@ -11,6 +11,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import tg.controleprojeto.modelo.LinhaDePesquisa;
 import tg.controleprojeto.modelo.Projeto;
 import tg.controleprojeto.modelo.Situacao;
 
@@ -62,21 +63,35 @@ public class ProjetoDAO {
 		return projeto;
 	}
 	
-	public List<Projeto> getProjetosPorStatus (List<Situacao> situacao) {
+	public List<Projeto> getProjetosPorStatus (List<Situacao> situacao, List<Integer> idLinhaDePesquisa) {
+		System.out.println(situacao.size());
+		System.out.println(idLinhaDePesquisa.size());
 		EntityManager manager = new JPAUtil().getEntityManager();
 		CriteriaBuilder criteria = manager.getCriteriaBuilder();
 		CriteriaQuery<Projeto> query = criteria.createQuery(Projeto.class);
 		Root<Projeto> root = query.from(Projeto.class);
 		Path<Situacao> enumPath = root.<Situacao>get("situacao");
-		Predicate situacaoIgual = null;
-		if(situacao != null) {
-			List<Predicate> predicates = new ArrayList<Predicate>();
+		Path<Integer> idLinhaDePesquisaPath = root.join("linhaDePesquisa").<Integer>get("id");
+		List<Predicate> predicatesSituacao = new ArrayList<Predicate>();
+		List<Predicate> predicatesLinhaDePesquisa = new ArrayList<Predicate>();
+		Predicate criterio = null;
+		if(situacao != null) {			
 			for(Situacao s:situacao) {
-				situacaoIgual = criteria.equal(enumPath, s);
-				predicates.add(situacaoIgual);
+				criterio = criteria.equal(enumPath, s);
+				predicatesSituacao.add(criterio);
 			}
-			query.where(criteria.or((Predicate[]) predicates.toArray(new Predicate[0])));
-		}		
+			System.out.println("ProjetoDAO - situacao: " + predicatesSituacao.size());
+		}
+		if(idLinhaDePesquisa != null) {
+			criterio = null;
+			for(Integer idLinha:idLinhaDePesquisa) {
+				criterio = criteria.equal(idLinhaDePesquisaPath, idLinha);
+				predicatesLinhaDePesquisa.add(criterio);
+			}			
+			System.out.println("ProjetoDAO - total: " + predicatesLinhaDePesquisa.size());
+		}
+		query.where(criteria.or((Predicate[]) predicatesSituacao.toArray(new Predicate[0])));
+		query.where(criteria.or((Predicate[]) predicatesLinhaDePesquisa.toArray(new Predicate[0])));
 		TypedQuery<Projeto> typedQuery = manager.createQuery(query);	
 		return typedQuery.getResultList();
 	}

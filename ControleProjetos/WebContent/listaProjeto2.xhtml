@@ -26,8 +26,13 @@
 								<f:selectItems value="#{projetoMB.situacoesPossiveis}" var="situacao"
 												itemValue="#{situacao}" itemLabel="#{situacao.descricao}"/>
 							</p:selectManyCheckbox>
-							<h:commandButton value="Listar" action="#{projetoMB.listaProjetosComFiltro}" />					
-						</h:panelGrid>						
+							<p:outputLabel value="Linhas de pesquisa"/>
+							<p:selectManyCheckbox value="#{projetoMB.idLinhasSelecionadas}" id="linhas" converter="javax.faces.Integer">
+								<f:selectItems value="#{projetoMB.linhasDePesquisa}" var="linha"
+												itemValue="#{linha.id}" itemLabel="#{linha.nome}"/>
+							</p:selectManyCheckbox>
+							<h:commandButton value="Listar" action="#{projetoMB.listaProjetosComFiltro}"/>					
+						</h:panelGrid>					
 					</h:form>
 				</div>		
 				<div style="margin-bottom: 30px">

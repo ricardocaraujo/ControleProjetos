@@ -42,8 +42,9 @@ public class ProjetoMB {
 	private Integer idLinhaDePesquisa;
 	private List<Situacao> situacoesSelecionadas;
 	private byte[] eap;
-	private BarChartModel grafico;
-	//private StreamedContent imagem;
+	//private BarChartModel grafico;
+	private List<Integer> idLinhasSelecionadas;
+	//private StreamedContent imagem; 
 	
  	
 	@PostConstruct
@@ -90,6 +91,10 @@ public class ProjetoMB {
 	}
 
 	public void setSituacoesSelecionadas(List<Situacao> situacoesSelecionadas) {
+		System.out.println(situacoesSelecionadas.size());
+		for(Situacao s:situacoesSelecionadas) {
+			System.out.println(s.getDescricao());
+		}
 		this.situacoesSelecionadas = situacoesSelecionadas;
 	}
 	
@@ -101,10 +106,6 @@ public class ProjetoMB {
 		this.eap = eap;
 	}
 	
-	public List<LinhaDePesquisa> getLinhasDePesquisa() {
-		return this.linhaDePesquisaDAO.getLinhasDePesquisa();
-	}
-	
 	public Integer getIdLinhaDePesquisa() {
 		return idLinhaDePesquisa;
 	}
@@ -113,9 +114,20 @@ public class ProjetoMB {
 		this.idLinhaDePesquisa = idLinhaDePesquisa;
 	}
 	
-	public void selecionaLinhaDePesquisa(int id) {
-		System.out.println(id);
-		this.listaProjetos = this.projetoDAO.getProjetosPorLinhaDePesquisa(id);
+	public List<LinhaDePesquisa> getLinhasDePesquisa() {
+		return this.linhaDePesquisaDAO.getLinhasDePesquisa();
+	}
+
+	public List<Integer> getIdLinhasSelecionadas() {
+		return idLinhasSelecionadas;
+	}
+
+	public void setIdLinhasSelecionadas(List<Integer> idLinhasSelecionadas) {
+		this.idLinhasSelecionadas = idLinhasSelecionadas;
+		System.out.println(idLinhasSelecionadas.size());
+		for(Integer n:idLinhasSelecionadas) {
+			System.out.println(n);
+		}
 	}
 
 	public void exibeImagemEap(FileUploadEvent event) {
@@ -139,7 +151,7 @@ public class ProjetoMB {
 //	}
 
 	public void listaProjetosComFiltro() {
-		this.listaProjetos = this.projetoDAO.getProjetosPorStatus(situacoesSelecionadas);		
+		this.listaProjetos = this.projetoDAO.getProjetosPorStatus(situacoesSelecionadas, idLinhasSelecionadas);		
 	}
 	
 	public String adiciona() { 
@@ -164,13 +176,8 @@ public class ProjetoMB {
 	}
 
 	public BarChartModel getGrafico() {
-		this.graficoSituacaoProjetos();
-		System.out.println("entrou no getGrafico");
-		return grafico;
-	}
-	
-	private void graficoSituacaoProjetos() {
-		grafico = new BarChartModel();		
+		//this.graficoSituacaoProjetos();
+		BarChartModel grafico = new BarChartModel();		
 		ChartSeries series = new ChartSeries();
 		series.setLabel("Situação");
 		int numeroProjetos = 0;
@@ -179,6 +186,7 @@ public class ProjetoMB {
 			series.set(s.getDescricao(), numeroProjetos);
 		}
 		grafico.addSeries(series);
+		return grafico;
 	}
 
 	public String editaProjeto(Projeto projeto) {
