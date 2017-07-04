@@ -70,14 +70,14 @@ public class ProjetoDAO {
 		CriteriaBuilder criteria = manager.getCriteriaBuilder();
 		CriteriaQuery<Projeto> query = criteria.createQuery(Projeto.class);
 		Root<Projeto> root = query.from(Projeto.class);
-		Path<Situacao> enumPath = root.<Situacao>get("situacao");
-		Path<Integer> idLinhaDePesquisaPath = root.join("linhaDePesquisa").<Integer>get("id");
+		Path<Situacao> situacaoPath = root.<Situacao>get("situacao");
+		Path<Integer> linhaDePesquisaPath = root.join("linhaDePesquisa").<Integer>get("id");
 		List<Predicate> predicatesSituacao = new ArrayList<Predicate>();
 		List<Predicate> predicatesLinhaDePesquisa = new ArrayList<Predicate>();
 		Predicate criterio = null;
 		if(situacao != null) {			
 			for(Situacao s:situacao) {
-				criterio = criteria.equal(enumPath, s);
+				criterio = criteria.equal(situacaoPath, s);
 				predicatesSituacao.add(criterio);
 			}
 			System.out.println("ProjetoDAO - situacao: " + predicatesSituacao.size());
@@ -85,7 +85,7 @@ public class ProjetoDAO {
 		if(idLinhaDePesquisa != null) {
 			criterio = null;
 			for(Integer idLinha:idLinhaDePesquisa) {
-				criterio = criteria.equal(idLinhaDePesquisaPath, idLinha);
+				criterio = criteria.equal(linhaDePesquisaPath, idLinha);
 				predicatesLinhaDePesquisa.add(criterio);
 			}			
 			System.out.println("ProjetoDAO - total: " + predicatesLinhaDePesquisa.size());
