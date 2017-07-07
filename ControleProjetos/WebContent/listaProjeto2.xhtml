@@ -22,17 +22,17 @@
 					<h:form>
 						<h:panelGrid columns="2">
 							<p:outputLabel value="Situação"/>
-							<p:selectManyCheckbox value="#{projetoMB.situacoesSelecionadas}" id="situacoes" converter="situacaoEnumConverter">
+							<p:selectManyCheckbox value="#{projetoMB.situacoesSelecionadas}" id="situacoes" layout="grid" columns="3" style="padding: 5px" converter="situacaoEnumConverter">
 								<f:selectItems value="#{projetoMB.situacoesPossiveis}" var="situacao"
-												itemValue="#{situacao}" itemLabel="#{situacao.descricao}"/>
+										itemValue="#{situacao}" itemLabel="#{situacao.descricao}"/>	
 							</p:selectManyCheckbox>
 							<p:outputLabel value="Linhas de pesquisa"/>
-							<p:selectManyCheckbox value="#{projetoMB.idLinhasSelecionadas}" id="linhas" converter="javax.faces.Integer">
-								<f:selectItems value="#{projetoMB.linhasDePesquisa}" var="linha"
+							<p:selectManyCheckbox value="#{projetoMB.idLinhasSelecionadas}" id="linhas" layout="grid" columns="3" style="padding: 5px" converter="javax.faces.Integer">
+								<f:selectItems value="#{projetoMB.linhasDePesquisa}"  var="linha"
 												itemValue="#{linha.id}" itemLabel="#{linha.nome}"/>
 							</p:selectManyCheckbox>
-							<h:commandButton value="Listar" action="#{projetoMB.listaProjetosComFiltro}"/>					
-						</h:panelGrid>					
+						</h:panelGrid>
+						<h:commandButton value="Listar" action="#{projetoMB.listaProjetosComFiltro}"/>					
 					</h:form>
 				</div>		
 				<div style="margin-bottom: 30px">
