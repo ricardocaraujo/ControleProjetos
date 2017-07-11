@@ -62,6 +62,18 @@
 						<f:selectItems value="#{projetoMB.empregados}" var="responsaveisTecnicos"
 										itemValue="#{responsaveisTecnicos.id}" itemLabel="#{responsaveisTecnicos.nome}"/>
 					</p:selectManyMenu>
+						
+					
+					<p:outputLabel value="Marcos do Projeto"/>
+					<h:dataTable columns="3">
+						<p:column style="width: 250px; padding-right: 30px">
+							<p:outputLabel></p:outputLabel>
+						</p:column>
+						<p:column style="width: 200px; padding-right: 30px" value="Responável"/>
+						<p:column style="width: 70px; padding-right: 30px" value="Data conclusão"/>
+					</h:dataTable>
+				
+					
 					
 					<p:outputLabel value="EAP"/>
 					<p:fileUpload fileUploadListener="#{projetoMB.exibeImagemEap}" showButtons="false"/>

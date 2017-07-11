@@ -1,11 +1,14 @@
 package tg.controleprojeto.modelo;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 @NamedQueries({
 	@NamedQuery(name="Empregado.findAll", query="select e from Empregado e"),
@@ -18,6 +21,9 @@ public class Empregado {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	
+	@OneToMany(mappedBy="responsavel")
+	private List<Marco> marcos;
 	
 	public Empregado(String nome) {
 		this.nome = nome;
