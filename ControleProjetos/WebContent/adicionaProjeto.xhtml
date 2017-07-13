@@ -62,19 +62,21 @@
 						<f:selectItems value="#{projetoMB.empregados}" var="responsaveisTecnicos"
 										itemValue="#{responsaveisTecnicos.id}" itemLabel="#{responsaveisTecnicos.nome}"/>
 					</p:selectManyMenu>
-						
-					
-					<p:outputLabel value="Marcos do Projeto"/>
-					<h:dataTable columns="3">
-						<p:column style="width: 250px; padding-right: 30px">
-							<p:outputLabel></p:outputLabel>
-						</p:column>
-						<p:column style="width: 200px; padding-right: 30px" value="Responável"/>
-						<p:column style="width: 70px; padding-right: 30px" value="Data conclusão"/>
-					</h:dataTable>
-				
-					
-					
+										
+					<p:outputLabel value="Marcos do Projeto"/>											
+					<h:form>
+						<p:dataTable value="#{projetoMB.listaMarcos}" var="marco" id="listaMarcos">
+							<p:column headerText="Descrição">
+								<h:inputText value="#{marco.descricao}"/>
+							</p:column>	
+							<p:column headerText="Data">
+								<p:calendar value="#{marco.data.time}">
+									<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+								</p:calendar>
+							</p:column>
+						</p:dataTable>					
+					</h:form>
+																		
 					<p:outputLabel value="EAP"/>
 					<p:fileUpload fileUploadListener="#{projetoMB.exibeImagemEap}" showButtons="false"/>
 									
@@ -83,7 +85,7 @@
 			</h:form>
 		</ui:define>
 	</ui:composition>
-</html>		
+</html>
 					
 					
 					

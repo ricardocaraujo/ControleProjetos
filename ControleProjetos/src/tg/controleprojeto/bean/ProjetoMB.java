@@ -19,6 +19,7 @@ import tg.controleprojeto.modelo.Projeto;
 import tg.controleprojeto.modelo.Situacao;
 import tg.controleprojeto.modelo.Empregado;
 import tg.controleprojeto.modelo.LinhaDePesquisa;
+import tg.controleprojeto.modelo.Marco;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
@@ -41,6 +42,7 @@ public class ProjetoMB {
 	private List<Integer> idDosResponsaveisTecnicos;
 	private Integer idLinhaDePesquisa;
 	private List<Situacao> situacoesSelecionadas;
+	private List<Marco> listaMarcos;
 	private byte[] eap;
 	//private BarChartModel grafico;
 	private List<Integer> idLinhasSelecionadas;
@@ -53,6 +55,8 @@ public class ProjetoMB {
 		projetoDAO = new ProjetoDAO();
 		empregadoDAO = new EmpregadoDAO();
 		linhaDePesquisaDAO = new LinhaDePesquisaDAO();
+		listaMarcos = new ArrayList<Marco>();
+		listaMarcos.add(new Marco());
 	}
 	
 	public List<Integer> getIdDosResponsaveisTecnicos() {
@@ -197,7 +201,15 @@ public class ProjetoMB {
 	public void setProjetoAtual(Projeto projeto) {
 		this.projeto = projeto;
 	}
-	
+		
+	public List<Marco> getListaMarcos() {
+		return listaMarcos;
+	}
+
+	public void setListaMarcos(List<Marco> listaMarcos) {
+		this.listaMarcos = listaMarcos;
+	}
+
 	public void removeProjeto() {
 		this.projetoDAO.remove(this.projeto.getId());
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Projeto apagado!"));
