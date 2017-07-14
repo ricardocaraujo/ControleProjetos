@@ -1,8 +1,5 @@
 package tg.controleprojeto.bean;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +8,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 
 import tg.controleprojeto.dao.EmpregadoDAO;
 import tg.controleprojeto.dao.LinhaDePesquisaDAO;
@@ -22,9 +20,6 @@ import tg.controleprojeto.modelo.LinhaDePesquisa;
 import tg.controleprojeto.modelo.Marco;
 
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
-import org.primefaces.model.UploadedFile;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
 
@@ -44,10 +39,7 @@ public class ProjetoMB {
 	private List<Situacao> situacoesSelecionadas;
 	private List<Marco> listaMarcos;
 	private byte[] eap;
-	//private BarChartModel grafico;
-	private List<Integer> idLinhasSelecionadas;
-	//private StreamedContent imagem; 
-	
+	private List<Integer> idLinhasSelecionadas;	
  	
 	@PostConstruct
 	public void init() {
@@ -136,23 +128,7 @@ public class ProjetoMB {
 
 	public void exibeImagemEap(FileUploadEvent event) {
 		this.setEap(event.getFile().getContents());
-//		try {
-//			this.imagem = new DefaultStreamedContent(event.getFile().getInputstream());
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//        //this.imagem = new DefaultStreamedContent(arquivo, "image/png");
 	}
-
-//	public StreamedContent getImagem() {
-//		System.out.println("entrou no getimagem");
-//		return imagem;
-//	}
-//
-//	public void setImagem(StreamedContent imagem) {
-//		System.out.println("entrou no setimagem");
-//		this.imagem = imagem;
-//	}
 
 	public void listaProjetosComFiltro() {
 		this.listaProjetos = this.projetoDAO.getProjetosPorStatus(situacoesSelecionadas, idLinhasSelecionadas);		
@@ -174,6 +150,7 @@ public class ProjetoMB {
 		projeto.setResponsaveisTecnicos(responsaveisTecnicos);
 		projeto.setEap(this.eap);
 		projeto.setLinhaDePesquisa(linhaDePesquisa);
+		projeto.setMarcos(listaMarcos);
 		this.projetoDAO.adiciona(projeto);
 		this.projeto = new Projeto();
 		return "listaProjeto?faces-redirect=true";
@@ -191,6 +168,14 @@ public class ProjetoMB {
 		}
 		grafico.addSeries(series);
 		return grafico;
+	}
+	
+	public void removeMarco(Marco marco) {
+		this.listaMarcos.remove(marco);
+	}
+	
+	public void adicionaMarco(AjaxBehaviorEvent event) {
+		this.listaMarcos.add(new Marco());
 	}
 
 	public String editaProjeto(Projeto projeto) {

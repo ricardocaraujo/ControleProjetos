@@ -29,7 +29,7 @@ public class Marco {
 	private Empregado responsavel;
 
 	public Marco() {
-		
+		data = Calendar.getInstance();		
 	}
 
 	public Integer getId() {

@@ -231,6 +231,14 @@ public class Projeto {
 	public void setLinhaDePesquisa(LinhaDePesquisa linhaDePesquisa) {
 		this.linhaDePesquisa = linhaDePesquisa;
 	}
+	
+	public List<Marco> getMarcos() {
+		return marcos;
+	}
+	
+	public void setMarcos(List<Marco> marcos) {
+		this.marcos = marcos;
+	}
 
 }
 
