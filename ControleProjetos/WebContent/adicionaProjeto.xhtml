@@ -19,15 +19,15 @@
 			<h:form id="form" enctype="multipart/form-data">
 				<h:panelGrid style="width: 920px; font-size:12px;" columns="2">
 					<p:outputLabel value="Nome do projeto" for="nome"/>
-					<p:inputText id="nome" value="#{projetoMB.projeto.nome}"
+					<p:inputText id="nome" style="width: 400px" value="#{projetoMB.projeto.nome}"
 						required="true" requiredMessage="Nome obrigatório">					
 					</p:inputText>
 					
 					<p:outputLabel value="Objetivo" for="objetivo"/>
-					<p:inputTextarea style="width: 400px" id="objetivo" value="#{projetoMB.projeto.objetivo}"/>
+					<p:inputTextarea id="objetivo" style="width: 400px" value="#{projetoMB.projeto.objetivo}"/>
 					
 					<p:outputLabel value="Justificativa" for="justificativa"/>
-					<p:inputTextarea id="justificativa" value="#{projetoMB.projeto.justificativa}"/>
+					<p:inputTextarea id="justificativa" style="width: 400px" value="#{projetoMB.projeto.justificativa}"/>
 					
 					<p:outputLabel value="Data de início" for="dataInicio"/>
 					<p:calendar id="dataInicio" value="#{projetoMB.projeto.dataInicio.time}" 
@@ -65,30 +65,34 @@
 										
 					<p:outputLabel value="Marcos do Projeto"/>											
 					<h:form>
-						<h:dataTable id="listaMarcos" value="#{projetoMB.listaMarcos}" var="marco">							
+						<h:dataTable id="listaMarcos" value="#{projetoMB.listaMarcos}"
+							var="marco">
 							<h:column>
 								<f:facet name="header">
-									<p:outputLabel value="Descrição"/>
+									<p:outputLabel value="Descrição" />
 								</f:facet>
-								<p:inputText value="#{marco.descricao}" style="width: 350px"/>
-							</h:column>	
+								<p:inputText value="#{marco.descricao}" style="width: 350px" />
+							</h:column>
 							<h:column>
 								<f:facet name="header">
-									<p:outputLabel value="Data"/>
+									<p:outputLabel value="Data" />
 								</f:facet>
 								<p:calendar value="#{marco.data.time}">
-									<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+									<f:convertDateTime pattern="dd/MM/yyyy"
+										timeZone="America/Sao_Paulo"/>
 								</p:calendar>
-							</h:column>						
+							</h:column>
 							<h:column>
-					            <h:commandButton value="-">
-					                <f:ajax listener="#{projetoMB.removeMarco(marco)}" immediate="true" render="@form" /> 
-					            </h:commandButton>
-       						 </h:column>
+								<h:commandLink styleClass="ui-icon ui-icon-closethick">
+									<f:ajax listener="#{projetoMB.removeMarco(marco)}"
+										immediate="true" execute="@form" render="@form"/>
+								</h:commandLink>
+							</h:column>
 						</h:dataTable>
-						<h:commandButton value="+">
-					          <f:ajax listener="#{projetoMB.adicionaMarco}" immediate="true" execute="@form" render="@form" /> 
-					    </h:commandButton>				
+						<h:commandLink styleClass="ui-icon ui-icon-plusthick">
+							<f:ajax listener="#{projetoMB.adicionaMarco}" immediate="true"
+								execute="@form" render="@form"/>
+						</h:commandLink>
 					</h:form>
 																		
 					<p:outputLabel value="EAP"/>
