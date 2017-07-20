@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
@@ -25,7 +26,7 @@ import org.primefaces.model.chart.ChartSeries;
 
 
 @ManagedBean
-@ViewScoped
+@RequestScoped
 public class ProjetoMB {
 	
 	private Projeto projeto;
@@ -43,7 +44,8 @@ public class ProjetoMB {
  	
 	@PostConstruct
 	public void init() {
-		this.projeto = new Projeto();
+		//this.projeto = new Projeto();
+		this.projeto = (Projeto) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("projeto");
 		projetoDAO = new ProjetoDAO();
 		empregadoDAO = new EmpregadoDAO();
 		linhaDePesquisaDAO = new LinhaDePesquisaDAO();
@@ -150,10 +152,10 @@ public class ProjetoMB {
 		projeto.setResponsaveisTecnicos(responsaveisTecnicos);
 		projeto.setEap(this.eap);
 		projeto.setLinhaDePesquisa(linhaDePesquisa);
-		projeto.setMarcos(listaMarcos);
+		//projeto.setMarcos(listaMarcos);
 		this.projetoDAO.adiciona(projeto);
 		this.projeto = new Projeto();
-		return "listaProjeto?faces-redirect=true";
+		return "listaProjeto2?faces-redirect=true";
 	}
 
 	public BarChartModel getGrafico() {
@@ -170,30 +172,30 @@ public class ProjetoMB {
 		return grafico;
 	}
 	
-	public void removeMarco(Marco marco) {
+/*	public void removeMarco(Marco marco) {
 		this.listaMarcos.remove(marco);
 	}
 	
 	public void adicionaMarco(AjaxBehaviorEvent event) {
 		this.listaMarcos.add(new Marco());
-	}
+	}*/
 
 	public String editaProjeto(Projeto projeto) {
-		this.projeto = projeto;
-		return "adicionaProjeto";
+		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("projeto", projeto);
+		return "adicionaProjeto?faces-redirect=true";
 	}
 	
 	public void setProjetoAtual(Projeto projeto) {
 		this.projeto = projeto;
 	}
 		
-	public List<Marco> getListaMarcos() {
+/*	public List<Marco> getListaMarcos() {
 		return listaMarcos;
 	}
 
 	public void setListaMarcos(List<Marco> listaMarcos) {
 		this.listaMarcos = listaMarcos;
-	}
+	}*/
 
 	public void removeProjeto() {
 		this.projetoDAO.remove(this.projeto.getId());

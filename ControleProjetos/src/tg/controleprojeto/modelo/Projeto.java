@@ -1,6 +1,7 @@
 package tg.controleprojeto.modelo;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -85,6 +86,8 @@ public class Projeto {
 	public Projeto(){
 		dataInicio = Calendar.getInstance();
 		dataFim = Calendar.getInstance();
+		marcos = new ArrayList<Marco>();
+		marcos.add(new Marco());
 	}
 
 	
