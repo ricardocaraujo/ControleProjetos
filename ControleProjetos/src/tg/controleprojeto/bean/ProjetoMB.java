@@ -38,7 +38,7 @@ public class ProjetoMB {
 	private List<Integer> idDosResponsaveisTecnicos;
 	private Integer idLinhaDePesquisa;
 	private List<Situacao> situacoesSelecionadas;
-	private List<Marco> listaMarcos;
+	//private List<Marco> listaMarcos;
 	private byte[] eap;
 	private List<Integer> idLinhasSelecionadas;	
  	
@@ -49,8 +49,9 @@ public class ProjetoMB {
 		projetoDAO = new ProjetoDAO();
 		empregadoDAO = new EmpregadoDAO();
 		linhaDePesquisaDAO = new LinhaDePesquisaDAO();
-		listaMarcos = new ArrayList<Marco>();
-		listaMarcos.add(new Marco());
+		projeto = new Projeto();
+		//listaMarcos = new ArrayList<Marco>();
+		//listaMarcos.add(new Marco());
 	}
 	
 	public List<Integer> getIdDosResponsaveisTecnicos() {
@@ -172,13 +173,14 @@ public class ProjetoMB {
 		return grafico;
 	}
 	
-/*	public void removeMarco(Marco marco) {
-		this.listaMarcos.remove(marco);
+	public void removeMarco(Marco marco) {
+		this.projeto.getMarcos().remove(marco); 
 	}
 	
 	public void adicionaMarco(AjaxBehaviorEvent event) {
-		this.listaMarcos.add(new Marco());
-	}*/
+		this.projeto.getMarcos().add(new Marco("Marco2"));
+		System.out.println("Mais um marco adicionado MB");
+	}
 
 	public String editaProjeto(Projeto projeto) {
 		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("projeto", projeto);

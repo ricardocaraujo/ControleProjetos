@@ -28,8 +28,9 @@ public class Marco {
 	@ManyToOne
 	private Empregado responsavel;
 
-	public Marco() {
-		data = Calendar.getInstance();		
+	public Marco(String descricao) {
+		data = Calendar.getInstance();
+		this.descricao = descricao;
 	}
 
 	public Integer getId() {
@@ -46,6 +47,7 @@ public class Marco {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+		System.out.println("chegou aqui");
 	}
 
 	public Calendar getData() {

@@ -81,9 +81,17 @@
 										timeZone="America/Sao_Paulo"/>
 								</p:calendar>
 							</h:column>
-
+							<h:column>
+								<h:commandLink styleClass="ui-icon ui-icon-closethick">
+									<f:ajax listener="#{projetoMB.removeMarco(marco)}" 
+											immediate="true" execute="@form" render="@form"/>
+								</h:commandLink>
+							</h:column>
 						</h:dataTable>
-
+						<h:commandLink styleClass="ui-icon ui-icon-plusthick">
+							<f:ajax listener="#{projetoMB.adicionaMarco}" 
+									immediate="true" execute="@form" render="@form"/>
+						</h:commandLink>
 					</h:form>
 																		
 					<p:outputLabel value="EAP"/>

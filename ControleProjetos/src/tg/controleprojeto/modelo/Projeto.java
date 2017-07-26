@@ -87,54 +87,44 @@ public class Projeto {
 		dataInicio = Calendar.getInstance();
 		dataFim = Calendar.getInstance();
 		marcos = new ArrayList<Marco>();
-		marcos.add(new Marco());
+		marcos.add(new Marco("Marco1"));
 	}
-
 	
 	public Integer getId() {
 		return id;
 	}
 
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 
 	public String getJustificativa() {
 		return justificativa;
 	}
 
-
 	public void setJustificativa(String justificativa) {
 		this.justificativa = justificativa;
 	}
 
-	
 	public Situacao getSituacao() {
 		return situacao;
 	}
-
 
 	public void setSituacao(Situacao situacao) {
 		this.situacao = situacao;
 	}
 
-
 	public String getNome() {
 		return nome;
 	}
-
 
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-
 	public String getObjetivo() {
 		return objetivo;
 	}
-
 
 	public void setObjetivo(String objetivo) {
 		this.objetivo = objetivo;
@@ -152,72 +142,57 @@ public class Projeto {
 		return dataInicio;
 	}
 
-
 	public void setDataInicio(Calendar dataInicio) {
-		System.out.println("chegou");
 		this.dataInicio = dataInicio;
 	}
-
 
 	public Calendar getDataFim() {
 		return dataFim;
 	}
 
-
 	public void setDataFim(Calendar dataFim) {
 		this.dataFim = dataFim;
 	}
-
 
 	public List<Empregado> getResponsaveisTecnicos() {
 		return responsaveisTecnicos;
 	}
 
-
 	public void setResponsaveisTecnicos(List<Empregado> responsaveisTecnicos) {
 		this.responsaveisTecnicos = responsaveisTecnicos;
 	}
-
 
 	public List<Empregado> getCoordenadores() {
 		return coordenadores;
 	}
 
-
 	public void setCoordenadores(List<Empregado> coordenadores) {
 		this.coordenadores = coordenadores;
 	}
-
 
 	public List<Empregado> getParticipantes() {
 		return participantes;
 	}
 
-
 	public void setParticipantes(List<Empregado> participantes) {
 		this.participantes = participantes;
 	}
-
 
 	public List<Gerencia> getGerenciasSolicitantes() {
 		return gerenciasSolicitantes;
 	}
 
-
 	public void setGerenciasSolicitantes(List<Gerencia> gerenciasSolicitantes) {
 		this.gerenciasSolicitantes = gerenciasSolicitantes;
 	}
-
 
 	public List<Gerencia> getGerenciasClientes() {
 		return gerenciasClientes;
 	}
 
-
 	public void setGerenciasClientes(List<Gerencia> gerenciasClientes) {
 		this.gerenciasClientes = gerenciasClientes;
 	}
-
 
 	public List<Gerencia> getGerenciasExecutoras() {
 		return gerenciasExecutoras;
