@@ -26,7 +26,7 @@ import org.primefaces.model.chart.ChartSeries;
 
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class ProjetoMB {
 	
 	private Projeto projeto;
@@ -38,20 +38,24 @@ public class ProjetoMB {
 	private List<Integer> idDosResponsaveisTecnicos;
 	private Integer idLinhaDePesquisa;
 	private List<Situacao> situacoesSelecionadas;
-	//private List<Marco> listaMarcos;
 	private byte[] eap;
 	private List<Integer> idLinhasSelecionadas;	
  	
 	@PostConstruct
-	public void init() {
-		//this.projeto = new Projeto();
+	public void init() {		
+		this.projetoDAO = new ProjetoDAO();
+		this.empregadoDAO = new EmpregadoDAO();
+		this.linhaDePesquisaDAO = new LinhaDePesquisaDAO();
+		this.carregaProjeto();
+	}
+	
+	public void carregaProjeto() {
 		this.projeto = (Projeto) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("projeto");
-		projetoDAO = new ProjetoDAO();
-		empregadoDAO = new EmpregadoDAO();
-		linhaDePesquisaDAO = new LinhaDePesquisaDAO();
-		projeto = new Projeto();
-		//listaMarcos = new ArrayList<Marco>();
-		//listaMarcos.add(new Marco());
+		System.out.println("entrou aqui");
+		if(this.projeto == null) {
+			System.out.println("entrou aqui 2");
+			this.projeto = new Projeto();
+		}
 	}
 	
 	public List<Integer> getIdDosResponsaveisTecnicos() {
@@ -153,14 +157,12 @@ public class ProjetoMB {
 		projeto.setResponsaveisTecnicos(responsaveisTecnicos);
 		projeto.setEap(this.eap);
 		projeto.setLinhaDePesquisa(linhaDePesquisa);
-		//projeto.setMarcos(listaMarcos);
 		this.projetoDAO.adiciona(projeto);
 		this.projeto = new Projeto();
 		return "listaProjeto2?faces-redirect=true";
 	}
 
 	public BarChartModel getGrafico() {
-		//this.graficoSituacaoProjetos();
 		BarChartModel grafico = new BarChartModel();		
 		ChartSeries series = new ChartSeries();
 		series.setLabel("Situação");
@@ -179,25 +181,17 @@ public class ProjetoMB {
 	
 	public void adicionaMarco(AjaxBehaviorEvent event) {
 		this.projeto.getMarcos().add(new Marco("Marco2"));
-		System.out.println("Mais um marco adicionado MB");
 	}
 
 	public String editaProjeto(Projeto projeto) {
 		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("projeto", projeto);
+		System.out.println(projeto.getId());
 		return "adicionaProjeto?faces-redirect=true";
 	}
 	
 	public void setProjetoAtual(Projeto projeto) {
 		this.projeto = projeto;
 	}
-		
-/*	public List<Marco> getListaMarcos() {
-		return listaMarcos;
-	}
-
-	public void setListaMarcos(List<Marco> listaMarcos) {
-		this.listaMarcos = listaMarcos;
-	}*/
 
 	public void removeProjeto() {
 		this.projetoDAO.remove(this.projeto.getId());
