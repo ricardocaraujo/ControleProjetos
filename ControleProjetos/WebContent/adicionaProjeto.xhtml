@@ -19,53 +19,53 @@
 			<h:form id="form" enctype="multipart/form-data">
 				<h:panelGrid style="width: 920px; font-size: 12px" rowClasses="formAdicionaProjeto" columns="2">
 					<p:outputLabel value="Nome do projeto" for="nome"/>
-					<p:inputText id="nome" style="width: 400px" value="#{projetoMB.projeto.nome}"
+					<p:inputText id="nome" style="width: 400px" value="#{adicionaProjetoMB.projeto.nome}"
 						required="true" requiredMessage="Nome obrigatório">					
 					</p:inputText>
 					
 					<p:outputLabel value="Objetivo" for="objetivo"/>
-					<p:inputTextarea id="objetivo" style="width: 400px" value="#{projetoMB.projeto.objetivo}"/>
+					<p:inputTextarea id="objetivo" style="width: 400px" value="#{adicionaProjetoMB.projeto.objetivo}"/>
 					
 					<p:outputLabel value="Justificativa" for="justificativa"/>
-					<p:inputTextarea id="justificativa" style="width: 400px" value="#{projetoMB.projeto.justificativa}"/>
+					<p:inputTextarea id="justificativa" style="width: 400px" value="#{adicionaProjetoMB.projeto.justificativa}"/>
 					
 					<p:outputLabel value="Data de início" for="dataInicio"/>
-					<p:calendar id="dataInicio" value="#{projetoMB.projeto.dataInicio.time}" 
+					<p:calendar id="dataInicio" value="#{adicionaProjetoMB.projeto.dataInicio.time}" 
 								timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" mask="true"/>
 								
 					<p:outputLabel value="Data de término" for="dataFim"/>
-					<p:calendar id="dataFim" value="#{projetoMB.projeto.dataFim.time}" 
+					<p:calendar id="dataFim" value="#{adicionaProjetoMB.projeto.dataFim.time}" 
 								timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" mask="true"/>
 					
 					<p:outputLabel value="Situação"/>
-					<p:selectOneRadio value="#{projetoMB.projeto.situacao}" converter="situacaoEnumConverter">
-						<f:selectItems value="#{projetoMB.situacoesPossiveis}" var="situacao"
+					<p:selectOneRadio value="#{adicionaProjetoMB.projeto.situacao}" converter="situacaoEnumConverter">
+						<f:selectItems value="#{adicionaProjetoMB.situacoesPossiveis}" var="situacao"
 										itemValue="#{situacao}" itemLabel="#{situacao.descricao}"/>
 					</p:selectOneRadio>
 					
 					<p:outputLabel value="Linha de Pesquisa"/>
-					<p:selectOneRadio value="#{projetoMB.idLinhaDePesquisa}" converter="javax.faces.Integer">
-						<f:selectItems value="#{projetoMB.linhasDePesquisa}" var="linhaDePesquisa" 
+					<p:selectOneRadio value="#{adicionaProjetoMB.idLinhaDePesquisa}" converter="javax.faces.Integer">
+						<f:selectItems value="#{adicionaProjetoMB.linhasDePesquisa}" var="linhaDePesquisa" 
 									itemValue="#{linhaDePesquisa.id}" itemLabel="#{linhaDePesquisa.nome}"/>					
 					</p:selectOneRadio>
 					
 					<p:outputLabel value="Coordenadores"/>
-					<p:selectManyMenu value="#{projetoMB.idDosCoordenadores}" converter="javax.faces.Integer">
+					<p:selectManyMenu value="#{adicionaProjetoMB.idDosCoordenadores}" converter="javax.faces.Integer">
 						<f:selectItem itemLabel="Nenhum" noSelectionOption="true"/>
-						<f:selectItems value="#{projetoMB.empregados}" var="coordenador" 
+						<f:selectItems value="#{adicionaProjetoMB.empregados}" var="coordenador" 
 										itemValue="#{coordenador.id}" itemLabel="#{coordenador.nome}"/>
 					</p:selectManyMenu>
 					
 					<p:outputLabel value="Responsáveis Técnicos"/>
-					<p:selectManyMenu value="#{projetoMB.idDosResponsaveisTecnicos}" converter="javax.faces.Integer">
+					<p:selectManyMenu value="#{adicionaProjetoMB.idDosResponsaveisTecnicos}" converter="javax.faces.Integer">
 						<f:selectItem itemLabel="Nenhum" noSelectionOption="true"/>
-						<f:selectItems value="#{projetoMB.empregados}" var="responsaveisTecnicos"
+						<f:selectItems value="#{adicionaProjetoMB.empregados}" var="responsaveisTecnicos"
 										itemValue="#{responsaveisTecnicos.id}" itemLabel="#{responsaveisTecnicos.nome}"/>
 					</p:selectManyMenu>
 										
 					<p:outputLabel value="Marco do Projeto"/>											
 					<h:form>
-						<h:dataTable id="listaMarcos" value="#{projetoMB.projeto.marcos}" var="marco">
+						<h:dataTable id="listaMarcos" value="#{adicionaProjetoMB.projeto.marcos}" var="marco">
 							<h:column>
 								<f:facet name="header">
 									<p:outputLabel value="Descrição" />
@@ -83,21 +83,21 @@
 							</h:column>
 							<h:column>
 								<h:commandLink styleClass="ui-icon ui-icon-closethick">
-									<f:ajax listener="#{projetoMB.removeMarco(marco)}" 
+									<f:ajax listener="#{adicionaProjetoMB.removeMarco(marco)}" 
 											immediate="true" execute="@form" render="@form"/>
 								</h:commandLink>
 							</h:column>
 						</h:dataTable>
 						<h:commandLink styleClass="ui-icon ui-icon-plusthick">
-							<f:ajax listener="#{projetoMB.adicionaMarco}" 
+							<f:ajax listener="#{adicionaProjetoMB.adicionaMarco}" 
 									immediate="true" execute="@form" render="@form"/>
 						</h:commandLink>
 					</h:form>
 																		
 					<p:outputLabel value="EAP"/>
-					<p:fileUpload fileUploadListener="#{projetoMB.exibeImagemEap}" showButtons="false"/>
+					<p:fileUpload fileUploadListener="#{adicionaProjetoMB.exibeImagemEap}" showButtons="false"/>
 									
-					<h:commandButton value="Salvar" action="#{projetoMB.adiciona}"/>
+					<h:commandButton value="Salvar" action="#{adicionaProjetoMB.adiciona}"/>
 				</h:panelGrid>
 			</h:form>
 		</ui:define>
