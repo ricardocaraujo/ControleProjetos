@@ -95,6 +95,9 @@ public class ListaProjetoMB {
 
 	public String editaProjeto(Projeto projeto) {
 		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("projeto", projeto);
+		//System.out.println(projeto.getNome());
+		//System.out.println(projeto.getMarcos().get(0));
+		
 		return "adicionaProjeto?faces-redirect=true";
 	}
 	

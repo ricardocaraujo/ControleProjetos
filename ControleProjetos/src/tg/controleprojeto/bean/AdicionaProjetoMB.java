@@ -47,7 +47,7 @@ public class AdicionaProjetoMB {
 		this.projeto = (Projeto) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("projeto");
 		if(this.projeto == null) {
 			this.projeto = new Projeto();
-		}
+		} 		
 	}
 	
 	public Projeto getProjeto() {
@@ -106,7 +106,7 @@ public class AdicionaProjetoMB {
 		this.setEap(event.getFile().getContents());
 	}
 	
-	public String adiciona() { 
+	public String adiciona() {
 		List<Empregado> coordenadores = new ArrayList<Empregado>();
 		List<Empregado> responsaveisTecnicos = new ArrayList<Empregado>();
 		LinhaDePesquisa linhaDePesquisa = linhaDePesquisaDAO.buscaPorId(idLinhaDePesquisa.intValue());
@@ -118,13 +118,13 @@ public class AdicionaProjetoMB {
 			Empregado respTecnico = empregadoDAO.buscaPorId(idRespTecnico.intValue());
 			responsaveisTecnicos.add(respTecnico);
 		}
-		projeto.setCoordenadores(coordenadores);
-		projeto.setResponsaveisTecnicos(responsaveisTecnicos);
-		projeto.setEap(this.eap);
-		projeto.setLinhaDePesquisa(linhaDePesquisa);
+		this.projeto.setCoordenadores(coordenadores);
+		this.projeto.setResponsaveisTecnicos(responsaveisTecnicos);
+		this.projeto.setEap(this.eap);
+		this.projeto.setLinhaDePesquisa(linhaDePesquisa);
 		this.projetoDAO.adiciona(projeto);
-		this.projeto = new Projeto();
-		return "listaProjeto?faces-redirect=true";
+		//this.projeto = new Projeto();
+		return "listaProjeto?faces-redirect=true";	
 	}
 	
 	public void removeMarco(Marco marco) {

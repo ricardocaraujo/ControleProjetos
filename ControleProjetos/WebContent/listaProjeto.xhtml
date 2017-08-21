@@ -59,6 +59,10 @@
 									<h:outputLabel value="Resp. técnicos: " styleClass="fonteNegrito"/>
 									<p:dataList value="#{projeto.responsaveisTecnicos}" var="responsavel" type="definition">
 										#{responsavel.nome}
+									</p:dataList>
+									<h:outputLabel value="Marcos: " styleClass="fonteNegrito"/>
+									<p:dataList value="#{projeto.marcos}" var="marco" type="definition">
+										#{marco.descricao}
 									</p:dataList>			
 						        </h:panelGrid>
 						        <h:panelGrid columns="3" style="margin:auto">
