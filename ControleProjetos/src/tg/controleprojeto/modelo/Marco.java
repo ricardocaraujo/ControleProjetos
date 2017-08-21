@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -28,9 +27,8 @@ public class Marco {
 	@ManyToOne
 	private Empregado responsavel;
 
-	public Marco(String descricao) {
+	public Marco() {
 		data = Calendar.getInstance();
-		this.descricao = descricao;
 	}
 
 	public Integer getId() {
@@ -47,7 +45,6 @@ public class Marco {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-		System.out.println("chegou aqui");
 	}
 
 	public Calendar getData() {

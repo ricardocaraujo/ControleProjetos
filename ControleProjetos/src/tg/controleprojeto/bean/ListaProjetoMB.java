@@ -1,11 +1,10 @@
 package tg.controleprojeto.bean;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
@@ -30,6 +29,13 @@ public class ListaProjetoMB {
 	private List<Situacao> situacoesSelecionadas;
 	private List<Integer> idLinhasSelecionadas;	
 
+	
+	@PostConstruct
+	public void init() {		
+		this.projetoDAO = new ProjetoDAO();
+		this.linhaDePesquisaDAO = new LinhaDePesquisaDAO();
+	}
+		
 	public Projeto getProjeto() {
 		return projeto;
 	}
@@ -54,10 +60,6 @@ public class ListaProjetoMB {
 	}
 
 	public void setSituacoesSelecionadas(List<Situacao> situacoesSelecionadas) {
-		System.out.println(situacoesSelecionadas.size());
-		for(Situacao s:situacoesSelecionadas) {
-			System.out.println(s.getDescricao());
-		}
 		this.situacoesSelecionadas = situacoesSelecionadas;
 	}
 
@@ -67,10 +69,6 @@ public class ListaProjetoMB {
 
 	public void setIdLinhasSelecionadas(List<Integer> idLinhasSelecionadas) {
 		this.idLinhasSelecionadas = idLinhasSelecionadas;
-		System.out.println(idLinhasSelecionadas.size());
-		for(Integer n:idLinhasSelecionadas) {
-			System.out.println(n);
-		}
 	}
 	
 	public List<LinhaDePesquisa> getLinhasDePesquisa() {
@@ -85,6 +83,7 @@ public class ListaProjetoMB {
 		for(Situacao s:Situacao.values()) {
 			numeroProjetos = this.projetoDAO.getNumeroProjetosPorStatus(s);
 			series.set(s.getDescricao(), numeroProjetos);
+			System.out.println(s.getDescricao());
 		}
 		grafico.addSeries(series);
 		return grafico;
@@ -96,7 +95,6 @@ public class ListaProjetoMB {
 
 	public String editaProjeto(Projeto projeto) {
 		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("projeto", projeto);
-		System.out.println(projeto.getId());
 		return "adicionaProjeto?faces-redirect=true";
 	}
 	

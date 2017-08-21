@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
@@ -47,9 +45,7 @@ public class AdicionaProjetoMB {
 	
 	public void carregaProjeto() {
 		this.projeto = (Projeto) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("projeto");
-		System.out.println("entrou aqui");
 		if(this.projeto == null) {
-			System.out.println("entrou aqui 2");
 			this.projeto = new Projeto();
 		}
 	}
@@ -136,7 +132,7 @@ public class AdicionaProjetoMB {
 	}
 	
 	public void adicionaMarco(AjaxBehaviorEvent event) {
-		this.projeto.getMarcos().add(new Marco("Marco2"));
+		this.projeto.getMarcos().add(new Marco());
 	}
 	
 }

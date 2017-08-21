@@ -11,7 +11,6 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import tg.controleprojeto.modelo.LinhaDePesquisa;
 import tg.controleprojeto.modelo.Projeto;
 import tg.controleprojeto.modelo.Situacao;
 
@@ -41,7 +40,6 @@ public class ProjetoDAO {
 		manager.remove(projeto);
 		manager.getTransaction().commit();
 		manager.close();
-		System.out.println("projeto removido");
 	}
 	
 	public List<Projeto> getProjetos() {
@@ -64,8 +62,6 @@ public class ProjetoDAO {
 	}
 	
 	public List<Projeto> getProjetosPorStatus (List<Situacao> situacao, List<Integer> idLinhaDePesquisa) {
-		System.out.println(situacao.size());
-		System.out.println(idLinhaDePesquisa.size());
 		EntityManager manager = new JPAUtil().getEntityManager();
 		CriteriaBuilder criteria = manager.getCriteriaBuilder();
 		CriteriaQuery<Projeto> query = criteria.createQuery(Projeto.class);
@@ -74,24 +70,24 @@ public class ProjetoDAO {
 		Path<Integer> linhaDePesquisaPath = root.join("linhaDePesquisa").<Integer>get("id");
 		List<Predicate> predicatesSituacao = new ArrayList<Predicate>();
 		List<Predicate> predicatesLinhaDePesquisa = new ArrayList<Predicate>();
-		Predicate criterio = null;
-		if(situacao != null) {			
-			for(Situacao s:situacao) {
-				criterio = criteria.equal(situacaoPath, s);
-				predicatesSituacao.add(criterio);
+		if(situacao != null) {	
+			for(Situacao s:situacao) {			
+				predicatesSituacao.add(criteria.equal(situacaoPath, s));
 			}
-			System.out.println("ProjetoDAO - situacao: " + predicatesSituacao.size());
 		}
 		if(idLinhaDePesquisa != null) {
-			criterio = null;
 			for(Integer idLinha:idLinhaDePesquisa) {
-				criterio = criteria.equal(linhaDePesquisaPath, idLinha);
-				predicatesLinhaDePesquisa.add(criterio);
+				predicatesLinhaDePesquisa.add(criteria.equal(linhaDePesquisaPath, idLinha));
 			}			
-			System.out.println("ProjetoDAO - total: " + predicatesLinhaDePesquisa.size());
 		}
-		query.where(criteria.or((Predicate[]) predicatesSituacao.toArray(new Predicate[0])));
-		query.where(criteria.or((Predicate[]) predicatesLinhaDePesquisa.toArray(new Predicate[0])));
+		if(situacao != null && idLinhaDePesquisa != null) {
+			query.where(criteria.and(criteria.or(predicatesSituacao.toArray(new Predicate[0])), 
+				criteria.or(predicatesLinhaDePesquisa.toArray(new Predicate[0]))));
+		} else if(situacao == null && idLinhaDePesquisa != null) {
+				query.where(criteria.or(predicatesLinhaDePesquisa.toArray(new Predicate[0])));
+		} else if(situacao != null && idLinhaDePesquisa == null) {
+				query.where(criteria.or(predicatesSituacao.toArray(new Predicate[0])));		
+		}		
 		TypedQuery<Projeto> typedQuery = manager.createQuery(query);	
 		return typedQuery.getResultList();
 	}
@@ -102,7 +98,6 @@ public class ProjetoDAO {
 		TypedQuery<Projeto> query = manager.createNamedQuery("Projetos.quantidadePorSituacao", Projeto.class);
 		query.setParameter("pSituacao", situacao);
 		List<Projeto> projetos = query.getResultList();
-		System.out.println(situacao.getDescricao());
 		manager.close();
 		return projetos.size();
 	}

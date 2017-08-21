@@ -1,12 +1,9 @@
 package tg.controleprojeto.modelo;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -87,7 +84,7 @@ public class Projeto {
 		dataInicio = Calendar.getInstance();
 		dataFim = Calendar.getInstance();
 		marcos = new ArrayList<Marco>();
-		marcos.add(new Marco("Marco1"));
+		marcos.add(new Marco());
 	}
 	
 	public Integer getId() {
