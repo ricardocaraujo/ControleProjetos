@@ -1,5 +1,6 @@
 package tg.controleprojeto.bean;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -80,7 +81,13 @@ public class ListaProjetoMB {
 		ChartSeries series = new ChartSeries();
 		series.setLabel("Situação");
 		int numeroProjetos = 0;
-		for(Situacao s:Situacao.values()) {
+		List<Situacao> situacoes;
+		if(situacoesSelecionadas == null) {
+			situacoes = Arrays.asList(Situacao.values());
+		} else {
+			situacoes = situacoesSelecionadas;
+		}
+		for(Situacao s:situacoes) {
 			numeroProjetos = this.projetoDAO.getNumeroProjetosPorStatus(s);
 			series.set(s.getDescricao(), numeroProjetos);
 			System.out.println(s.getDescricao());
@@ -95,9 +102,6 @@ public class ListaProjetoMB {
 
 	public String editaProjeto(Projeto projeto) {
 		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("projeto", projeto);
-		//System.out.println(projeto.getNome());
-		//System.out.println(projeto.getMarcos().get(0));
-		
 		return "adicionaProjeto?faces-redirect=true";
 	}
 	

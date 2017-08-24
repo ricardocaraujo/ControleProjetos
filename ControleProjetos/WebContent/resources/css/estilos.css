@@ -1,25 +1,20 @@
-.container {
+#container {
 	width: 920px;
 	margin: auto;
-}
-
-.lados {
-	width:15%;
-	background-color: #c0c0c0;
-}
-
-.formAdicionaProjeto {
-	margin-bottom: 20px;
 }
 
 #cabecalho {
 	margin-bottom: 20px;
 }
 
-#formPesquisa {
+.formAdicionaProjeto {
 	margin-bottom: 20px;
 }
 
 .fonteNegrito {
 	font-weight: bold;
+}
+
+.semborda div {
+	border: none;
 }

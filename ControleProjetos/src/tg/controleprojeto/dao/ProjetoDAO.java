@@ -70,24 +70,24 @@ public class ProjetoDAO {
 		Path<Integer> linhaDePesquisaPath = root.join("linhaDePesquisa").<Integer>get("id");
 		List<Predicate> predicatesSituacao = new ArrayList<Predicate>();
 		List<Predicate> predicatesLinhaDePesquisa = new ArrayList<Predicate>();
-		if(situacao != null) {	
+		if(!situacao.isEmpty()) {
 			for(Situacao s:situacao) {			
 				predicatesSituacao.add(criteria.equal(situacaoPath, s));
 			}
 		}
-		if(idLinhaDePesquisa != null) {
+		if(!idLinhaDePesquisa.isEmpty()) {
 			for(Integer idLinha:idLinhaDePesquisa) {
 				predicatesLinhaDePesquisa.add(criteria.equal(linhaDePesquisaPath, idLinha));
 			}			
 		}
-		if(situacao != null && idLinhaDePesquisa != null) {
-			query.where(criteria.and(criteria.or(predicatesSituacao.toArray(new Predicate[0])), 
-				criteria.or(predicatesLinhaDePesquisa.toArray(new Predicate[0]))));
-		} else if(situacao == null && idLinhaDePesquisa != null) {
-				query.where(criteria.or(predicatesLinhaDePesquisa.toArray(new Predicate[0])));
-		} else if(situacao != null && idLinhaDePesquisa == null) {
-				query.where(criteria.or(predicatesSituacao.toArray(new Predicate[0])));		
-		}		
+		if (!situacao.isEmpty() && !idLinhaDePesquisa.isEmpty()) {
+			query.where(criteria.and(criteria.or(predicatesSituacao.toArray(new Predicate[0])),
+					criteria.or(predicatesLinhaDePesquisa.toArray(new Predicate[0]))));
+		} else if (situacao.isEmpty() && !idLinhaDePesquisa.isEmpty()) {
+			query.where(criteria.or(predicatesLinhaDePesquisa.toArray(new Predicate[0])));
+		} else if (!situacao.isEmpty() && idLinhaDePesquisa.isEmpty()) {
+			query.where(criteria.or(predicatesSituacao.toArray(new Predicate[0])));
+		}	
 		TypedQuery<Projeto> typedQuery = manager.createQuery(query);	
 		return typedQuery.getResultList();
 	}

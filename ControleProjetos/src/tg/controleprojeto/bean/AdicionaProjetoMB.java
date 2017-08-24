@@ -118,12 +118,14 @@ public class AdicionaProjetoMB {
 			Empregado respTecnico = empregadoDAO.buscaPorId(idRespTecnico.intValue());
 			responsaveisTecnicos.add(respTecnico);
 		}
+		for(Marco marco:this.projeto.getMarcos()) {
+			marco.setProjeto(projeto);
+		}
 		this.projeto.setCoordenadores(coordenadores);
 		this.projeto.setResponsaveisTecnicos(responsaveisTecnicos);
 		this.projeto.setEap(this.eap);
-		this.projeto.setLinhaDePesquisa(linhaDePesquisa);
-		this.projetoDAO.adiciona(projeto);
-		//this.projeto = new Projeto();
+		this.projeto.setLinhaDePesquisa(linhaDePesquisa);		
+		this.projetoDAO.adiciona(projeto);		
 		return "listaProjeto?faces-redirect=true";	
 	}
 	
