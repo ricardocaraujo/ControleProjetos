@@ -69,7 +69,7 @@
 										</p:dataList>			
 							        </h:panelGrid>
 							        <h:panelGrid columns="3" style="margin:auto">
-							        	<p:commandLink title="Ver detalhes">
+							        	<p:commandLink title="Ver detalhes" actionListener="#{listaProjetoMB.visualizaProjeto(projeto)}">
 			                    			<h:outputText styleClass="ui-icon ui-icon-search" style="margin: auto;" />
 			                			</p:commandLink>
 							            <p:commandLink title="Editar" action="#{listaProjetoMB.editaProjeto(projeto)}">

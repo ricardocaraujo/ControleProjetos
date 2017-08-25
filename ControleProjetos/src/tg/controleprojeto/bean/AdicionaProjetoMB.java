@@ -21,7 +21,7 @@ import tg.controleprojeto.modelo.Marco;
 import org.primefaces.event.FileUploadEvent;
 
 
-@ManagedBean
+@ManagedBean(name="adicionaProjeto")
 @ViewScoped
 public class AdicionaProjetoMB {
 	

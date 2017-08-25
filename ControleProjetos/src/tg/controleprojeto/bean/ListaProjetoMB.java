@@ -1,7 +1,9 @@
 package tg.controleprojeto.bean;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -15,6 +17,7 @@ import tg.controleprojeto.modelo.Projeto;
 import tg.controleprojeto.modelo.Situacao;
 import tg.controleprojeto.modelo.LinhaDePesquisa;
 
+import org.primefaces.context.RequestContext;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
 
@@ -105,12 +108,21 @@ public class ListaProjetoMB {
 		return "adicionaProjeto?faces-redirect=true";
 	}
 	
-	public void setProjetoAtual(Projeto projeto) {
+	public void visualizaProjeto(Projeto projeto) {
+//		Map<String, Object> mapa = new HashMap<String, Object>();
+//		mapa.put("projeto", projeto);
+//		RequestContext.getCurrentInstance().openDialog("visualizaProjeto", mapa, null);
 		this.projeto = projeto;
+		RequestContext.getCurrentInstance().openDialog("visualizaProjeto");
+		System.out.println("entrou aqui 3");
 	}
-
+	
 	public void removeProjeto() {
 		this.projetoDAO.remove(this.projeto.getId());
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Projeto apagado!"));
     }
+	
+	public void setProjetoAtual(Projeto projeto) {
+		this.projeto = projeto;
+	}
 }
