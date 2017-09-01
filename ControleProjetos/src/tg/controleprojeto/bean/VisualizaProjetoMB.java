@@ -13,18 +13,19 @@ public class VisualizaProjetoMB {
 
 	private Projeto projeto;
 	
-	@ManagedProperty("#{AdicionaProjetoMB}")
-	private AdicionaProjetoMB adicionaProjeto;
+	@ManagedProperty("#{ListaProjetoMB}")
+	private ListaProjetoMB listaProjetoMB;
 	
 	@PostConstruct
 	public void init() {
 		System.out.println("entrou aqui 1");
-		this.projeto = this.adicionaProjeto.getProjeto();
+		this.projeto = this.listaProjetoMB.getProjeto();
 	}
 	
 	public Projeto getProjeto() {
 		System.out.println("entrou aqui 2");
 		return this.projeto;
 	}
+	
 	
 }
