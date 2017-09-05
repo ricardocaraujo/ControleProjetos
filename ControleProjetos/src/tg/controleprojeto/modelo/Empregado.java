@@ -1,5 +1,6 @@
 package tg.controleprojeto.modelo;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -16,7 +17,7 @@ import javax.persistence.OneToMany;
 })
 
 @Entity
-public class Empregado {
+public class Empregado implements Serializable  {
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;

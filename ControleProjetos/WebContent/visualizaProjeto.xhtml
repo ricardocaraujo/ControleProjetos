@@ -17,9 +17,9 @@
 			<h:outputStylesheet name="css/estilos.css"/>
 			
 			<h:form id="form">
-				<h:panelGrid style="width: 920px; font-size: 12px" rowClasses="formAdicionaProjeto" columns="2">
+				<h:panelGrid style="width: 600px; font-size: 12px" rowClasses="formAdicionaProjeto" columns="2">
 					<p:outputLabel value="Nome do projeto" for="nome"/>
-					<p:outputLabel id="nome" style="width: 400px" value="#{visualizaProjetoMB.projeto.nome}"/>					
+					<p:inputText id="nome" style="width: 400px" value="#{visualizaProjetoMB.projeto.nome}"/>					
 				</h:panelGrid>
 			</h:form>
 

@@ -1,5 +1,6 @@
 package tg.controleprojeto.dao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import javax.persistence.criteria.Root;
 import tg.controleprojeto.modelo.Projeto;
 import tg.controleprojeto.modelo.Situacao;
 
-public class ProjetoDAO { 
+public class ProjetoDAO implements Serializable { 
 	
 		
 	public void adiciona(Projeto projeto) {

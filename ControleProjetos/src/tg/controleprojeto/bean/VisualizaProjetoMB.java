@@ -1,5 +1,7 @@
 package tg.controleprojeto.bean;
 
+import java.io.Serializable;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -9,22 +11,27 @@ import tg.controleprojeto.modelo.Projeto;
 
 @ManagedBean
 @ViewScoped
-public class VisualizaProjetoMB {
+public class VisualizaProjetoMB implements Serializable {
+
+	
+	private static final long serialVersionUID = 1L;
 
 	private Projeto projeto;
 	
-	@ManagedProperty("#{ListaProjetoMB}")
+	@ManagedProperty(value="#{listaProjetoMB}")
 	private ListaProjetoMB listaProjetoMB;
 	
 	@PostConstruct
 	public void init() {
-		System.out.println("entrou aqui 1");
 		this.projeto = this.listaProjetoMB.getProjeto();
 	}
 	
 	public Projeto getProjeto() {
-		System.out.println("entrou aqui 2");
 		return this.projeto;
+	}
+
+	public void setListaProjetoMB(ListaProjetoMB listaProjetoMB) {
+		this.listaProjetoMB = listaProjetoMB;
 	}
 	
 	

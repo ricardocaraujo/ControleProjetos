@@ -1,5 +1,6 @@
 package tg.controleprojeto.bean;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -24,9 +25,10 @@ import org.primefaces.model.chart.ChartSeries;
 
 
 @ManagedBean
-@ViewScoped
-public class ListaProjetoMB {
+@SessionScoped
+public class ListaProjetoMB implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	private Projeto projeto;
 	private ProjetoDAO projetoDAO;
 	private LinhaDePesquisaDAO linhaDePesquisaDAO;
@@ -110,12 +112,10 @@ public class ListaProjetoMB {
 	}
 	
 	public void visualizaProjeto(Projeto projeto) {
-//		Map<String, Object> mapa = new HashMap<String, Object>();
-//		mapa.put("projeto", projeto);
-//		RequestContext.getCurrentInstance().openDialog("visualizaProjeto", mapa, null);
+		Map<String, Object> dialogParametros = new HashMap<String, Object>();
+		dialogParametros.put("contentHeight", 600);
 		this.projeto = projeto;
-		RequestContext.getCurrentInstance().openDialog("visualizaProjeto");
-		System.out.println("entrou aqui 3");
+		RequestContext.getCurrentInstance().openDialog("visualizaProjeto", dialogParametros, null);
 	}
 	
 	public void removeProjeto() {

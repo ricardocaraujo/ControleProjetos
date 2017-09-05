@@ -1,5 +1,6 @@
 package tg.controleprojeto.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,7 +9,7 @@ import javax.persistence.TypedQuery;
 import tg.controleprojeto.modelo.LinhaDePesquisa;
 
 
-public class LinhaDePesquisaDAO {
+public class LinhaDePesquisaDAO implements Serializable {
 	
 	public void adiciona(LinhaDePesquisa linhaDePesquisa) {
 		EntityManager manager = new JPAUtil().getEntityManager();

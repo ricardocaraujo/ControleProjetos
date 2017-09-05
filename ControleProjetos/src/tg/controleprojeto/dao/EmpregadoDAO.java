@@ -1,5 +1,6 @@
 package tg.controleprojeto.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -7,7 +8,7 @@ import javax.persistence.TypedQuery;
 
 import tg.controleprojeto.modelo.Empregado;
 
-public class EmpregadoDAO {
+public class EmpregadoDAO implements Serializable {
 	
 	
 	public void adiciona(Empregado empregado) {

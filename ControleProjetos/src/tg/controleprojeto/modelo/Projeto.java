@@ -1,5 +1,6 @@
 package tg.controleprojeto.modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -30,7 +31,7 @@ import javax.persistence.TemporalType;
 
 
 @Entity 
-public class Projeto {
+public class Projeto implements Serializable {
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id; 

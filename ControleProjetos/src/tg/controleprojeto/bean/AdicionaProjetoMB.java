@@ -1,5 +1,6 @@
 package tg.controleprojeto.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ import org.primefaces.event.FileUploadEvent;
 
 @ManagedBean(name="adicionaProjetoMB")
 @ViewScoped
-public class AdicionaProjetoMB {
+public class AdicionaProjetoMB implements Serializable {
 	
 	private Projeto projeto;
 	private ProjetoDAO projetoDAO;
