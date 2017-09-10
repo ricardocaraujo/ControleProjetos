@@ -23,7 +23,7 @@
 				<ui:define name="conteudo">	
 					<div style="margin-bottom: 30px">
 						<h:form>
-							<h:panelGrid columns="2">
+							<p:panelGrid columns="2">
 								<p:outputLabel value="Situação"/>
 								<p:selectManyCheckbox value="#{listaProjetoMB.situacoesSelecionadas}" id="situacoes" layout="grid" columns="3" style="padding: 5px" converter="situacaoEnumConverter">
 									<f:selectItems value="#{listaProjetoMB.situacoesPossiveis}" var="situacao"
@@ -34,7 +34,8 @@
 									<f:selectItems value="#{listaProjetoMB.linhasDePesquisa}"  var="linha"
 													itemValue="#{linha.id}" itemLabel="#{linha.nome}"/>
 								</p:selectManyCheckbox>
-							</h:panelGrid>
+							</p:panelGrid>
+							
 							<h:commandButton value="Listar" action="#{listaProjetoMB.listaProjetosComFiltro}"/>
 						</h:form>
 					</div>		

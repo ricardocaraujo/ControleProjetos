@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
@@ -34,8 +35,10 @@ public class AdicionaProjetoMB implements Serializable {
 	private List<Integer> idDosResponsaveisTecnicos;
 	private Integer idLinhaDePesquisa;
 	private byte[] eap;
+	
+	@ManagedProperty(value="#{listaProjetoMB}")
+	private ListaProjetoMB listaProjetoMB;
 
- 	
 	@PostConstruct
 	public void init() {		
 		this.projetoDAO = new ProjetoDAO();
@@ -45,10 +48,13 @@ public class AdicionaProjetoMB implements Serializable {
 	}
 	
 	public void carregaProjeto() {
-		this.projeto = (Projeto) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("projeto");
-		if(this.projeto == null) {
+		if(FacesContext.getCurrentInstance().getExternalContext().getFlash().get("projeto") != null) {
+			this.projeto = (Projeto) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("projeto");
+		} else if(listaProjetoMB != null) {
+			this.projeto = listaProjetoMB.getProjeto();
+		} else {
 			this.projeto = new Projeto();
-		} 		
+		}	
 	}
 	
 	public Projeto getProjeto() {
@@ -101,6 +107,10 @@ public class AdicionaProjetoMB implements Serializable {
 	
 	public void setIdLinhaDePesquisa(Integer idLinhaDePesquisa) {
 		this.idLinhaDePesquisa = idLinhaDePesquisa;
+	}
+	
+	public void setListaProjetoMB(ListaProjetoMB listaProjetoMB) {
+		this.listaProjetoMB = listaProjetoMB;
 	}
 	
 	public void exibeImagemEap(FileUploadEvent event) {

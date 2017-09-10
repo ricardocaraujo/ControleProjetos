@@ -115,7 +115,7 @@ public class ListaProjetoMB implements Serializable {
 		Map<String, Object> dialogParametros = new HashMap<String, Object>();
 		dialogParametros.put("contentHeight", 600);
 		this.projeto = projeto;
-		RequestContext.getCurrentInstance().openDialog("visualizaProjeto", dialogParametros, null);
+		RequestContext.getCurrentInstance().openDialog("adicionaProjeto", dialogParametros, null);
 	}
 	
 	public void removeProjeto() {
