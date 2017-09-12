@@ -50,8 +50,8 @@ public class AdicionaProjetoMB implements Serializable {
 	public void carregaProjeto() {
 		if(FacesContext.getCurrentInstance().getExternalContext().getFlash().get("projeto") != null) {
 			this.projeto = (Projeto) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("projeto");
-		} else if(listaProjetoMB != null) {
-			this.projeto = listaProjetoMB.getProjeto();
+		} else if(listaProjetoMB.getProjeto() != null) {
+			this.projeto = listaProjetoMB.getProjeto();	
 		} else {
 			this.projeto = new Projeto();
 		}	

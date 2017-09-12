@@ -34,4 +34,5 @@ public class VisualizaProjetoMB implements Serializable {
 		this.listaProjetoMB = listaProjetoMB;
 	}
 	
+	
 }

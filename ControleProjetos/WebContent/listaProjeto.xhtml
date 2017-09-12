@@ -44,7 +44,7 @@
 							<p:dataGrid var="projeto" value="#{listaProjetoMB.listaProjetos}" columns="3" layout="grid"
 										rows="12" paginator="true" id="projetos" rowsPerPageTemplate="6,12,16">
 											
-								<p:panel header="#{projeto.nome}" style="text-align:center">
+								<p:panel header="#{projeto.nome}" style="text-align:center; padding-bottom: 10px" >
 							        <h:panelGrid columns="2" style="font-size:12px;text-align:left;">
 							        	<h:outputLabel value="Objetivo: " styleClass="fonteNegrito"/>
 							        	<h:outputText value="#{projeto.objetivo}"/>

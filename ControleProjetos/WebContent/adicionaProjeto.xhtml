@@ -10,14 +10,14 @@
 		<h:outputStylesheet name="css/estilos.css"/>
 	</h:head>
 
-	<ui:composition template="_template.xhtml">
+	<ui:composition template="_template.xhtml" rendered="#{not empty adicionaProjetoMB.projeto.nome}">
 		
-		<ui:define name="titulo">
+		<ui:define name="titulo" rendered="#{not empty adicionaProjetoMB.projeto.nome}">
 			Adiciona Projeto
 		</ui:define>
 		<ui:define name="conteudo">
 			<h:form id="form" enctype="multipart/form-data">
-				<h:panelGrid style="width: 920px; font-size: 12px" rowClasses="formAdicionaProjeto" columns="2">
+				<h:panelGrid id="tabela" style="width: 920px; font-size: 12px" rowClasses="formAdicionaProjeto" columns="2">
 					<p:outputLabel value="Nome do projeto" for="nome"/>
 					<p:inputText id="nome" style="width: 400px" value="#{adicionaProjetoMB.projeto.nome}"
 						required="true" requiredMessage="Nome obrigatório">					
@@ -98,8 +98,13 @@
 					<p:fileUpload fileUploadListener="#{adicionaProjetoMB.exibeImagemEap}" showButtons="false"/>
 									
 					<h:commandButton value="Salvar" action="#{adicionaProjetoMB.adiciona}"/>
+					
 				</h:panelGrid>
-			</h:form>
+								
+				<p:commandButton value="Alterar" onclick="PF('desbloqueio').hide()" rendered="#{not empty adicionaProjetoMB.projeto.nome}"/>				
+				<p:blockUI block="tabela" blocked="true" widgetVar="desbloqueio" rendered="#{not empty adicionaProjetoMB.projeto.nome}"/>
+							
+			</h:form>	
 		</ui:define>
 	</ui:composition>
 </html>
