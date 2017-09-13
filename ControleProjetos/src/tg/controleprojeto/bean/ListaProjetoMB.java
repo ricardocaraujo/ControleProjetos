@@ -25,7 +25,7 @@ import org.primefaces.model.chart.ChartSeries;
 
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class ListaProjetoMB implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -107,13 +107,15 @@ public class ListaProjetoMB implements Serializable {
 	}
 
 	public String editaProjeto(Projeto projeto) {
-		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("projeto", projeto);
+		//FacesContext.getCurrentInstance().getExternalContext().getFlash().put("projeto", projeto);
+		this.projeto = projeto;
 		return "adicionaProjeto?faces-redirect=true";
 	}
 	
 	public void visualizaProjeto(Projeto projeto) {
 		Map<String, Object> dialogParametros = new HashMap<String, Object>();
-		this.projeto = projeto;
+		dialogParametros.put("responsive", true);
+		this.projeto = projeto;	
 		RequestContext.getCurrentInstance().openDialog("adicionaProjeto", dialogParametros, null);
 	}
 	

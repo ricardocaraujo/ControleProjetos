@@ -92,18 +92,15 @@
 							<f:ajax listener="#{adicionaProjetoMB.adicionaMarco}" 
 									immediate="true" execute="@form" render="@form"/>
 						</h:commandLink>
-					</h:form>
-																		
+					</h:form>																		
 					<p:outputLabel value="EAP"/>
-					<p:fileUpload fileUploadListener="#{adicionaProjetoMB.exibeImagemEap}" showButtons="false"/>
-									
-					<h:commandButton value="Salvar" action="#{adicionaProjetoMB.adiciona}"/>
-					
+					<p:fileUpload fileUploadListener="#{adicionaProjetoMB.exibeImagemEap}" style="width: 400px" showButtons="false"/>					
 				</h:panelGrid>
-								
-				<p:commandButton value="Alterar" onclick="PF('desbloqueio').hide()" rendered="#{not empty adicionaProjetoMB.projeto.nome}"/>				
-				<p:blockUI block="tabela" blocked="true" widgetVar="desbloqueio" rendered="#{not empty adicionaProjetoMB.projeto.nome}"/>
-							
+				<h:panelGrid columns="2">
+					<p:commandButton style="margin-top:20px" value="Alterar" onclick="PF('desbloqueio').hide()" rendered="#{not empty adicionaProjetoMB.projeto.nome}"/>
+					<p:commandButton style="margin-top:20px" value="Salvar" action="#{adicionaProjetoMB.adiciona}"/>						
+					<p:blockUI block="tabela" blocked="true" widgetVar="desbloqueio" rendered="#{not empty adicionaProjetoMB.projeto.nome}"/>				
+				</h:panelGrid>						
 			</h:form>	
 		</ui:define>
 	</ui:composition>
