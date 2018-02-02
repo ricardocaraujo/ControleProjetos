@@ -1,6 +1,7 @@
 #container {
 	width: 920px;
 	margin: auto;
+	background-color: none;
 }
 
 #cabecalho {

@@ -107,8 +107,8 @@ public class ListaProjetoMB implements Serializable {
 	}
 
 	public String editaProjeto(Projeto projeto) {
-		//FacesContext.getCurrentInstance().getExternalContext().getFlash().put("projeto", projeto);
-		this.projeto = projeto;
+		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("projeto", projeto);
+		//this.projeto = projeto;
 		return "adicionaProjeto?faces-redirect=true";
 	}
 	
