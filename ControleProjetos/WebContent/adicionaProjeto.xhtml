@@ -50,15 +50,13 @@
 					</p:selectOneRadio>
 					
 					<p:outputLabel value="Coordenadores"/>
-					<p:selectManyMenu value="#{adicionaProjetoMB.idDosCoordenadores}" converter="javax.faces.Integer">
-						<f:selectItem itemLabel="Nenhum" noSelectionOption="true"/>
+					<p:selectManyMenu value="#{adicionaProjetoMB.idDosCoordenadores}" showCheckbox="true" converter="javax.faces.Integer">
 						<f:selectItems value="#{adicionaProjetoMB.empregados}" var="coordenador" 
 										itemValue="#{coordenador.id}" itemLabel="#{coordenador.nome}"/>
-					</p:selectManyMenu>
+					</p:selectManyMenu>	
 					
 					<p:outputLabel value="Responsáveis Técnicos"/>
-					<p:selectManyMenu value="#{adicionaProjetoMB.idDosResponsaveisTecnicos}" converter="javax.faces.Integer">
-						<f:selectItem itemLabel="Nenhum" noSelectionOption="true"/>
+					<p:selectManyMenu value="#{adicionaProjetoMB.idDosResponsaveisTecnicos}" showCheckbox="true" converter="javax.faces.Integer">
 						<f:selectItems value="#{adicionaProjetoMB.empregados}" var="responsaveisTecnicos"
 										itemValue="#{responsaveisTecnicos.id}" itemLabel="#{responsaveisTecnicos.nome}"/>
 					</p:selectManyMenu>
@@ -97,10 +95,10 @@
 					<p:fileUpload fileUploadListener="#{adicionaProjetoMB.exibeImagemEap}" style="width: 400px" showButtons="false"/>					
 				</h:panelGrid>
 				<h:panelGrid columns="2">
-					<p:button style="margin-top:20px; " value="Voltar" outcome="listaProjeto" rendered="#{not empty adicionaProjetoMB.projeto.nome}"/>
-					<!-- <p:commandButton style="margin-top:20px" value="Alterar" onclick="PF('desbloqueio').hide()" rendered="#{not empty adicionaProjetoMB.projeto.nome}"/> -->
-					<p:commandButton style="margin-top:20px" value="Salvar" action="#{adicionaProjetoMB.adiciona}"/>						
-					<!-- <p:blockUI block="tabela" blocked="true" widgetVar="desbloqueio" rendered="#{not empty adicionaProjetoMB.projeto.nome}"/> -->					
+					<p:commandButton style="margin-top:20px" value="Salvar" action="#{adicionaProjetoMB.adiciona}"/>	
+					<p:button style="margin-top:20px; " value="Voltar" outcome="listaProjeto" rendered="#{not empty adicionaProjetoMB.projeto.nome}"/>									
+					<!-- <p:blockUI block="tabela" blocked="true" widgetVar="desbloqueio" rendered="#{not empty adicionaProjetoMB.projeto.nome}"/>
+					<p:commandButton style="margin-top:20px" value="Alterar" onclick="PF('desbloqueio').hide()" rendered="#{not empty adicionaProjetoMB.projeto.nome}"/> -->					
 				</h:panelGrid>						
 			</h:form>	
 		</ui:define>

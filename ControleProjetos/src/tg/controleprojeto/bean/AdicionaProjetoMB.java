@@ -50,15 +50,8 @@ public class AdicionaProjetoMB implements Serializable {
 	public void carregaProjeto() {
 		if(FacesContext.getCurrentInstance().getExternalContext().getFlash().get("projeto") != null) {
 			this.projeto = (Projeto) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("projeto");
-		} else		
-		/*if(listaProjetoMB.getProjeto() != null) {
-			this.projeto = listaProjetoMB.getProjeto();
-			System.out.println(listaProjetoMB.getProjeto().toString());
-			System.out.println(listaProjetoMB.getProjeto().getNome());
-			System.out.println(listaProjetoMB.getProjeto().getObjetivo());
-		} else*/ {
+		} else {
 			this.projeto = new Projeto();
-			System.out.println("entrou aqui2");
 		}	
 	}
 	
@@ -77,7 +70,15 @@ public class AdicionaProjetoMB implements Serializable {
 	public List<LinhaDePesquisa> getLinhasDePesquisa() {
 		return this.linhaDePesquisaDAO.getLinhasDePesquisa();
 	}
+	
+	/*public List<Empregado> getCoordenadores() {
+		return this.projeto.getCoordenadores();
+	}
 
+	public void setCoordenadores(List<Empregado> coordenadores) {
+		this.projeto.setCoordenadores(coordenadores);
+	} */
+	
 	public List<Integer> getIdDosCoordenadores() {
 		return idDosCoordenadores;
 	}
@@ -141,7 +142,11 @@ public class AdicionaProjetoMB implements Serializable {
 		this.projeto.setResponsaveisTecnicos(responsaveisTecnicos);
 		this.projeto.setEap(this.eap);
 		this.projeto.setLinhaDePesquisa(linhaDePesquisa);		
-		this.projetoDAO.adiciona(projeto);		
+		if(projeto.getId() != null) {
+			this.projetoDAO.altera(this.projeto);
+		} else {
+			this.projetoDAO.adiciona(this.projeto);
+		}			
 		return "listaProjeto?faces-redirect=true";	
 	}
 	

@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
@@ -25,7 +26,7 @@ import org.primefaces.model.chart.ChartSeries;
 
 
 @ManagedBean
-@ViewScoped
+@ApplicationScoped
 public class ListaProjetoMB implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -115,8 +116,9 @@ public class ListaProjetoMB implements Serializable {
 	public void visualizaProjeto(Projeto projeto) {
 		Map<String, Object> dialogParametros = new HashMap<String, Object>();
 		dialogParametros.put("responsive", true);
-		this.projeto = projeto;	
-		RequestContext.getCurrentInstance().openDialog("adicionaProjeto", dialogParametros, null);
+		this.projeto = projeto;
+		RequestContext.getCurrentInstance().openDialog("visualizaProjeto", dialogParametros, null);
+		RequestContext.getCurrentInstance().getAttributes().put("projeto", projeto);
 	}
 	
 	public void removeProjeto() {

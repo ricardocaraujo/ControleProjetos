@@ -17,9 +17,22 @@
 			<h:outputStylesheet name="css/estilos.css"/>
 			
 			<h:form id="form">
-				<h:panelGrid style="width: 600px; font-size: 12px" rowClasses="formAdicionaProjeto" columns="2">
-					<p:outputLabel value="Nome do projeto" for="nome"/>
-					<p:inputText id="nome" style="width: 400px" value="#{visualizaProjetoMB.projeto.nome}"/>					
+				<h:panelGrid style="width: 600px; padding: 20px; font-size: 12px" rowClasses="formAdicionaProjeto" columns="2">
+					<p:outputLabel value="Nome do projeto: " for="nome" style="width: 200px" />
+					<p:outputLabel id="nome" value="#{visualizaProjetoMB.projeto.nome}"/>
+					
+					<p:outputLabel value="Objetivo: " for="objetivo"/>
+					<p:outputLabel id="objetivo" value="#{visualizaProjetoMB.projeto.objetivo}"/>		
+					
+					<p:outputLabel value="Justificativa" for="justificativa"/>
+					<p:outputLabel id="justificativa" value="#{visualizaProjetoMB.projeto.justificativa}"/>
+					
+					<p:outputLabel value="Data de início" for="dataInicio"/>
+					<h:outputLabel id="dataInicio" value="#{visualizaProjetoMB.projeto.dataInicio.time}" converter="javax.faces.DateTime" />
+								
+					<p:outputLabel value="Data de término" for="dataFim"/>
+					<p:outputLabel id="dataFim" value="#{visualizaProjetoMB.projeto.dataFim.time}" 
+								timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" mask="true"/>		
 				</h:panelGrid>
 			</h:form>
 

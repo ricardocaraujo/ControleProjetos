@@ -41,8 +41,9 @@
 					</div>		
 					<div style="margin-bottom: 30px">
 						<h:form id="formProjetos">
-							<p:dataGrid var="projeto" value="#{listaProjetoMB.listaProjetos}" columns="3" layout="grid"
-										rows="12" paginator="true" id="projetos" rowsPerPageTemplate="6,12,16">
+							<p:dataGrid var="projeto" value="#{listaProjetoMB.listaProjetos}" columns="3" 
+										rows="12" paginator="true" id="projetos" rowsPerPageTemplate="6,12,16"
+										paginatorTemplate="">
 											
 								<p:panel header="#{projeto.nome}" style="text-align:center; padding-bottom: 10px" >
 							        <h:panelGrid columns="2" style="font-size:12px;text-align:left;">
