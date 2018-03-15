@@ -6,10 +6,8 @@
 		xmlns:ui="http://java.sun.com/jsf/facelets"
 		xmlns:p="http://primefaces.org/ui">
 		
-	<h:head>
-		<h:outputStylesheet name="css/estilos.css"/>
-	</h:head>
-
+	
+	
 	<ui:composition template="_template.xhtml" rendered="#{not empty adicionaProjetoMB.projeto.nome}">
 		
 		<ui:define name="titulo" rendered="#{not empty adicionaProjetoMB.projeto.nome}">
@@ -17,11 +15,10 @@
 		</ui:define>
 		<ui:define name="conteudo">
 			<h:form id="form" enctype="multipart/form-data">
-				<h:panelGrid id="tabela" style="width: 920px; font-size: 12px" rowClasses="formAdicionaProjeto" columns="2">
+				<p:panelGrid id="tabela" columns="2">
 					<p:outputLabel value="Nome do projeto" for="nome"/>
-					<p:inputText id="nome" style="width: 400px" value="#{adicionaProjetoMB.projeto.nome}"
-						required="true" requiredMessage="Nome obrigatório">					
-					</p:inputText>
+					<p:inputText id="nome" value="#{adicionaProjetoMB.projeto.nome}"
+						required="true" requiredMessage="Nome obrigatório"/>					
 					
 					<p:outputLabel value="Objetivo" for="objetivo"/>
 					<p:inputTextarea id="objetivo" style="width: 400px" value="#{adicionaProjetoMB.projeto.objetivo}"/>
@@ -35,10 +32,10 @@
 								
 					<p:outputLabel value="Data de término" for="dataFim"/>
 					<p:calendar id="dataFim" value="#{adicionaProjetoMB.projeto.dataFim.time}" 
-								timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" mask="true"/>
+								timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" mask="true"/>					
 					
 					<p:outputLabel value="Situação"/>
-					<p:selectOneRadio value="#{adicionaProjetoMB.projeto.situacao}" converter="situacaoEnumConverter">
+					<p:selectOneRadio value="#{adicionaProjetoMB.projeto.situacao}" converter="situacaoEnumConverter" layout="grid" columns="2">
 						<f:selectItems value="#{adicionaProjetoMB.situacoesPossiveis}" var="situacao"
 										itemValue="#{situacao}" itemLabel="#{situacao.descricao}"/>
 					</p:selectOneRadio>
@@ -46,7 +43,9 @@
 					<p:outputLabel value="Linha de Pesquisa"/>
 					<p:selectOneRadio value="#{adicionaProjetoMB.idLinhaDePesquisa}" converter="javax.faces.Integer">
 						<f:selectItems value="#{adicionaProjetoMB.linhasDePesquisa}" var="linhaDePesquisa" 
-									itemValue="#{linhaDePesquisa.id}" itemLabel="#{linhaDePesquisa.nome}"/>					
+									itemValue="#{linhaDePesquisa.id}" itemLabel="#{linhaDePesquisa.nome}">
+						
+						</f:selectItems>				
 					</p:selectOneRadio>
 					
 					<p:outputLabel value="Coordenadores"/>
@@ -58,7 +57,7 @@
 					<p:outputLabel value="Responsáveis Técnicos"/>
 					<p:selectManyMenu value="#{adicionaProjetoMB.idDosResponsaveisTecnicos}" showCheckbox="true" converter="javax.faces.Integer">
 						<f:selectItems value="#{adicionaProjetoMB.empregados}" var="responsaveisTecnicos"
-										itemValue="#{responsaveisTecnicos.id}" itemLabel="#{responsaveisTecnicos.nome}"/>
+										itemValue="#{responsaveisTecnicos.id}" itemLabel="#{responsaveisTecnicos.nome}"/>			
 					</p:selectManyMenu>
 										
 					<p:outputLabel value="Marco do Projeto"/>											
@@ -75,8 +74,7 @@
 									<p:outputLabel value="Data" />
 								</f:facet>
 								<p:calendar value="#{marco.data.time}">
-									<f:convertDateTime pattern="dd/MM/yyyy"
-										timeZone="America/Sao_Paulo"/>
+									<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
 								</p:calendar>
 							</h:column>
 							<h:column>
@@ -86,14 +84,16 @@
 								</h:commandLink>
 							</h:column>
 						</h:dataTable>
-						<h:commandLink styleClass="ui-icon ui-icon-plusthick" >
+						<p:commandLink styleClass="ui-icon ui-icon-plusthick" >
 							<f:ajax listener="#{adicionaProjetoMB.adicionaMarco}" 
 									immediate="true" execute="listaMarcos" render="listaMarcos"/>
-						</h:commandLink>
+						</p:commandLink>
 					</h:form>																		
+					
 					<p:outputLabel value="EAP"/>
 					<p:fileUpload fileUploadListener="#{adicionaProjetoMB.exibeImagemEap}" style="width: 400px" showButtons="false"/>					
-				</h:panelGrid>
+				</p:panelGrid>
+				
 				<h:panelGrid columns="2">
 					<p:commandButton style="margin-top:20px" value="Salvar" action="#{adicionaProjetoMB.adiciona}"/>	
 					<p:button style="margin-top:20px; " value="Voltar" outcome="listaProjeto" rendered="#{not empty adicionaProjetoMB.projeto.nome}"/>									

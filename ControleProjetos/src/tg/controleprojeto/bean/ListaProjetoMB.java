@@ -26,7 +26,7 @@ import org.primefaces.model.chart.ChartSeries;
 
 
 @ManagedBean
-@ApplicationScoped
+@ViewScoped
 public class ListaProjetoMB implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -103,16 +103,19 @@ public class ListaProjetoMB implements Serializable {
 		return grafico;
 	}
 	
+	// recupera no bd os projetos com os filtros informados
 	public void listaProjetosComFiltro() {
 		this.listaProjetos = this.projetoDAO.getProjetosPorStatus(situacoesSelecionadas, idLinhasSelecionadas);		
 	}
 
+	// redireciona para página que exibirá o projeto passado por parâmetro
 	public String editaProjeto(Projeto projeto) {
+		this.setProjeto(projeto);
 		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("projeto", projeto);
-		//this.projeto = projeto;
 		return "adicionaProjeto?faces-redirect=true";
 	}
 	
+	// abre janela pop-up para exibir projeto passado por parâmetro
 	public void visualizaProjeto(Projeto projeto) {
 		Map<String, Object> dialogParametros = new HashMap<String, Object>();
 		dialogParametros.put("responsive", true);
@@ -121,11 +124,13 @@ public class ListaProjetoMB implements Serializable {
 		RequestContext.getCurrentInstance().getAttributes().put("projeto", projeto);
 	}
 	
+	// remove o projeto
 	public void removeProjeto() {
 		this.projetoDAO.remove(this.projeto.getId());
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Projeto apagado!"));
     }
 	
+	// seta o projeto passado por parâmetro para em seguida removê-lo
 	public void setProjetoAtual(Projeto projeto) {
 		this.projeto = projeto;
 	}

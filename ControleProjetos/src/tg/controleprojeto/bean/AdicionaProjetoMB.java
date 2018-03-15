@@ -7,7 +7,10 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.component.html.HtmlSelectBooleanCheckbox;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
@@ -24,9 +27,11 @@ import org.primefaces.event.FileUploadEvent;
 
 
 @ManagedBean(name="adicionaProjetoMB")
-@ViewScoped
+@SessionScoped
 public class AdicionaProjetoMB implements Serializable {
 	
+
+	private static final long serialVersionUID = 1L;
 	private Projeto projeto;
 	private ProjetoDAO projetoDAO;
 	private EmpregadoDAO empregadoDAO;
@@ -36,8 +41,8 @@ public class AdicionaProjetoMB implements Serializable {
 	private Integer idLinhaDePesquisa;
 	private byte[] eap;
 	
-	@ManagedProperty(value="#{listaProjetoMB}")
-	private ListaProjetoMB listaProjetoMB;
+	//@ManagedProperty(value="#{listaProjetoMB}")
+	//private ListaProjetoMB listaProjetoMB;
 
 	@PostConstruct
 	public void init() {		
@@ -52,7 +57,8 @@ public class AdicionaProjetoMB implements Serializable {
 			this.projeto = (Projeto) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("projeto");
 		} else {
 			this.projeto = new Projeto();
-		}	
+		}
+		
 	}
 	
 	public Projeto getProjeto() {
@@ -70,14 +76,6 @@ public class AdicionaProjetoMB implements Serializable {
 	public List<LinhaDePesquisa> getLinhasDePesquisa() {
 		return this.linhaDePesquisaDAO.getLinhasDePesquisa();
 	}
-	
-	/*public List<Empregado> getCoordenadores() {
-		return this.projeto.getCoordenadores();
-	}
-
-	public void setCoordenadores(List<Empregado> coordenadores) {
-		this.projeto.setCoordenadores(coordenadores);
-	} */
 	
 	public List<Integer> getIdDosCoordenadores() {
 		return idDosCoordenadores;
@@ -115,9 +113,9 @@ public class AdicionaProjetoMB implements Serializable {
 		this.idLinhaDePesquisa = idLinhaDePesquisa;
 	}
 	
-	public void setListaProjetoMB(ListaProjetoMB listaProjetoMB) {
-		this.listaProjetoMB = listaProjetoMB;
-	}
+	//public void setListaProjetoMB(ListaProjetoMB listaProjetoMB) {
+	//	this.listaProjetoMB = listaProjetoMB;
+	//}
 	
 	public void exibeImagemEap(FileUploadEvent event) {
 		this.setEap(event.getFile().getContents());

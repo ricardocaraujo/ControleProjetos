@@ -1,0 +1,46 @@
+#container {
+	width: 50%; 
+	margin: auto;
+	background-color: none;
+}
+
+#ladoDaTela {
+	width: 25%;
+	float: left;
+}
+
+#cabecalho {
+	margin-bottom: 20px;
+}
+
+.fonteNegrito {
+	font-weight: bold;
+}
+
+.semborda div {
+	border: 0px;
+}
+
+.ui-widget {
+	font-size: 0.8em;
+}
+
+.ui-panelgrid .ui-widget-content {
+	border: none;
+}
+
+.ui-widget-content.soesse {
+	border: 5px;
+}
+
+.ui-panelgrid .ui-panelgrid-cell  {
+	padding: 10px 10px;
+	border: none;
+}
+
+
+/* #container {
+	width: 920px; 
+	margin: auto;
+	background-color: none;
+} */
