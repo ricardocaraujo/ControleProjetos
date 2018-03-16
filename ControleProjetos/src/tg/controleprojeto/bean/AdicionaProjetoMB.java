@@ -1,5 +1,6 @@
 package tg.controleprojeto.bean;
 
+import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,6 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
-import javax.faces.component.html.HtmlSelectBooleanCheckbox;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
@@ -24,6 +24,7 @@ import tg.controleprojeto.modelo.LinhaDePesquisa;
 import tg.controleprojeto.modelo.Marco;
 
 import org.primefaces.event.FileUploadEvent;
+
 
 
 @ManagedBean(name="adicionaProjetoMB")
@@ -43,6 +44,9 @@ public class AdicionaProjetoMB implements Serializable {
 	
 	//@ManagedProperty(value="#{listaProjetoMB}")
 	//private ListaProjetoMB listaProjetoMB;
+	
+	@ManagedProperty(value="#{linhaTempo}")
+	private LinhaTempoMarcosProjeto linhaTempo;
 
 	@PostConstruct
 	public void init() {		
@@ -51,14 +55,21 @@ public class AdicionaProjetoMB implements Serializable {
 		this.linhaDePesquisaDAO = new LinhaDePesquisaDAO();
 		this.carregaProjeto();
 	}
-	
+
+	public LinhaTempoMarcosProjeto getLinhaTempo() {
+		return linhaTempo;
+	}
+
+	public void setLinhaTempo(LinhaTempoMarcosProjeto linhaTempo) {
+		this.linhaTempo = linhaTempo;
+	}
+
 	public void carregaProjeto() {
 		if(FacesContext.getCurrentInstance().getExternalContext().getFlash().get("projeto") != null) {
 			this.projeto = (Projeto) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("projeto");
 		} else {
 			this.projeto = new Projeto();
-		}
-		
+		}	
 	}
 	
 	public Projeto getProjeto() {
@@ -120,7 +131,7 @@ public class AdicionaProjetoMB implements Serializable {
 	public void exibeImagemEap(FileUploadEvent event) {
 		this.setEap(event.getFile().getContents());
 	}
-	
+		
 	public String adiciona() {
 		List<Empregado> coordenadores = new ArrayList<Empregado>();
 		List<Empregado> responsaveisTecnicos = new ArrayList<Empregado>();
@@ -152,8 +163,12 @@ public class AdicionaProjetoMB implements Serializable {
 		this.projeto.getMarcos().remove(marco); 
 	}
 	
-	public void adicionaMarco(AjaxBehaviorEvent event) {
-		this.projeto.getMarcos().add(new Marco());
+	public void adicionaMarco() {
+		this.linhaTempo.adicionaMarco(this.projeto.getMarcos().get(this.projeto.getMarcos().size() - 1));
+		for (Marco marco: this.projeto.getMarcos()) {
+			System.out.println(marco.getDescricao());
+		}
+		this.projeto.getMarcos().add(new Marco());		
 	}
 	
 }

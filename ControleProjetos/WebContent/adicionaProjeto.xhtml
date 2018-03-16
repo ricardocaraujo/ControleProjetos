@@ -84,11 +84,23 @@
 								</h:commandLink>
 							</h:column>
 						</h:dataTable>
-						<p:commandLink styleClass="ui-icon ui-icon-plusthick" >
+						<h:commandLink styleClass="ui-icon ui-icon-plusthick">
 							<f:ajax listener="#{adicionaProjetoMB.adicionaMarco}" 
-									immediate="true" execute="listaMarcos" render="listaMarcos"/>
-						</p:commandLink>
-					</h:form>																		
+									execute="listaMarcos" render="listaMarcos :timeline"/>
+						</h:commandLink>						
+					</h:form>
+					
+					<p:outputLabel value="Linha do Tempo dos Marcos"/>
+					<p:timeline id="timeline" value="#{adicionaProjetoMB.linhaTempo.model}" height="250px"
+        					selectable="#{adicionaProjetoMB.linhaTempo.selectable}"
+					        zoomable="#{adicionaProjetoMB.linhaTempo.zoomable}"
+					        moveable="#{adicionaProjetoMB.linhaTempo.moveable}"
+					        stackEvents="#{adicionaProjetoMB.linhaTempo.stackEvents}"
+					        axisOnTop="#{adicionaProjetoMB.linhaTempo.axisOnTop}"
+					        eventStyle="#{adicionaProjetoMB.linhaTempo.eventStyle}"
+					        showCurrentTime="#{adicionaProjetoMB.linhaTempo.showCurrentTime}"
+					        showNavigation="#{adicionaProjetoMB.linhaTempo.showNavigation}">					
+					</p:timeline>																	
 					
 					<p:outputLabel value="EAP"/>
 					<p:fileUpload fileUploadListener="#{adicionaProjetoMB.exibeImagemEap}" style="width: 400px" showButtons="false"/>					
