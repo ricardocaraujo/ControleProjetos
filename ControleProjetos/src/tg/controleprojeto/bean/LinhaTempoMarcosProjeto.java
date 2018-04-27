@@ -1,10 +1,15 @@
 package tg.controleprojeto.bean;
 
+import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import org.primefaces.model.timeline.TimelineEvent;
 import org.primefaces.model.timeline.TimelineModel;
@@ -12,9 +17,14 @@ import org.primefaces.model.timeline.TimelineModel;
 import tg.controleprojeto.modelo.Marco;
 
 @ManagedBean(name="linhaTempo")
-@SessionScoped
-public class LinhaTempoMarcosProjeto {
+@ViewScoped
+public class LinhaTempoMarcosProjeto implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private TimelineModel model;
 	 
     private boolean selectable = true;
@@ -25,13 +35,25 @@ public class LinhaTempoMarcosProjeto {
     private boolean axisOnTop;
     private boolean showCurrentTime = true;
     private boolean showNavigation = false;
+	private Calendar dataInicio;
+    private Calendar dataFim;
  
     @PostConstruct
     protected void initialize() {
         model = new TimelineModel();
+        this.inicializaDatas();
+        
     }
  
-    public TimelineModel getModel() {
+    private void inicializaDatas() {
+    	dataInicio = Calendar.getInstance();
+    	dataFim = Calendar.getInstance();
+    	int ano, mes, dia;
+    	
+    	
+	}
+
+	public TimelineModel getModel() {
         return model;
     }
  
@@ -99,8 +121,23 @@ public class LinhaTempoMarcosProjeto {
         this.showNavigation = showNavigation;
     }
     
+    public Calendar getDataInicio() {
+		return dataInicio;
+	}
+
+	public void setDataInicio(Calendar dataInicio) {
+		this.dataInicio = dataInicio;
+	}
+
+	public Calendar getDataFim() {
+		return dataFim;
+	}
+
+	public void setDataFim(Calendar dataFim) {
+		this.dataFim = dataFim;
+	}
+    
     public void adicionaMarco(Marco marco) {
-    	System.out.println(marco.getDescricao());
     	model.add(new TimelineEvent(marco.getDescricao(), marco.getData().getTime()));
     }
 

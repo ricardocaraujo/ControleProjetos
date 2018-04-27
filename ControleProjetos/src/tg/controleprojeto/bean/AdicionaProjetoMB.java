@@ -28,7 +28,7 @@ import org.primefaces.event.FileUploadEvent;
 
 
 @ManagedBean(name="adicionaProjetoMB")
-@SessionScoped
+@ViewScoped
 public class AdicionaProjetoMB implements Serializable {
 	
 
@@ -41,10 +41,7 @@ public class AdicionaProjetoMB implements Serializable {
 	private List<Integer> idDosResponsaveisTecnicos;
 	private Integer idLinhaDePesquisa;
 	private byte[] eap;
-	
-	//@ManagedProperty(value="#{listaProjetoMB}")
-	//private ListaProjetoMB listaProjetoMB;
-	
+		
 	@ManagedProperty(value="#{linhaTempo}")
 	private LinhaTempoMarcosProjeto linhaTempo;
 
@@ -76,7 +73,7 @@ public class AdicionaProjetoMB implements Serializable {
 		return projeto;
 	}
 
-	public void setProjeto(Projeto projeto) {
+	public void setProjeto(Projeto projeto) {		
 		this.projeto = projeto;
 	}
 	
@@ -123,11 +120,7 @@ public class AdicionaProjetoMB implements Serializable {
 	public void setIdLinhaDePesquisa(Integer idLinhaDePesquisa) {
 		this.idLinhaDePesquisa = idLinhaDePesquisa;
 	}
-	
-	//public void setListaProjetoMB(ListaProjetoMB listaProjetoMB) {
-	//	this.listaProjetoMB = listaProjetoMB;
-	//}
-	
+		
 	public void exibeImagemEap(FileUploadEvent event) {
 		this.setEap(event.getFile().getContents());
 	}
@@ -165,9 +158,6 @@ public class AdicionaProjetoMB implements Serializable {
 	
 	public void adicionaMarco() {
 		this.linhaTempo.adicionaMarco(this.projeto.getMarcos().get(this.projeto.getMarcos().size() - 1));
-		for (Marco marco: this.projeto.getMarcos()) {
-			System.out.println(marco.getDescricao());
-		}
 		this.projeto.getMarcos().add(new Marco());		
 	}
 	

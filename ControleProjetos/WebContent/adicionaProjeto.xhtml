@@ -15,95 +15,166 @@
 		</ui:define>
 		<ui:define name="conteudo">
 			<h:form id="form" enctype="multipart/form-data">
-				<p:panelGrid id="tabela" columns="2">
-					<p:outputLabel value="Nome do projeto" for="nome"/>
-					<p:inputText id="nome" value="#{adicionaProjetoMB.projeto.nome}"
-						required="true" requiredMessage="Nome obrigatório"/>					
+				<p:panelGrid id="tabela">
+				
+					<p:row>
+						<p:column>
+							<p:outputLabel value="Nome do projeto" for="nome"/>
+						</p:column>
+						<p:column>
+							<p:inputText id="nome" value="#{adicionaProjetoMB.projeto.nome}"
+								required="true" requiredMessage="Nome obrigatório"/>					
+						</p:column>
+					</p:row>
 					
-					<p:outputLabel value="Objetivo" for="objetivo"/>
-					<p:inputTextarea id="objetivo" style="width: 400px" value="#{adicionaProjetoMB.projeto.objetivo}"/>
+					<p:row>
+						<p:column>
+							<p:outputLabel value="Objetivo" for="objetivo"/>
+						</p:column>
+						<p:column>
+							<p:inputTextarea id="objetivo" style="width: 400px" value="#{adicionaProjetoMB.projeto.objetivo}"/>
+						</p:column>
+					</p:row>
 					
-					<p:outputLabel value="Justificativa" for="justificativa"/>
-					<p:inputTextarea id="justificativa" style="width: 400px" value="#{adicionaProjetoMB.projeto.justificativa}"/>
+					<p:row>
+						<p:column>
+							<p:outputLabel value="Justificativa" for="justificativa"/>
+						</p:column>
+						<p:column>
+							<p:inputTextarea id="justificativa" style="width: 400px" value="#{adicionaProjetoMB.projeto.justificativa}"/>
+						</p:column>
+					</p:row>
 					
-					<p:outputLabel value="Data de início" for="dataInicio"/>
-					<p:calendar id="dataInicio" value="#{adicionaProjetoMB.projeto.dataInicio.time}" 
-								timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" mask="true"/>
+					<p:row>
+						<p:column>
+							<p:outputLabel value="Data de início" for="dataInicio"/>
+						</p:column>
+						<p:column>
+							<p:calendar id="dataInicio" value="#{adicionaProjetoMB.projeto.dataInicio.time}" 
+										timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" mask="true"/>
+						</p:column>
+					</p:row>
+					
+					<p:row>
+						<p:column>
+							<p:outputLabel value="Data de término" for="dataFim"/>
+						</p:column>
+						<p:column>
+							<p:calendar id="dataFim" value="#{adicionaProjetoMB.projeto.dataFim.time}" 
+										timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" mask="true"/>					
+						</p:column>
+					</p:row>
+					
+					<p:row>
+						<p:column>
+							<p:outputLabel value="Situação"/>
+						</p:column>
+						<p:column>
+							<p:selectOneRadio value="#{adicionaProjetoMB.projeto.situacao}" converter="situacaoEnumConverter" layout="grid" columns="2">
+								<f:selectItems value="#{adicionaProjetoMB.situacoesPossiveis}" var="situacao"
+												itemValue="#{situacao}" itemLabel="#{situacao.descricao}"/>
+							</p:selectOneRadio>
+						</p:column>
+					</p:row>
+					
+					<p:row>
+						<p:column>
+							<p:outputLabel value="Linha de Pesquisa"/>
+						</p:column>
+						<p:column>
+							<p:selectOneRadio value="#{adicionaProjetoMB.idLinhaDePesquisa}" converter="javax.faces.Integer">
+								<f:selectItems value="#{adicionaProjetoMB.linhasDePesquisa}" var="linhaDePesquisa" 
+											itemValue="#{linhaDePesquisa.id}" itemLabel="#{linhaDePesquisa.nome}">
 								
-					<p:outputLabel value="Data de término" for="dataFim"/>
-					<p:calendar id="dataFim" value="#{adicionaProjetoMB.projeto.dataFim.time}" 
-								timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy" mask="true"/>					
+								</f:selectItems>				
+							</p:selectOneRadio>
+						</p:column>
+					</p:row>
 					
-					<p:outputLabel value="Situação"/>
-					<p:selectOneRadio value="#{adicionaProjetoMB.projeto.situacao}" converter="situacaoEnumConverter" layout="grid" columns="2">
-						<f:selectItems value="#{adicionaProjetoMB.situacoesPossiveis}" var="situacao"
-										itemValue="#{situacao}" itemLabel="#{situacao.descricao}"/>
-					</p:selectOneRadio>
+					<p:row>
+						<p:column>
+							<p:outputLabel value="Coordenadores"/>
+						</p:column>
+						<p:column>	
+							<p:selectManyMenu value="#{adicionaProjetoMB.idDosCoordenadores}" showCheckbox="true" converter="javax.faces.Integer">
+								<f:selectItems value="#{adicionaProjetoMB.empregados}" var="coordenador" 
+												itemValue="#{coordenador.id}" itemLabel="#{coordenador.nome}"/>
+							</p:selectManyMenu>	
+						</p:column>
+					</p:row>
 					
-					<p:outputLabel value="Linha de Pesquisa"/>
-					<p:selectOneRadio value="#{adicionaProjetoMB.idLinhaDePesquisa}" converter="javax.faces.Integer">
-						<f:selectItems value="#{adicionaProjetoMB.linhasDePesquisa}" var="linhaDePesquisa" 
-									itemValue="#{linhaDePesquisa.id}" itemLabel="#{linhaDePesquisa.nome}">
-						
-						</f:selectItems>				
-					</p:selectOneRadio>
+					<p:row>
+						<p:column>
+							<p:outputLabel value="Responsáveis Técnicos"/>
+						</p:column>
+						<p:column>	
+							<p:selectManyMenu value="#{adicionaProjetoMB.idDosResponsaveisTecnicos}" showCheckbox="true" converter="javax.faces.Integer">
+								<f:selectItems value="#{adicionaProjetoMB.empregados}" var="responsaveisTecnicos"
+												itemValue="#{responsaveisTecnicos.id}" itemLabel="#{responsaveisTecnicos.nome}"/>			
+							</p:selectManyMenu>
+						</p:column>
+					</p:row>
 					
-					<p:outputLabel value="Coordenadores"/>
-					<p:selectManyMenu value="#{adicionaProjetoMB.idDosCoordenadores}" showCheckbox="true" converter="javax.faces.Integer">
-						<f:selectItems value="#{adicionaProjetoMB.empregados}" var="coordenador" 
-										itemValue="#{coordenador.id}" itemLabel="#{coordenador.nome}"/>
-					</p:selectManyMenu>	
+					<p:row>
+						<p:column>	
+							<p:outputLabel value="Marco do Projeto"/>
+						</p:column>
+						<p:column>									
+							<h:form>
+								<h:dataTable id="listaMarcos" value="#{adicionaProjetoMB.projeto.marcos}" var="marco">
+									<h:column>
+										<f:facet name="header">
+											<p:outputLabel value="Descrição" />
+										</f:facet>
+										<p:inputText value="#{marco.descricao}" style="width: 350px" />
+									</h:column>
+									<h:column>
+										<f:facet name="header">
+											<p:outputLabel value="Data" />
+										</f:facet>
+										<p:calendar value="#{marco.data.time}">
+											<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+										</p:calendar>
+									</h:column>
+									<h:column>
+										<h:commandLink styleClass="ui-icon ui-icon-closethick">
+											<f:ajax listener="#{adicionaProjetoMB.removeMarco(marco)}" 
+													immediate="true" execute="listaMarcos" render="listaMarcos"/>	
+										</h:commandLink>
+									</h:column>
+								</h:dataTable>
+								<h:commandLink styleClass="ui-icon ui-icon-plusthick" action="#{adicionaProjetoMB.adicionaMarco}">
+									<f:ajax execute="listaMarcos" render="@form :timeline"/>
+								</h:commandLink>					
+							</h:form>
+						</p:column>
+					</p:row>
 					
-					<p:outputLabel value="Responsáveis Técnicos"/>
-					<p:selectManyMenu value="#{adicionaProjetoMB.idDosResponsaveisTecnicos}" showCheckbox="true" converter="javax.faces.Integer">
-						<f:selectItems value="#{adicionaProjetoMB.empregados}" var="responsaveisTecnicos"
-										itemValue="#{responsaveisTecnicos.id}" itemLabel="#{responsaveisTecnicos.nome}"/>			
-					</p:selectManyMenu>
-										
-					<p:outputLabel value="Marco do Projeto"/>											
-					<h:form>
-						<h:dataTable id="listaMarcos" value="#{adicionaProjetoMB.projeto.marcos}" var="marco">
-							<h:column>
-								<f:facet name="header">
-									<p:outputLabel value="Descrição" />
-								</f:facet>
-								<p:inputText value="#{marco.descricao}" style="width: 350px" />
-							</h:column>
-							<h:column>
-								<f:facet name="header">
-									<p:outputLabel value="Data" />
-								</f:facet>
-								<p:calendar value="#{marco.data.time}">
-									<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
-								</p:calendar>
-							</h:column>
-							<h:column>
-								<h:commandLink styleClass="ui-icon ui-icon-closethick">
-									<f:ajax listener="#{adicionaProjetoMB.removeMarco(marco)}" 
-											immediate="true" execute="listaMarcos" render="listaMarcos"/>	
-								</h:commandLink>
-							</h:column>
-						</h:dataTable>
-						<h:commandLink styleClass="ui-icon ui-icon-plusthick">
-							<f:ajax listener="#{adicionaProjetoMB.adicionaMarco}" 
-									execute="listaMarcos" render="listaMarcos :timeline"/>
-						</h:commandLink>						
-					</h:form>
-					
-					<p:outputLabel value="Linha do Tempo dos Marcos"/>
-					<p:timeline id="timeline" value="#{adicionaProjetoMB.linhaTempo.model}" height="250px"
-        					selectable="#{adicionaProjetoMB.linhaTempo.selectable}"
-					        zoomable="#{adicionaProjetoMB.linhaTempo.zoomable}"
-					        moveable="#{adicionaProjetoMB.linhaTempo.moveable}"
-					        stackEvents="#{adicionaProjetoMB.linhaTempo.stackEvents}"
-					        axisOnTop="#{adicionaProjetoMB.linhaTempo.axisOnTop}"
-					        eventStyle="#{adicionaProjetoMB.linhaTempo.eventStyle}"
-					        showCurrentTime="#{adicionaProjetoMB.linhaTempo.showCurrentTime}"
-					        showNavigation="#{adicionaProjetoMB.linhaTempo.showNavigation}">					
-					</p:timeline>																	
-					
-					<p:outputLabel value="EAP"/>
-					<p:fileUpload fileUploadListener="#{adicionaProjetoMB.exibeImagemEap}" style="width: 400px" showButtons="false"/>					
+					<p:row>
+						<p:column colspan="2">
+							<p:timeline id="timeline" value="#{adicionaProjetoMB.linhaTempo.model}" height="250px"
+		        					selectable="#{adicionaProjetoMB.linhaTempo.selectable}"
+							        zoomable="#{adicionaProjetoMB.linhaTempo.zoomable}"
+							        moveable="#{adicionaProjetoMB.linhaTempo.moveable}"
+							        stackEvents="#{adicionaProjetoMB.linhaTempo.stackEvents}"
+							        axisOnTop="#{adicionaProjetoMB.linhaTempo.axisOnTop}"
+							        eventStyle="#{adicionaProjetoMB.linhaTempo.eventStyle}"
+							        showCurrentTime="#{adicionaProjetoMB.linhaTempo.showCurrentTime}"
+							        showNavigation="#{adicionaProjetoMB.linhaTempo.showNavigation}"
+							        start="#{adicionaProjetoMB.linhaTempo.dataInicio.time}"
+							        end="#{adicionaProjetoMB.linhaTempo.dataFim.time}">	
+							</p:timeline>
+						</p:column>
+					</p:row>
+																					
+					<p:row>
+						<p:column>
+							<p:outputLabel value="EAP"/>
+						</p:column>
+						<p:column>	
+							<p:fileUpload fileUploadListener="#{adicionaProjetoMB.exibeImagemEap}" style="width: 400px" showButtons="false"/>
+						</p:column>
+					</p:row>			
 				</p:panelGrid>
 				
 				<h:panelGrid columns="2">
