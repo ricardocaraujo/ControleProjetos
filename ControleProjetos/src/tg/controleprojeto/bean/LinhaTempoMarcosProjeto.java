@@ -47,10 +47,7 @@ public class LinhaTempoMarcosProjeto implements Serializable {
  
     private void inicializaDatas() {
     	dataInicio = Calendar.getInstance();
-    	dataFim = Calendar.getInstance();
-    	int ano, mes, dia;
-    	
-    	
+    	dataFim = Calendar.getInstance();	
 	}
 
 	public TimelineModel getModel() {
