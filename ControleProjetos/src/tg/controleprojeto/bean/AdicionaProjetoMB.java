@@ -50,6 +50,7 @@ public class AdicionaProjetoMB implements Serializable {
 		this.projetoDAO = new ProjetoDAO();
 		this.empregadoDAO = new EmpregadoDAO();
 		this.linhaDePesquisaDAO = new LinhaDePesquisaDAO();
+		
 		this.carregaProjeto();
 	}
 
