@@ -42,7 +42,6 @@ public class LinhaTempoMarcosProjeto implements Serializable {
     protected void initialize() {
         model = new TimelineModel();
         this.inicializaDatas();
-        
     }
  
     private void inicializaDatas() {
@@ -137,5 +136,12 @@ public class LinhaTempoMarcosProjeto implements Serializable {
     public void adicionaMarco(Marco marco) {
     	model.add(new TimelineEvent(marco.getDescricao(), marco.getData().getTime()));
     }
+
+	public void removeMarco(Marco marco) {
+		TimelineEvent evento = new TimelineEvent(marco.getDescricao(), marco.getData().getTime());
+		model.delete(evento);
+	}
+
+
 
 }

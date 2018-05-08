@@ -1,6 +1,5 @@
 package tg.controleprojeto.bean;
 
-import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +11,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.faces.event.AjaxBehaviorEvent;
 
 import tg.controleprojeto.dao.EmpregadoDAO;
@@ -49,8 +49,7 @@ public class AdicionaProjetoMB implements Serializable {
 	public void init() {		
 		this.projetoDAO = new ProjetoDAO();
 		this.empregadoDAO = new EmpregadoDAO();
-		this.linhaDePesquisaDAO = new LinhaDePesquisaDAO();
-		
+		this.linhaDePesquisaDAO = new LinhaDePesquisaDAO();		
 		this.carregaProjeto();
 	}
 
@@ -154,6 +153,7 @@ public class AdicionaProjetoMB implements Serializable {
 	}
 	
 	public void removeMarco(Marco marco) {
+		this.linhaTempo.removeMarco(marco);
 		this.projeto.getMarcos().remove(marco); 
 	}
 	
