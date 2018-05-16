@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.AjaxBehaviorEvent;
@@ -43,7 +44,7 @@ public class AdicionaProjetoMB implements Serializable {
 	private byte[] eap;
 		
 	@ManagedProperty(value="#{linhaTempo}")
-	private LinhaTempoMarcosProjeto linhaTempo;
+	private LinhaTempoMarcosProjetoMB linhaTempo;
 
 	@PostConstruct
 	public void init() {		
@@ -53,11 +54,11 @@ public class AdicionaProjetoMB implements Serializable {
 		this.carregaProjeto();
 	}
 
-	public LinhaTempoMarcosProjeto getLinhaTempo() {
+	public LinhaTempoMarcosProjetoMB getLinhaTempo() {
 		return linhaTempo;
 	}
 
-	public void setLinhaTempo(LinhaTempoMarcosProjeto linhaTempo) {
+	public void setLinhaTempo(LinhaTempoMarcosProjetoMB linhaTempo) {
 		this.linhaTempo = linhaTempo;
 	}
 
@@ -154,7 +155,7 @@ public class AdicionaProjetoMB implements Serializable {
 	
 	public void removeMarco(Marco marco) {
 		this.linhaTempo.removeMarco(marco);
-		this.projeto.getMarcos().remove(marco); 
+		this.projeto.getMarcos().remove(marco);
 	}
 	
 	public void adicionaMarco() {

@@ -130,25 +130,23 @@
 									<f:facet name="header">
 										<p:outputLabel value="Data" />
 									</f:facet>
-									<p:calendar value="#{marco.data.time}">
-										<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
-									</p:calendar>
+									<p:calendar value="#{marco.data.time}" pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" mask="true"/>
 								</h:column>
 								<h:column>
 									<h:commandLink styleClass="ui-icon ui-icon-closethick" action="#{adicionaProjetoMB.removeMarco(marco)}">
-										<f:ajax immediate="true" execute="listaMarcos" render="@form"/>	
+										<f:ajax execute="listaMarcos" render="listaMarcos"/>	
 									</h:commandLink>
 								</h:column>
 							</h:dataTable>
 							<h:commandLink styleClass="ui-icon ui-icon-plusthick" action="#{adicionaProjetoMB.adicionaMarco}">
-								<f:ajax render="@form" execute="listaMarcos"/>		
+								<f:ajax execute="listaMarcos" render="listaMarcos"/>		
 							</h:commandLink>
 						</p:column>
 					</p:row>
 					
 					<p:row>
 						<p:column colspan="2">
-							<p:timeline id="timeline" value="#{adicionaProjetoMB.linhaTempo.model}" height="250px"
+							<p:timeline id="timeline" value="#{adicionaProjetoMB.linhaTempo.model}" height="250px" width="900px"
 		        					selectable="#{adicionaProjetoMB.linhaTempo.selectable}"
 							        zoomable="#{adicionaProjetoMB.linhaTempo.zoomable}"
 							        moveable="#{adicionaProjetoMB.linhaTempo.moveable}"

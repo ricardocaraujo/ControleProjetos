@@ -11,6 +11,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.component.timeline.TimelineUpdater;
 import org.primefaces.model.timeline.TimelineEvent;
 import org.primefaces.model.timeline.TimelineModel;
 
@@ -18,7 +19,7 @@ import tg.controleprojeto.modelo.Marco;
 
 @ManagedBean(name="linhaTempo")
 @ViewScoped
-public class LinhaTempoMarcosProjeto implements Serializable {
+public class LinhaTempoMarcosProjetoMB implements Serializable {
 	
 	/**
 	 * 
@@ -26,6 +27,8 @@ public class LinhaTempoMarcosProjeto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private TimelineModel model;
+	
+
 	 
     private boolean selectable = true;
     private boolean zoomable = true;
@@ -40,13 +43,18 @@ public class LinhaTempoMarcosProjeto implements Serializable {
  
     @PostConstruct
     protected void initialize() {
-        model = new TimelineModel();
+        this.model = new TimelineModel();
+    	
         this.inicializaDatas();
     }
  
     private void inicializaDatas() {
     	dataInicio = Calendar.getInstance();
-    	dataFim = Calendar.getInstance();	
+    	int mesInicio = dataInicio.get(2) - 2;
+		dataInicio.set(2, mesInicio);
+    	dataFim = Calendar.getInstance();
+    	int anoFim = dataFim.get(1) + 2;
+    	dataFim.set(1, anoFim);
 	}
 
 	public TimelineModel getModel() {
@@ -134,12 +142,13 @@ public class LinhaTempoMarcosProjeto implements Serializable {
 	}
     
     public void adicionaMarco(Marco marco) {
-    	model.add(new TimelineEvent(marco.getDescricao(), marco.getData().getTime()));
+    	TimelineUpdater.getCurrentInstance(":formulario:timeline").add(new TimelineEvent(marco.getDescricao(), marco.getData().getTime()));
     }
 
 	public void removeMarco(Marco marco) {
 		TimelineEvent evento = new TimelineEvent(marco.getDescricao(), marco.getData().getTime());
-		model.delete(evento);
+		System.out.println("entrou");
+		model.delete(evento, TimelineUpdater.getCurrentInstance(":formulario:timeline"));
 	}
 
 
