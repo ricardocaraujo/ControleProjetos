@@ -10,7 +10,7 @@ import tg.controleprojeto.modelo.Usuario;
 @ManagedBean
 public class LoginMB {
 	
-	Usuario usuario;
+	private Usuario usuario;
 	
 	@PostConstruct
 	public void init() {
@@ -31,6 +31,11 @@ public class LoginMB {
 		
 		return "login?faces-redirect=true";
 	}*/
+	
+	/*public String efetuaLogin() {
+		
+	}*/
+	
 	
 	public String deslogar() {
 		FacesContext contexto = FacesContext.getCurrentInstance();

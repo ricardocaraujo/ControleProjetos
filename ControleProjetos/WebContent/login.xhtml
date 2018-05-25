@@ -15,14 +15,20 @@
 			<ui:define name="conteudo">
 				<h:form id="login">
 					<p:fieldset legend="Login">
-						<h:panelGrid columns="3">
+						<h:panelGrid columns="2">
 							
-							<p:outputLabel value="Email:">
+							<h:outputLabel value="Email: "/>
+							<h:inputText id="email" value="#{loginMB.usuario.email}" required="true">
+								<f:passThroughAttribute name="type" value="email"/>
+							</h:inputText>	
 							
+							<h:outputLabel value="Senha: "/>
+							<h:inputText id="senha" value="#{loginMB.usuario.senha}" required="true">
+								<f:passThroughAttribute name="type" value="password"/>
+							</h:inputText>
 							
-							</p:outputLabel>
+							<h:commandButton value="Login" action="#{loginMB.efetuaLogin}"/>
 							
-						
 						</h:panelGrid>
 					</p:fieldset>
 				

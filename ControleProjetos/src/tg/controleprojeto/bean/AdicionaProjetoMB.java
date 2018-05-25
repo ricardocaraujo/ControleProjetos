@@ -2,6 +2,7 @@ package tg.controleprojeto.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -25,6 +26,7 @@ import tg.controleprojeto.modelo.LinhaDePesquisa;
 import tg.controleprojeto.modelo.Marco;
 
 import org.primefaces.event.FileUploadEvent;
+
 
 
 
@@ -153,14 +155,20 @@ public class AdicionaProjetoMB implements Serializable {
 		return "listaProjeto?faces-redirect=true";	
 	}
 	
-	public void removeMarco(Marco marco) {
+	public void removeMarco(Marco marco) {		
 		this.linhaTempo.removeMarco(marco);
 		this.projeto.getMarcos().remove(marco);
 	}
 	
 	public void adicionaMarco() {
-		this.linhaTempo.adicionaMarco(this.projeto.getMarcos().get(this.projeto.getMarcos().size() - 1));
-		this.projeto.getMarcos().add(new Marco());		
+		int indice = this.projeto.getMarcos().size();
+		if(indice == 0) {
+			this.projeto.getMarcos().add(new Marco());	
+		} else {
+			Marco marco = this.projeto.getMarcos().get(indice - 1);
+			this.linhaTempo.adicionaMarco(marco);
+			this.projeto.getMarcos().add(new Marco());		
+		}		
 	}
 	
 }

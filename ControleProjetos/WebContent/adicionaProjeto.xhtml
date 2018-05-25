@@ -119,12 +119,12 @@
 							<p:outputLabel value="Marco do Projeto"/>
 						</p:column>
 						<p:column>									
-							<h:dataTable id="listaMarcos" value="#{adicionaProjetoMB.projeto.marcos}" var="marco">
+							<h:dataTable id="listaMarcos" value="#{adicionaProjetoMB.projeto.marcos}" var="marco" required="true">
 								<h:column>
 									<f:facet name="header">
 										<p:outputLabel value="Descrição" />
 									</f:facet>
-									<p:inputText value="#{marco.descricao}" style="width: 350px" />
+									<p:inputText value="#{marco.descricao}" required="true" requiredMessage="É necessário inserir o marco" style="width: 350px" />
 								</h:column>
 								<h:column>
 									<f:facet name="header">
@@ -134,7 +134,7 @@
 								</h:column>
 								<h:column>
 									<h:commandLink styleClass="ui-icon ui-icon-closethick" action="#{adicionaProjetoMB.removeMarco(marco)}">
-										<f:ajax execute="listaMarcos" render="listaMarcos"/>	
+										<f:ajax render="formulario:listaMarcos"/>	
 									</h:commandLink>
 								</h:column>
 							</h:dataTable>
@@ -147,6 +147,7 @@
 					<p:row>
 						<p:column colspan="2">
 							<p:timeline id="timeline" value="#{adicionaProjetoMB.linhaTempo.model}" height="250px" width="900px"
+									editable="true"
 		        					selectable="#{adicionaProjetoMB.linhaTempo.selectable}"
 							        zoomable="#{adicionaProjetoMB.linhaTempo.zoomable}"
 							        moveable="#{adicionaProjetoMB.linhaTempo.moveable}"

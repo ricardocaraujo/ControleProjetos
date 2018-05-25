@@ -142,13 +142,15 @@ public class LinhaTempoMarcosProjetoMB implements Serializable {
 	}
     
     public void adicionaMarco(Marco marco) {
-    	TimelineUpdater.getCurrentInstance(":formulario:timeline").add(new TimelineEvent(marco.getDescricao(), marco.getData().getTime()));
+    	TimelineEvent evento = new TimelineEvent(marco.getDescricao(), marco.getData().getTime());
+    	TimelineUpdater timelineUpdater = TimelineUpdater.getCurrentInstance(":formulario:timeline");
+    	model.add(evento, timelineUpdater);
     }
 
 	public void removeMarco(Marco marco) {
 		TimelineEvent evento = new TimelineEvent(marco.getDescricao(), marco.getData().getTime());
-		System.out.println("entrou");
-		model.delete(evento, TimelineUpdater.getCurrentInstance(":formulario:timeline"));
+		TimelineUpdater timelineUpdater = TimelineUpdater.getCurrentInstance(":formulario:timeline");
+		model.delete(evento, timelineUpdater);
 	}
 
 
