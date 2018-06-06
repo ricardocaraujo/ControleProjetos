@@ -5,6 +5,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
+import tg.controleprojeto.dao.UsuarioDAO;
 import tg.controleprojeto.modelo.Usuario;
 
 @ManagedBean
@@ -14,33 +15,34 @@ public class LoginMB {
 	
 	@PostConstruct
 	public void init() {
-		this.usuario = new Usuario();
+		this.setUsuario(new Usuario());
 	}
 	
-	/*public String efetuaLogin() {
+	public String efetuaLogin() {
 		FacesContext contexto = FacesContext.getCurrentInstance();
-		boolean existe = new UsuarioDAO().existe(this.usuario);
-		
+		boolean existe = new UsuarioDAO().existeUsuario(this.usuario);		
 		if(existe) {
-			contexto.getExternalContext().getSessionMap().put("usuarioLogado", this.usuario);
-			return "adicionaProjeto?faces-redirect=true";
-		}
-		
+			contexto.getExternalContext().getSessionMap().put("usuarioLogado", this.getUsuario());
+			return "listaProjeto?faces-redirect=true";
+		}		
 		contexto.getExternalContext().getFlash().setKeepMessages(true);
-		contexto.addMessage(null, new FacesMessage("Usuário não encontrado"));
-		
+		contexto.addMessage(null, new FacesMessage("Usuário não encontrado"));		
 		return "login?faces-redirect=true";
-	}*/
-	
-	/*public String efetuaLogin() {
-		
-	}*/
+	}
 	
 	
 	public String deslogar() {
 		FacesContext contexto = FacesContext.getCurrentInstance();
-		contexto.getExternalContext().getSessionMap().remove(this.usuario);
+		contexto.getExternalContext().getSessionMap().remove(this.getUsuario());
 		return "login?faces-redirect=true";
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 

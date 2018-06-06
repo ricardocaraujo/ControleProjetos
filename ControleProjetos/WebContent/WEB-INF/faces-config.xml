@@ -6,6 +6,7 @@
     version="2.2">
     
     <lifecycle>
+    	<phase-listener>tg.controleprojeto.util.Autorizador</phase-listener>
     	<phase-listener>tg.controleprojeto.util.LogPhaseListener</phase-listener>
     </lifecycle>
     

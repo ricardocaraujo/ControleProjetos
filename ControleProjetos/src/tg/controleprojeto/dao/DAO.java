@@ -52,5 +52,5 @@ public class DAO<T> {
 		query.select(query.from(classe));
 		List<T> lista = manager.createQuery(query).getResultList();
 		return lista;
-	}
+	}	
 }
