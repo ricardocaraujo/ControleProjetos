@@ -22,6 +22,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.thoughtworks.xstream.XStream;
+
 @NamedQueries({
 	@NamedQuery(name="Projetos.findAll", query="select p from Projeto p"),
 	@NamedQuery(name="Projetos.buscaPorId", query="select p from Projeto p where p.id=:pId"),
@@ -215,6 +217,10 @@ public class Projeto implements Serializable {
 	
 	public void setMarcos(List<Marco> marcos) {
 		this.marcos = marcos;
+	}
+	
+	public String toXML() {
+		return new XStream().toXML(this);
 	}
 
 }

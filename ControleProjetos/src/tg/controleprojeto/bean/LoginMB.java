@@ -33,7 +33,7 @@ public class LoginMB {
 	
 	public String deslogar() {
 		FacesContext contexto = FacesContext.getCurrentInstance();
-		contexto.getExternalContext().getSessionMap().remove(this.getUsuario());
+		contexto.getExternalContext().getSessionMap().remove("usuarioLogado");
 		return "login?faces-redirect=true";
 	}
 

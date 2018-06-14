@@ -16,35 +16,35 @@
 			<div id="cabecalho">
 				<h:graphicImage library="img" style="width: 700px; display:block; margin:auto; "/>
 				
-				<h:form>  
+				<h:form rendered="#{usuarioLogado != null}">  
 				    <p:growl id="messages" showDetail="true" autoUpdate="true" />
 				 
 				    <p:menubar>
 				        <p:submenu label="Projeto" icon="ui-icon-document">
 				            <p:menuitem value="Novo" action="adicionaProjeto" />
-				            <p:menuitem value="Editar"  icon="ui-icon-pencil" />
-				            <p:menuitem value="Excluir"  icon="ui-icon-close" />
+				            <p:menuitem value="Editar" icon="ui-icon-pencil" />
+				            <p:menuitem value="Excluir" icon="ui-icon-close" />
 				            <p:separator />
 				            <p:menuitem value="Relatórios" icon="fa fa-fw fa-bar-chart-o" action="listaProjeto" />
 				        </p:submenu>
 				 
 				        <p:submenu label="Empregado" icon="fa fa-fw fa-male">
 				            <p:menuitem value="Novo"  />
-				            <p:menuitem value="Editar"  icon="ui-icon-pencil" />
-				            <p:menuitem value="Excluir"  icon="ui-icon-close" />
+				            <p:menuitem value="Editar" icon="ui-icon-pencil" />
+				            <p:menuitem value="Excluir" icon="ui-icon-close" />
 				        </p:submenu>
 				 
 				 		<p:submenu label="Gerência" icon="fa fa-fw fa-sitemap">
 				            <p:menuitem value="Nova" />
 				            <p:menuitem value="Editar" icon="ui-icon-pencil" />
-				            <p:menuitem value="Excluir"  icon="ui-icon-close" />
+				            <p:menuitem value="Excluir" icon="ui-icon-close" />
 				        </p:submenu>
 				 
 				        <p:menuitem value="Quit" icon="ui-icon-close" />
 				 
 				        <f:facet name="options">
 				            <p:inputText style="margin-right:10px" placeholder="Procurar"/>
-				            <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+				            <p:commandButton value="Logout" icon="ui-icon-extlink" action="#{loginMB.deslogar}"/>
 				        </f:facet>
 				    </p:menubar>
 				</h:form>
