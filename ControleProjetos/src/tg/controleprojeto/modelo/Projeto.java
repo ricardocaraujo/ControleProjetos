@@ -9,6 +9,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,6 +22,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -45,6 +49,7 @@ public class Projeto implements Serializable {
 	private LinhaDePesquisa linhaDePesquisa;
 	
 	@OneToMany(mappedBy="projeto", cascade=CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Marco> marcos;
 	
 	@Enumerated(EnumType.STRING)
@@ -61,26 +66,32 @@ public class Projeto implements Serializable {
 
 	@ManyToMany
 	@JoinTable(name="projeto_resptecnico")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Empregado> responsaveisTecnicos;
 	
 	@ManyToMany
 	@JoinTable(name="projeto_coordenador")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Empregado> coordenadores;
 	
 	@ManyToMany
 	@JoinTable(name="projeto_participante")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Empregado> participantes;
 	
 	@ManyToMany
 	@JoinTable(name="projeto_gerenciassolicitantes")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Gerencia> gerenciasSolicitantes;
 	
 	@ManyToMany
 	@JoinTable(name="projeto_gerenciasclientes")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Gerencia> gerenciasClientes;
 	
 	@ManyToMany
 	@JoinTable(name="projeto_gerenciasexecutoras")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Gerencia> gerenciasExecutoras;
 	 
 	

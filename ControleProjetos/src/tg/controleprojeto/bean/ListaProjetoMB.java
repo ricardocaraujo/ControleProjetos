@@ -1,6 +1,7 @@
 package tg.controleprojeto.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +14,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
 
 import tg.controleprojeto.dao.LinhaDePesquisaDAO;
 import tg.controleprojeto.dao.ProjetoDAO;
@@ -23,6 +27,8 @@ import tg.controleprojeto.modelo.LinhaDePesquisa;
 import org.primefaces.context.RequestContext;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
+
+import com.thoughtworks.xstream.XStream;
 
 
 @ManagedBean
@@ -52,9 +58,14 @@ public class ListaProjetoMB implements Serializable {
 		this.projeto = projeto;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Projeto> getListaProjetos() {
 		if(situacoesSelecionadas == null) {
-			return projetoDAO.getProjetos();	
+			Client cliente = ClientBuilder.newClient();
+			WebTarget target = cliente.target("http://localhost:8080");
+			String projetos = target.path("ControleProjetos/webapi/projetos").request().get(String.class);
+			List<Projeto> lista = (ArrayList<Projeto>) new XStream().fromXML(projetos);
+			return lista;
 		}	
 		return this.listaProjetos;
 	}
