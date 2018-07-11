@@ -21,6 +21,7 @@ import tg.controleprojeto.dao.LinhaDePesquisaDAO;
 import tg.controleprojeto.dao.ProjetoDAO;
 import tg.controleprojeto.modelo.Projeto;
 import tg.controleprojeto.modelo.Situacao;
+import tg.controleprojeto.ws.client.ProjetoCliente;
 import tg.controleprojeto.modelo.Empregado;
 import tg.controleprojeto.modelo.LinhaDePesquisa;
 import tg.controleprojeto.modelo.Marco;
@@ -150,7 +151,7 @@ public class AdicionaProjetoMB implements Serializable {
 		if(projeto.getId() != null) {
 			this.projetoDAO.altera(this.projeto);
 		} else {
-			this.projetoDAO.adiciona(this.projeto);
+			new ProjetoCliente().adicionaProjeto(this.projeto);
 		}			
 		return "listaProjeto?faces-redirect=true";	
 	}

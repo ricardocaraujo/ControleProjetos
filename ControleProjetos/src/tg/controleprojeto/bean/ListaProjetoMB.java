@@ -22,6 +22,7 @@ import tg.controleprojeto.dao.LinhaDePesquisaDAO;
 import tg.controleprojeto.dao.ProjetoDAO;
 import tg.controleprojeto.modelo.Projeto;
 import tg.controleprojeto.modelo.Situacao;
+import tg.controleprojeto.ws.client.ProjetoCliente;
 import tg.controleprojeto.modelo.LinhaDePesquisa;
 
 import org.primefaces.context.RequestContext;
@@ -58,14 +59,9 @@ public class ListaProjetoMB implements Serializable {
 		this.projeto = projeto;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Projeto> getListaProjetos() {
-		if(situacoesSelecionadas == null) {
-			Client cliente = ClientBuilder.newClient();
-			WebTarget target = cliente.target("http://localhost:8080");
-			String projetos = target.path("ControleProjetos/webapi/projetos").request().get(String.class);
-			List<Projeto> lista = (ArrayList<Projeto>) new XStream().fromXML(projetos);
-			return lista;
+		if(situacoesSelecionadas == null) {		
+			return new ProjetoCliente().getProjetos();
 		}	
 		return this.listaProjetos;
 	}
@@ -116,7 +112,8 @@ public class ListaProjetoMB implements Serializable {
 	
 	// recupera no bd os projetos com os filtros informados
 	public void listaProjetosComFiltro() {
-		this.listaProjetos = this.projetoDAO.getProjetosPorStatus(situacoesSelecionadas, idLinhasSelecionadas);		
+		//this.listaProjetos = this.projetoDAO.getProjetosPorStatus(situacoesSelecionadas, idLinhasSelecionadas);
+		this.listaProjetos = new ProjetoCliente().getProjetosComFiltro(situacoesSelecionadas, idLinhasSelecionadas);
 	}
 
 	// redireciona para página que exibirá o projeto passado por parâmetro
